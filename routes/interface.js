@@ -9,7 +9,7 @@ router.get('/shop', function(req,res,next){
   res.render('shop')
 });
 router.get('/categories', function(req,res,next){
-  res.render('categories-index',{layout:'shop'})
+  res.render('categories-index',{layout:'categories'})
 });
 router.get('/about',(req,res,next)=>{
   res.render('aboutus')

@@ -1,6 +1,6 @@
 <div class="jumbotron-fluid shop-jumbo">
     <!--navbar-->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-lg shop-nav">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-lg shop-nav">
         <a class="navbar-brand" href="#">PawKlan</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -26,9 +26,12 @@
             <button class="btn my-2 my-sm-0" type="submit">Search</button>
             </form>
         </div>
-        </nav>
-    <!--shop page-->
-    <div class="shop">
+    </nav>
+    
+    <div class="row">
+      <div class="col-sm-12 col-md-8">
+        <!--shop page-->
+        <div class="shop shadow-lg">
         <div id="carouselCaptions" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
                 <li data-target="#carouselCaptions" data-slide-to="0" class="active"></li>
@@ -70,7 +73,19 @@
                 <span class="sr-only">Next</span>
             </a>
         </div>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-4">
+        <p class="text-left mt-4 ml-2" id="featured-text">Welcome to Pawklan</p>
+        <p class="text-center lead" id="featured-comment">
+          Hey let's make your fashion dreams a reality,check out our featured products
+          <p class="d-none d-md-block d-lg-block d-xl-block text-center lead">
+            <img src="/images/background_image.jpg" alt="" id="picture">
+          </p>
+        </p>
+      </div>
     </div>
+    
 </div>
 <!-- bestSellers products-->
 <section class="mt-5 mb-5">
@@ -82,21 +97,21 @@
         <div class="owl-carousel owl-theme">
         <div class="item">
             <img src="/images/IMG_5007.JPG" alt=""
-            class="img-fluid" id="carousel-image shadow-lg">
+            class="shop-img" id="carousel-image shadow-lg">
             <p class="lead text-center">Product name</p>
             <p class="lead small text-center">Product price</p>
             <a href="#" class="btn btn-block btn-sm">View product</a>
         </div>
         <div class="item">
             <img src="/images/IMG_4814.JPG" alt=""
-            class="img-fluid" id="carousel-image shadow-lg">
+            class="shop-carousel-img" id="carousel-image shadow-lg">
             <p class="lead text-center">Product name</p>
             <p class="lead small text-center">Product price</p>
             <a href="#" class="btn btn-block btn-sm">View product</a>
         </div>
         <div class="item">
             <img src="/images/DSC_6439.jpg" alt=""
-            class="img-fluid" id="carousel-image shadow-lg">
+            class="shop-carousel-img" id="carousel-image shadow-lg">
             <p class="lead text-center">Product name</p>
             <p class="lead small text-center">Product price</p>
             <a href="#" class="btn btn-block btn-sm">View product</a>
@@ -135,157 +150,163 @@
 <!--New Arrivals-->
 <section>
     <div class="container-fluid">
-         <div class="text-center" style="font-family:Georgia, 'Times New Roman', Times, serif;font-style:normal">
-    <p class="new-arrivals">New arrivals</p>
-  </div>
-  <div class="row">
-    <!--Men's fashion-->
-    <div class="col-sm-12 col-md-3 col-lg-3">
-      <p class="lead text-center">Men's clothing</p>
-      <ul class="list-unstyled">
-        <li class="media">
-          <img src="/images/about1.jpg" class="mr-3 img-fluid" alt="..." style="object-fit: cover; height:70px;width:70px">
-          <div class="media-body text-justify">
-            <p class="lead small">
-              Product: .......
-            </p>
-            <p class="lead small">Price: ---</p>
-            <a href="#" class="btn btn-sm btn-block">View product</a>
-          </div>
-        </li>
-        <br>
-        <li class="media">
-          <img src="/images/about1.jpg" class="mr-3 img-fluid" alt="..." style="object-fit: cover; height:70px;width:70px">
-          <div class="media-body text-justify">
-            <p class="lead small">
-              Product: ..........
-            </p>
-            <p class="lead small">Price: ---</p>
-            <a href="#" class="btn btn-sm btn-block">View product</a>
-          </div>
-        </li>
-        <br>
-        <li class="media">
-          <img src="/images/about1.jpg" class="mr-3 img-fluid" alt="..." style="object-fit: cover; height:70px;width:70px">
-          <div class="media-body text-justify">
-            <p class="lead small">
-              Product: .............
-            </p>
-            <p class="lead small">Price: ---</p>
-            <a href="#" class="btn btn-sm btn-block">View product</a>
-          </div>
-        </li>
-      </ul>
+          <div class="text-center" style="font-family:Georgia, 'Times New Roman', Times, serif;font-style:normal">
+      <p class="new-arrivals">New arrivals</p>
     </div>
-    <!--Women's Fashion-->
-    <div class="col-sm-12 col-md-3 col-lg-3">
-      <p class="lead text-center">Ladies Fashion</p>
-      <ul class="list-unstyled">
-        <li class="media">
-          <img src="/images/DSC_6439.jpg" class="mr-3 img-fluid" alt="..." style="object-fit: cover; height:70px;width:70px">
-         <div class="media-body text-justify">
-            <p class="lead small">
-              Product: ..........
-            </p>
-            <p class="lead small">Price: ---</p>
-            <a href="#" class="btn btn-sm btn-block">View product</a>
-          </div>
-        </li>
-        <br>
-        <li class="media">
-          <img src="/images/DSC_6439.jpg" class="mr-3 img-fluid" alt="..." style="object-fit: cover; height:70px;width:70px">
-         <div class="media-body text-justify">
-            <p class="lead small">
-              Product: ..........
-            </p>
-            <p class="lead small">Price: ---</p>
-            <a href="#" class="btn btn-sm btn-block">View product</a>
-          </div>
-        </li>
-        <br>
-        <li class="media">
-          <img src="/images/DSC_6439.jpg" class="mr-3 img-fluid" alt="..." style="object-fit: cover; height:70px;width:70px">
-         <div class="media-body text-justify">
-            <p class="lead small">
-              Product: ..........
-            </p>
-            <p class="lead small">Price: ---</p>
-            <a href="#" class="btn btn-sm btn-block">View product</a>
-          </div>
-        </li>
-      </ul>
+    <div class="row">
+      <!--Men's fashion-->
+      <div class="col-sm-12 col-md-3 col-lg-3">
+        <p class="lead text-center">Men's clothing</p>
+        <ul class="list-unstyled">
+          <li class="media">
+            <img src="/images/about1.jpg" class="mr-3 img-fluid" alt="..." style="object-fit: cover; height:70px;width:70px">
+            <div class="media-body text-justify">
+              <p class="lead small">
+                Product: .......
+              </p>
+              <p class="lead small">Price: ---</p>
+              <a href="#" class="btn btn-sm btn-block">View</a>
+            </div>
+          </li>
+          <br>
+          <li class="media">
+            <img src="/images/about1.jpg" class="mr-3 img-fluid" alt="..." style="object-fit: cover; height:70px;width:70px">
+            <div class="media-body text-justify">
+              <p class="lead small">
+                Product: ..........
+              </p>
+              <p class="lead small">Price: ---</p>
+              <a href="#" class="btn btn-sm btn-block">View</a>
+            </div>
+          </li>
+          <br>
+          <li class="media">
+            <img src="/images/about1.jpg" class="mr-3 img-fluid" alt="..." style="object-fit: cover; height:70px;width:70px">
+            <div class="media-body text-justify">
+              <p class="lead small">
+                Product: .............
+              </p>
+              <p class="lead small">Price: ---</p>
+              <a href="#" class="btn btn-sm btn-block">View</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <!--Women's Fashion-->
+      <div class="col-sm-12 col-md-3 col-lg-3">
+        <p class="lead text-center">Ladies Fashion</p>
+        <ul class="list-unstyled">
+          <li class="media">
+            <img src="/images/DSC_6439.jpg" class="mr-3 img-fluid" alt="..." style="object-fit: cover; height:70px;width:70px">
+          <div class="media-body text-justify">
+              <p class="lead small">
+                Product: ..........
+              </p>
+              <p class="lead small">Price: ---</p>
+              <a href="#" class="btn btn-sm btn-block">View</a>
+            </div>
+          </li>
+          <br>
+          <li class="media">
+            <img src="/images/DSC_6439.jpg" class="mr-3 img-fluid" alt="..." style="object-fit: cover; height:70px;width:70px">
+          <div class="media-body text-justify">
+              <p class="lead small">
+                Product: ..........
+              </p>
+              <p class="lead small">Price: ---</p>
+              <a href="#" class="btn btn-sm btn-block">View</a>
+            </div>
+          </li>
+          <br>
+          <li class="media">
+            <img src="/images/DSC_6439.jpg" class="mr-3 img-fluid" alt="..." style="object-fit: cover; height:70px;width:70px">
+          <div class="media-body text-justify">
+              <p class="lead small">
+                Product: ..........
+              </p>
+              <p class="lead small">Price: ---</p>
+              <a href="#" class="btn btn-sm btn-block">View</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <!--Children's fashion-->
+      <div class="col-sm-12 col-md-3 col-lg-3">
+        <p class="lead text-center">Kid's wears</p>
+        <ul class="list-unstyled">
+          <li class="media">
+            <img src="/images/pexels-mosun-fadare-3220530.jpg" class="mr-3 img-fluid" alt="..." style="object-fit: cover; height:70px;width:70px">
+            <div class="media-body text-justify">
+              <p class="lead small">
+                Product: ..........
+              </p>
+              <p class="lead small">Price: ---</p>
+              <a href="#" class="btn btn-sm btn-block">View</a>
+            </div>
+          </li>
+          <br>
+          <li class="media">
+            <img src="/images/pexels-mosun-fadare-3220530.jpg" class="mr-3 img-fluid" alt="..." style="object-fit: cover; height:70px;width:70px">
+            <div class="media-body text-justify">
+              <p class="lead small">
+                Product: ..........
+              </p>
+              <p class="lead small">Price: ---</p>
+              <a href="#" class="btn btn-sm btn-block">View</a>
+            </div>
+          </li>
+          <br>
+          <li class="media">
+            <img src="/images/pexels-mosun-fadare-3220530.jpg" class="mr-3 img-fluid" alt="..." style="object-fit: cover; height:70px;width:70px">
+            <div class="media-body text-justify">
+              <p class="lead small">
+                Product: ..........
+              </p>
+              <p class="lead small">Price: ---</p>
+              <a href="#" class="btn btn-sm btn-block">View</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <!--Accesories-->
+      <div class="col-sm-12 col-md-3 col-lg-3">
+        <p class="lead text-center">Accesories</p>
+        <ul class="list-unstyled">
+          <li class="media">
+            <img src="/images/pexels-mosun-fadare-3220530.jpg" class="mr-3 img-fluid" alt="..." style="object-fit: cover; height:70px;width:70px">
+            <div class="media-body text-justify">
+              <p class="lead small">
+                Product: ..........
+              </p>
+              <p class="lead small">Price: ---</p>
+              <a href="#" class="btn btn-sm btn-block">View</a>
+            </div>
+          </li>
+          <br>
+          <li class="media">
+            <img src="/images/pexels-mosun-fadare-3220530.jpg" class="mr-3 img-fluid" alt="..." style="object-fit: cover; height:70px;width:70px">
+            <div class="media-body text-justify">
+              <p class="lead small">
+                Product: ..........
+              </p>
+              <p class="lead small">Price: ---</p>
+              <a href="#" class="btn btn-sm btn-block">View</a>
+            </div>
+          </li>
+          <br>
+          <li class="media">
+            <img src="/images/pexels-mosun-fadare-3220530.jpg" class="mr-3 img-fluid" alt="..." style="object-fit: cover; height:70px;width:70px">
+            <div class="media-body text-justify">
+              <p class="lead small">
+                Product: ..........
+              </p>
+              <p class="lead small">Price: ---</p>
+              <a href="#" class="btn btn-sm btn-block">View</a>
+            </div>
+          </li>
+        </ul>
+      </div>
     </div>
-    <!--Children's fashion-->
-    <div class="col-sm-12 col-md-3 col-lg-3">
-      <p class="lead text-center">Children's  Fashion</p>
-      <ul class="list-unstyled">
-        <li class="media">
-          <img src="/pexels-mosun-fadare-3220530.jpg" class="mr-3 img-fluid" alt="..." style="object-fit: cover; height:70px;width:70px">
-          <div class="media-body text-justify">
-            <p class="lead small">
-              Product: ..........
-            </p>
-            <p class="lead small">Price: ---</p>
-            <a href="#" class="btn btn-sm btn-block">View product</a>
-          </div>
-        </li>
-        <br>
-        <li class="media">
-          <img src="/pexels-mosun-fadare-3220530.jpg" class="mr-3 img-fluid" alt="..." style="object-fit: cover; height:70px;width:70px">
-          <div class="media-body text-justify">
-            <p class="lead small">
-              Product: ..........
-            </p>
-            <p class="lead small">Price: ---</p>
-            <a href="#" class="btn btn-sm btn-block">View product</a>
-          </div>
-        </li>
-        <br>
-        <li class="media">
-          <img src="/pexels-mosun-fadare-3220530.jpg" class="mr-3 img-fluid" alt="..." style="object-fit: cover; height:70px;width:70px">
-          <div class="media-body text-justify">
-            <p class="lead small">
-              Product: ..........
-            </p>
-            <p class="lead small">Price: ---</p>
-            <a href="#" class="btn btn-sm btn-block">View product</a>
-          </div>
-        </li>
-      </ul>
-    </div>
-    <!--Accesories-->
-    <div class="col-sm-12 col-md-3 col-lg-3">
-      <p class="lead text-center">Accesories</p>
-      <ul class="list-unstyled">
-        <li class="media">
-          <img src="/images/cooperate.jpg" class="mr-3 img-fluid" alt="..." style="object-fit: cover; height:70px;width:70px">
-          <div class="media-body text-justify">
-            <p class="lead small">
-              Brown Oxfords
-            </p>
-          </div>
-        </li>
-        <br>
-        <li class="media">
-          <img src="/images/cooperate.jpg" class="mr-3 img-fluid" alt="..." style="object-fit: cover; height:70px;width:70px">
-          <div class="media-body text-justify">
-            <p class="lead small">
-              Brown Oxfords
-            </p>
-          </div>
-        </li>
-        <br>
-        <li class="media">
-          <img src="/images/cooperate.jpg" class="mr-3 img-fluid" alt="..." style="object-fit: cover; height:70px;width:70px">
-          <div class="media-body text-justify">
-            <p class="lead small">
-              Brown Oxfords
-            </p>
-          </div>
-        </li>
-      </ul>
-    </div>
-  </div>
-    </div>
+    </div> 
 </section>
 {{>footer}}

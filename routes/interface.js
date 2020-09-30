@@ -1,17 +1,22 @@
 var express = require('express');
-var router = express.Router();
+var app = express()
 
+// vhost for dashboard routes
+
+module.exports = function(app){
 /* GET home page. */
-router.get('/', function(req, res, next) {
+app.get('/', function(req, res, next) {
   res.render('index');
 });
-router.get('/shop', function(req,res,next){
+app.get('/shop', function(req,res,next){
   res.render('shop')
 });
-router.get('/categories', function(req,res,next){
+app.get('/categories', function(req,res,next){
   res.render('categories-index',{layout:'categories'})
 });
-router.get('/about',(req,res,next)=>{
+app.get('/about',(req,res,next)=>{
   res.render('aboutus')
 })
-module.exports = router;
+}
+
+

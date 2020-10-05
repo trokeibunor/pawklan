@@ -1,0 +1,391 @@
+{{#section 'head'}}
+    <link rel="stylesheet" href="/stylesheets/products.css">
+{{/section}}
+<div class="container-fluid">
+    <h4>Products</h4>
+    <div class="card-body table-responsive p-0 " style="height: 300px;">
+        <table class="table table-head-fixed text-nowrap">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Quantity</th>
+                <th>Stock(left)</th>
+                <th>Packages Sold</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    {{!-- Add  Product  --}}
+    <div class="row">
+        <div class="col-sm-12 col-md-10 mx-auto shadow bg-white p-2 m-3">
+            <h5 class="m-2">Add Product</h5>
+            <div class="card-body">
+                <div class="col-sm-12 col-md-12">
+                    <p class="alert alert-info small">
+                        Please Select all tags and sub-categories that applies to product
+                    </p>
+                </div>
+                <form action="#" method="post">
+                    <div class="form-group mt-2 mb-2">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroupPrepend">
+                                Product Name
+                                </span>
+                            </div>
+                            <input type="text" name="productName" class="form-control" placeholder="Product Name"
+                            id="productName" required>
+                        </div>
+                    </div>
+                    <div class="form-group mt-2 mb-2">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroupPrepend">
+                                Product slug
+                                </span>
+                            </div>
+                            <input type="text" name="productSlug" class="form-control" placeholder="Product Slug"
+                            id="productSlug" required>
+                        </div>
+                    </div>
+                    {{!-- Category& price& discount& quantity --}}
+                    <div class="form-row mt-2 mb-2">
+                        <div class="col-sm-12 col-md-3">
+                            <div class="form-group">
+                                <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        Category
+                                    </span>
+                                </div>
+                                <select name="productCategory" class="form-control" id="productCategory">
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                    <option value="kids">Kids</option>
+                                    <option value="headWear">headWare</option>
+                                    <option value="accessories">Accessories</option>
+                                    <option value="footware">Footwear</option>
+                                </select>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-3">
+                            <div class="form-group">
+                                <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        Price
+                                    </span>
+                                </div>
+                                <input type="number" name="productPrice" id="productPrice" placeholder="Price In Naira"
+                                class="form-control">
+                            </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-3">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            Quantity
+                                        </span>
+                                    </div>
+                                    <input type="number" name="productQuantity" id="productQuantity" placeholder="Product Quantity"
+                                    class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-3">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        Discount
+                                    </span>
+                                </div>
+                                <input type="number" name="productDiscount" id="productDiscount" placeholder="in percentage" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    {{!-- SubCategories & tags --}}
+                    <div class="form-row mt-2 mb-2">
+                        <!-- Sub-categories-->
+                        <div class="col-sm-12 col-md-6 tags">
+                            <div class="form-row ml-2">
+                                <label class="text-muted">Sub-categories</label>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-4">
+                                    <div class="form-check">
+                                        <input type="checkbox" name="SC_hoodies" id="SC_hoodies" class="form-check-input">
+                                        <label class="form-check-label" for="SC_hoodies">Hoodies</label>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-check">
+                                        <input type="checkbox" name="SC_tops" id="SC_tops" class="form-check-input">
+                                        <label class="form-check-label" for="SC_tops">Tops</label>
+                                    </div> 
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-check">
+                                        <input type="checkbox" name="SC_outwear" id="SC_outwear" class="form-check-input">
+                                        <label class="form-check-label" for="SC_outwear">Outwear</label>
+                                    </div>  
+                                </div>
+                            </div>
+                            {{!-- next Row --}}
+                            <div class="form-row">
+                                <div class="col-4">
+                                    <div class="form-check">
+                                        <input type="checkbox" name="SC_shorts" id="SC_shorts" class="form-check-input">
+                                        <label class="form-check-label" for="SC_shorts">Shorts</label>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-check">
+                                        <input type="checkbox" name="SC_jackets" id="SC_jackets" class="form-check-input">
+                                        <label class="form-check-label" for="SC_jackets">Jackets</label>
+                                    </div> 
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-check">
+                                        <input type="checkbox" name="SC_sweatshirts" id="SC_sweatshirts" class="form-check-input">
+                                        <label class="form-check-label" for="SC_sweatshirts">Sweatshirts</label>
+                                    </div>  
+                                </div>
+                            </div>
+                            {{!-- next Row --}}
+                            <div class="form-row">
+                                <div class="col-4">
+                                    <div class="form-check">
+                                        <input type="checkbox" name="SC_underwear" id="SC_underwear" class="form-check-input">
+                                        <label class="form-check-label" for="SC_underwear">Underwear</label>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-check">
+                                        <input type="checkbox" name="SC_socks" id="SC_socks" class="form-check-input">
+                                        <label class="form-check-label" for="SC_socks">Socks</label>
+                                    </div> 
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-check">
+                                        <input type="checkbox" name="SC_matching" id="SC_matching" class="form-check-input">
+                                        <label class="form-check-label" for="SC_matching">Matching Sets</label>
+                                    </div>  
+                                </div>
+                            </div>
+                            {{!-- next Row --}}
+                            <div class="form-row">
+                                <div class="col-4">
+                                    <div class="form-check">
+                                        <input type="checkbox" name="SC_croptops" id="SC_croptops" class="form-check-input">
+                                        <label class="form-check-label" for="SC_croptops">Crop Tops</label>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-check">
+                                        <input type="checkbox" name="SC_skirts" id="SC_skirts" class="form-check-input">
+                                        <label class="form-check-label" for="SC_skirts">Skirts</label>
+                                    </div> 
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-check">
+                                        <input type="checkbox" name="SC_dresses" id="SC_dresses" class="form-check-input">
+                                        <label class="form-check-label" for="SC_dresses">Dresses</label>
+                                    </div>  
+                                </div>
+                            </div>
+                        </div>
+                        <!--Tags-->
+                        <div class="col-sm-12 col-md-6 tags">
+                            <div class="form-row ml-2">
+                                <label>Tags</label>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-4">
+                                    <div class="form-check">
+                                        <input type="checkbox" name="t_hoodies" id="t_hoodies" class="form-check-input">
+                                        <label class="form-check-label" for="t_hoodies">Hoodies</label>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-check">
+                                        <input type="checkbox" name="t_tops" id="t_tops" class="form-check-input">
+                                        <label class="form-check-label" for="t_tops">Tops</label>
+                                    </div> 
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-check">
+                                        <input type="checkbox" name="t_outwear" id="t_outwear" class="form-check-input">
+                                        <label class="form-check-label" for="t_outwear">Outwear</label>
+                                    </div>  
+                                </div>
+                            </div>
+                            {{!-- next Row --}}
+                            <div class="form-row">
+                                <div class="col-4">
+                                    <div class="form-check">
+                                        <input type="checkbox" name="t_shorts" id="t_shorts" class="form-check-input">
+                                        <label class="form-check-label" for="t_shorts">Shorts</label>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-check">
+                                        <input type="checkbox" name="t_jackets" id="t_jackets" class="form-check-input">
+                                        <label class="form-check-label" for="t_jackets">Jackets</label>
+                                    </div> 
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-check">
+                                        <input type="checkbox" name="t_sweatshirts" id="t_sweatshirts" class="form-check-input">
+                                        <label class="form-check-label" for="t_sweatshirts">Sweatshirts</label>
+                                    </div>  
+                                </div>
+                            </div>
+                            {{!-- next Row --}}
+                            <div class="form-row">
+                                <div class="col-4">
+                                    <div class="form-check">
+                                        <input type="checkbox" name="t_underwear" id="t_underwear" class="form-check-input">
+                                        <label class="form-check-label" for="SC_underwear">Underwear</label>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-check">
+                                        <input type="checkbox" name="t_socks" id="t_socks" class="form-check-input">
+                                        <label class="form-check-label" for="SC_socks">Socks</label>
+                                    </div> 
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-check">
+                                        <input type="checkbox" name="t_matching" id="t_matching" class="form-check-input">
+                                        <label class="form-check-label" for="t_matching">Matching Sets</label>
+                                    </div>  
+                                </div>
+                            </div>
+                            {{!-- next Row --}}
+                            <div class="form-row">
+                                <div class="col-4">
+                                    <div class="form-check">
+                                        <input type="checkbox" name="t_croptops" id="t_croptops" class="form-check-input">
+                                        <label class="form-check-label" for="SC_croptops">Crop Tops</label>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-check">
+                                        <input type="checkbox" name="t_skirts" id="t_skirts" class="form-check-input">
+                                        <label class="form-check-label" for="t_skirts">Skirts</label>
+                                    </div> 
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-check">
+                                        <input type="checkbox" name="t_dresses" id="t_dresses" class="form-check-input">
+                                        <label class="form-check-label" for="t_dresses">Dresses</label>
+                                    </div>  
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{!-- Available colors & featured Product --}}
+                    <div class="form-row mt-2 mb-2">
+                        <div class="col-sm-12 col-md-6">
+                            <div class="input-group">
+                                <div class="input-group-append">
+                                    <span class="input-group-text">Available Colours</span>
+                                </div>
+                                <select name="productColour" id="productColours" class="form-control" multiple>
+                                    <option value="black" style="background-color: black;">
+                                        Black
+                                    </option>
+                                    <option value="white" style="background-color: white;">
+                                        white
+                                    </option>
+                                    <option value="red" style="background-color: red;">
+                                        Red
+                                    </option>
+                                    <option value="green" style="background-color: green;">
+                                        green
+                                    </option>
+                                    <option value="yellow" style="background-color: yellow;">
+                                        yellow
+                                    </option>
+                                    <option value="blue" style="background-color: blue;">
+                                        Blue
+                                    </option>
+                                    <option value="silver" style="background-color: silver;">
+                                        Silver
+                                    </option>
+                                    <option value="gold" style="background-color: gold;">
+                                        Black
+                                    </option>
+                                    <option value="brown" style="background-color: brown;">
+                                        Brown
+                                    </option>
+                                    <option value="pink" style="background-color: pink;">
+                                        Pink
+                                    </option>
+                                    <option value="purple" style="background-color: purple;">
+                                        Purple
+                                    </option>
+                                    <option value="teal" style="background-color: teal;">
+                                        teal
+                                    </option>
+                                    <option value="navy" style="background-color: navy;">
+                                        Navy
+                                    </option>
+                                    <option value="lavender" style="background-color: lavender;">
+                                        Lavender
+                                    </option>
+                                    <option value="khaki" style="background-color: khaki;">
+                                        Khaki
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <label for="featured">Featured Product</label>
+                            <div class="form-group">
+                                <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" id="customSwitch1">
+                                <label class="custom-control-label" for="customSwitch1">Turn on/off the featured-product feature</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{!-- Description --}}
+                    <div class="form-group mt-2 mb-2">
+                        <label for="productDescription">Description</label>
+                        <textarea name="productDescription" id="productDescription" class="form-control" rows="5"></textarea>
+                    </div>
+                    {{!-- upload images --}}
+                    <div class="form-group mt-2 mb-2">
+                        <label for="productImages">Please Select Product images</label>
+                        <input type="file" name="productImages" id="productImages"
+                        class="form-file-control" accept="image/*"  multiple>
+                    </div>
+                    {{!-- submit --}}
+                    <div class="form-group mt-2 mb-2">
+                        <input type="submit" class="btn btn-block btn-outline-info">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

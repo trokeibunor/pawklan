@@ -1,12 +1,13 @@
-var createError = require('http-errors');
+// var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose');
+// Mongo models
+var product = require('./public/models/product');
 // router link
-var indexRouter = require('./routes/interface');
-var adminRouter = require('./routes/adminroute');
+
 var credentials = require('./public/lib/credentials');
 
 
@@ -71,18 +72,15 @@ var opts = {
 //routes
 require('./routes/interface')(app);
 
-app.use('/', adminRouter);
-// dashboard routes
-
 app.use(function(req, res){
-  res.status(404);
-  res.render(404);
+  res.status('404');
+  res.render('404');
 });
   // custom 500 page
 app.use(function(err, req, res, next){
   console.error(err.stack);
-  res.status(500);
-  res.render(500);
+  res.status('500');
+  res.render('500');
   });
 
 // run app on localhost

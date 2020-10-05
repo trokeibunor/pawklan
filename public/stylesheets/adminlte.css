@@ -46,7 +46,6 @@
 *::after {
   box-sizing: border-box;
 }
-
 html {
   font-family: sans-serif;
   line-height: 1.15;
@@ -11327,7 +11326,7 @@ body:not(.layout-fixed).layout-navbar-fixed.text-sm .wrapper .main-sidebar .side
 
 .layout-top-nav .wrapper .main-sidebar {
   bottom: inherit;
-  height: inherit;
+  height: 100%;
 }
 
 .layout-top-nav .wrapper .content-wrapper,

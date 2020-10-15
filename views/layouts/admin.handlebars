@@ -207,7 +207,7 @@
                     <p>Orders</p>
                     </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" id="staffLink">
                     <a href="/staff" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Staff</p>
@@ -268,10 +268,16 @@
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
         </div>
-        <!-- /.content-header -->
 
         <!-- Main content -->
         <div class="content">
+        {{#if flash}}
+            <div class="alert alert-dismissible alert-{{flash.type}}">
+            <button type="button" class="close"
+            data-dismiss="alert" aria-hidden="true">&times;<button>
+            <strong>{{flash.intro}}</strong> {{{flash.message}}}
+            </div>
+        {{/if}}
         {{{body}}}
         </div>
         <!-- /.content -->

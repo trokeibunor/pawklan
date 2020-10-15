@@ -4,6 +4,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose');
+var passport = require('passport');
+var flash = require('connect-flash');
 // Mongo models
 var product = require('./public/models/product');
 // router link
@@ -14,6 +16,7 @@ var credentials = require('./public/lib/credentials');
 var app = express();
 
 // set port to localhost:3000
+// development
 app.set('port', process.env.PORT || 3000);
 
 // view engine setup
@@ -39,8 +42,12 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser(credentials.cookiesecret));
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(require('express-session')());
+app.use(flash());
 app.use(express.static(path.join(__dirname, 'public')));
+
 // middle ware for flash messages
 app.use(function(req, res, next){
   // if there's a flash message, transfer
@@ -71,6 +78,7 @@ var opts = {
 
 //routes
 require('./routes/interface')(app);
+require('./routes/form-handler')(app);
 
 app.use(function(req, res){
   res.status('404');

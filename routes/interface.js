@@ -22,9 +22,17 @@ app.get('/about',(req,res,next)=>{
   res.render('aboutus')
 });
 // dashboard routes
+admin.get('/login',(req,res,next)=>{
+  res.render('admin/login')
+})
 admin.get('/',function(req,res,next){
   res.render('admin/home', {layout:'admin'})
 });
+admin.get('/staff-home',(req,res,next)=>{
+  res.render('admin/staff-home',{
+    layout : 'admin'
+  })
+})
 admin.get('/product', (req,res,next)=>{
   res.render('admin/product', {
     layout : 'admin',

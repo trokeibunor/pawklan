@@ -38,10 +38,11 @@
             <div class="card-body">
                 <div class="col-sm-12 col-md-12">
                     <p class="alert alert-info small">
-                        Please Select all tags and sub-categories that applies to product
+                        Please Select all tags and sub-categories that applies to product <br>
+                        Please upload 5 images
                     </p>
                 </div>
-                <form action="#" method="post">
+                <form action="/process-product" method="post" enctype="multipart/form-data">
                     <div class="form-group mt-2 mb-2">
                         <div class="input-group">
                             <div class="input-group-prepend">
@@ -132,19 +133,19 @@
                             <div class="form-row">
                                 <div class="col-4">
                                     <div class="form-check">
-                                        <input type="checkbox" name="SC_hoodies" id="SC_hoodies" class="form-check-input">
+                                        <input type="checkbox" name="SC_hoodies" id="SC_hoodies" value="Hoodies" class="form-check-input">
                                         <label class="form-check-label" for="SC_hoodies">Hoodies</label>
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="form-check">
-                                        <input type="checkbox" name="SC_tops" id="SC_tops" class="form-check-input">
+                                        <input type="checkbox" name="SC_tops" id="SC_tops" value="Tops" class="form-check-input">
                                         <label class="form-check-label" for="SC_tops">Tops</label>
                                     </div> 
                                 </div>
                                 <div class="col-4">
                                     <div class="form-check">
-                                        <input type="checkbox" name="SC_outwear" id="SC_outwear" class="form-check-input">
+                                        <input type="checkbox" name="SC_outwear" id="SC_outwear" value="Outwear" class="form-check-input">
                                         <label class="form-check-label" for="SC_outwear">Outwear</label>
                                     </div>  
                                 </div>
@@ -153,19 +154,19 @@
                             <div class="form-row">
                                 <div class="col-4">
                                     <div class="form-check">
-                                        <input type="checkbox" name="SC_shorts" id="SC_shorts" class="form-check-input">
+                                        <input type="checkbox" name="SC_shorts" id="SC_shorts" value="Shorts" class="form-check-input">
                                         <label class="form-check-label" for="SC_shorts">Shorts</label>
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="form-check">
-                                        <input type="checkbox" name="SC_jackets" id="SC_jackets" class="form-check-input">
+                                        <input type="checkbox" name="SC_jackets" id="SC_jackets" value="Jackets" class="form-check-input">
                                         <label class="form-check-label" for="SC_jackets">Jackets</label>
                                     </div> 
                                 </div>
                                 <div class="col-4">
                                     <div class="form-check">
-                                        <input type="checkbox" name="SC_sweatshirts" id="SC_sweatshirts" class="form-check-input">
+                                        <input type="checkbox" name="SC_sweatshirts" id="SC_sweatshirts" value="Sweatshirts" class="form-check-input">
                                         <label class="form-check-label" for="SC_sweatshirts">Sweatshirts</label>
                                     </div>  
                                 </div>
@@ -174,19 +175,19 @@
                             <div class="form-row">
                                 <div class="col-4">
                                     <div class="form-check">
-                                        <input type="checkbox" name="SC_underwear" id="SC_underwear" class="form-check-input">
+                                        <input type="checkbox" name="SC_underwear" id="SC_underwear" value="Underwear" class="form-check-input">
                                         <label class="form-check-label" for="SC_underwear">Underwear</label>
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="form-check">
-                                        <input type="checkbox" name="SC_socks" id="SC_socks" class="form-check-input">
+                                        <input type="checkbox" name="SC_socks" id="SC_socks" value="Socks" class="form-check-input">
                                         <label class="form-check-label" for="SC_socks">Socks</label>
                                     </div> 
                                 </div>
                                 <div class="col-4">
                                     <div class="form-check">
-                                        <input type="checkbox" name="SC_matching" id="SC_matching" class="form-check-input">
+                                        <input type="checkbox" name="SC_matching" id="SC_matching" value="Matching Sets" class="form-check-input">
                                         <label class="form-check-label" for="SC_matching">Matching Sets</label>
                                     </div>  
                                 </div>
@@ -195,19 +196,19 @@
                             <div class="form-row">
                                 <div class="col-4">
                                     <div class="form-check">
-                                        <input type="checkbox" name="SC_croptops" id="SC_croptops" class="form-check-input">
+                                        <input type="checkbox" name="SC_croptops" id="SC_croptops" value="Crop-tops" class="form-check-input">
                                         <label class="form-check-label" for="SC_croptops">Crop Tops</label>
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="form-check">
-                                        <input type="checkbox" name="SC_skirts" id="SC_skirts" class="form-check-input">
+                                        <input type="checkbox" name="SC_skirts" id="SC_skirts" value="Skirts" class="form-check-input">
                                         <label class="form-check-label" for="SC_skirts">Skirts</label>
                                     </div> 
                                 </div>
                                 <div class="col-4">
                                     <div class="form-check">
-                                        <input type="checkbox" name="SC_dresses" id="SC_dresses" class="form-check-input">
+                                        <input type="checkbox" name="SC_dresses" id="SC_dresses" value="Dresses" class="form-check-input">
                                         <label class="form-check-label" for="SC_dresses">Dresses</label>
                                     </div>  
                                 </div>
@@ -221,19 +222,19 @@
                             <div class="form-row">
                                 <div class="col-4">
                                     <div class="form-check">
-                                        <input type="checkbox" name="t_hoodies" id="t_hoodies" class="form-check-input">
+                                        <input type="checkbox" name="t_hoodies" id="t_hoodies" value="Hoodies" class="form-check-input">
                                         <label class="form-check-label" for="t_hoodies">Hoodies</label>
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="form-check">
-                                        <input type="checkbox" name="t_tops" id="t_tops" class="form-check-input">
+                                        <input type="checkbox" name="t_tops" id="t_tops" value="Tops" class="form-check-input">
                                         <label class="form-check-label" for="t_tops">Tops</label>
                                     </div> 
                                 </div>
                                 <div class="col-4">
                                     <div class="form-check">
-                                        <input type="checkbox" name="t_outwear" id="t_outwear" class="form-check-input">
+                                        <input type="checkbox" name="t_outwear" id="t_outwear" value="Outwear" class="form-check-input">
                                         <label class="form-check-label" for="t_outwear">Outwear</label>
                                     </div>  
                                 </div>
@@ -242,19 +243,19 @@
                             <div class="form-row">
                                 <div class="col-4">
                                     <div class="form-check">
-                                        <input type="checkbox" name="t_shorts" id="t_shorts" class="form-check-input">
+                                        <input type="checkbox" name="t_shorts" id="t_shorts" value="Shorts" class="form-check-input">
                                         <label class="form-check-label" for="t_shorts">Shorts</label>
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="form-check">
-                                        <input type="checkbox" name="t_jackets" id="t_jackets" class="form-check-input">
+                                        <input type="checkbox" name="t_jackets" id="t_jackets" value="Jackets" class="form-check-input">
                                         <label class="form-check-label" for="t_jackets">Jackets</label>
                                     </div> 
                                 </div>
                                 <div class="col-4">
                                     <div class="form-check">
-                                        <input type="checkbox" name="t_sweatshirts" id="t_sweatshirts" class="form-check-input">
+                                        <input type="checkbox" name="t_sweatshirts" id="t_sweatshirts" value="Sweatshirts" class="form-check-input">
                                         <label class="form-check-label" for="t_sweatshirts">Sweatshirts</label>
                                     </div>  
                                 </div>
@@ -263,19 +264,19 @@
                             <div class="form-row">
                                 <div class="col-4">
                                     <div class="form-check">
-                                        <input type="checkbox" name="t_underwear" id="t_underwear" class="form-check-input">
-                                        <label class="form-check-label" for="SC_underwear">Underwear</label>
+                                        <input type="checkbox" name="t_underwear" id="t_underwear" value="Underwear" class="form-check-input">
+                                        <label class="form-check-label" for="t_underwear">Underwear</label>
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="form-check">
-                                        <input type="checkbox" name="t_socks" id="t_socks" class="form-check-input">
-                                        <label class="form-check-label" for="SC_socks">Socks</label>
+                                        <input type="checkbox" name="t_socks" id="t_socks" value="Underwear" class="form-check-input">
+                                        <label class="form-check-label" for="t_socks">Socks</label>
                                     </div> 
                                 </div>
                                 <div class="col-4">
                                     <div class="form-check">
-                                        <input type="checkbox" name="t_matching" id="t_matching" class="form-check-input">
+                                        <input type="checkbox" name="t_matching" id="t_matching" value="Matching Sets" class="form-check-input">
                                         <label class="form-check-label" for="t_matching">Matching Sets</label>
                                     </div>  
                                 </div>
@@ -284,19 +285,19 @@
                             <div class="form-row">
                                 <div class="col-4">
                                     <div class="form-check">
-                                        <input type="checkbox" name="t_croptops" id="t_croptops" class="form-check-input">
+                                        <input type="checkbox" name="t_croptops" id="t_croptops" value="Crop-tops" class="form-check-input">
                                         <label class="form-check-label" for="SC_croptops">Crop Tops</label>
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="form-check">
-                                        <input type="checkbox" name="t_skirts" id="t_skirts" class="form-check-input">
+                                        <input type="checkbox" name="t_skirts" id="t_skirts" value="Skirts" class="form-check-input">
                                         <label class="form-check-label" for="t_skirts">Skirts</label>
                                     </div> 
                                 </div>
                                 <div class="col-4">
                                     <div class="form-check">
-                                        <input type="checkbox" name="t_dresses" id="t_dresses" class="form-check-input">
+                                        <input type="checkbox" name="t_dresses" id="t_dresses" value="Dresses" class="form-check-input">
                                         <label class="form-check-label" for="t_dresses">Dresses</label>
                                     </div>  
                                 </div>
@@ -363,7 +364,7 @@
                             <label for="featured">Featured Product</label>
                             <div class="form-group">
                                 <div class="custom-control custom-switch">
-                                <input type="checkbox" class="custom-control-input" id="customSwitch1">
+                                <input type="checkbox" name="productFeatured" value="true" class="custom-control-input" id="customSwitch1">
                                 <label class="custom-control-label" for="customSwitch1">Turn on/off the featured-product feature</label>
                                 </div>
                             </div>
@@ -382,10 +383,21 @@
                     </div>
                     {{!-- submit --}}
                     <div class="form-group mt-2 mb-2">
-                        <input type="submit" class="btn btn-block btn-outline-info">
+                        <input type="submit" onclick="check()" id="submit" class="btn btn-block btn-outline-info">
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
+<script>
+    function check(e){
+        var $fileUpload = $("input[type='file']");
+        if (parseInt($fileUpload.get(0).files.length) > 5){
+            alert("You are only allowed to upload a maximum of 5 files");
+            
+
+            throw Error;
+        };  
+    }
+</script>

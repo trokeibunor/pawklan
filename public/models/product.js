@@ -6,15 +6,17 @@ var productsSchema = mongoose.Schema({
     description : String,
     category : String,
     subcategories : [String],
+    tags: [String],
     price : Number,
     discount : Number,
     color : [String],
     sku : Number,
     date : String,
     packagesSold : Number,
-    featured: Boolean,
+    featured: String,
     addedBy: String,
     editedBy: String,
+    path: String,
 })
 
 var products = mongoose.model('products', productsSchema);

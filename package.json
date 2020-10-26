@@ -9,7 +9,9 @@
     "bcrypt": "^5.0.0",
     "bcrypt-nodejs": "0.0.3",
     "bcryptjs": "^2.4.3",
+    "connect": "2.0",
     "connect-flash": "^0.1.1",
+    "connect-mongo": "^3.2.0",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "express": "~4.16.1",
@@ -26,6 +28,7 @@
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
     "save": "^2.4.0",
+    "session-mongoose": "^0.5.2",
     "vhost": "^3.0.2"
   },
   "devDependencies": {

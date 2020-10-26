@@ -16,20 +16,22 @@
                 <th>Sack</th>
             </tr>
             </thead>
+            {{#each staffs}}
             <tbody>
                 <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>{{id}}</td>
+                    <td>{{name}}</td>
+                    <td>{{position}}</td>
+                    <td>{{email}}</td>
+                    <td>{{salary}}</td>
+                    <td>{{account}}</td>
+                    <td>{{bank}}</td>
+                    <td>{{position}}</td>
+                    <td><a href="/edit-staff?id={{id}}" class="btn btn-link edit-button"><i class="far fa-edit"></i></a></td>
+                    <td><a href="/delete-staff?id={{id}}" class="btn btn-link delete-button"><i class="far fa-trash-alt"></i></a></td>
                 </tr>
             </tbody>
+            {{/each}}
         </table>
     </div>
     <div class="row">

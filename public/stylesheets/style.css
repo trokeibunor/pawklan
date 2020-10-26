@@ -171,3 +171,11 @@ section{
   height: 80%;
   object-fit: contain;
 }
+#loginbtn{
+  border-radius: 50px;
+  background-color: black !important;
+}
+#loginbtn:hover{
+  background-color: gray !important;
+  border-radius: 25px;
+}

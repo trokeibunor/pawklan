@@ -1,11 +1,13 @@
-// var createError = require('http-errors');
+var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose');
 var passport = require('passport');
+var connect = require('connect');
 var flash = require('connect-flash');
+
 // Mongo models
 var product = require('./public/models/product');
 // router link
@@ -29,7 +31,39 @@ helpers: {
   return null;
   }}
 });
-          
+// Set upp mongo
+//link in mongo
+var opts = {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  server: {
+  socketOptions: { keepAlive: 1 }
+  }
+  };
+switch(app.get('env')){
+  case 'development':
+  mongoose.connect(credentials.mongo.development.connectionString, opts);
+  console.log('mongo connected')
+  break;
+  case 'production':
+  mongoose.connect(credentials.mongo.production.connectionString, opts);
+  break;
+  default:
+  throw new Error('Unknown execution environment: ' + app.get('env'));
+}
+// Set up sessions storage in mongodb
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
+mongoose.connect(credentials.mongo.development.connectionString, opts);
+ 
+app.use(session({
+    secret: 'pawklan_secret',
+    saveUninitialized: true, 
+    resave: false, //don't save session if unmodified
+    store: new MongoStore({ 
+      url: 'mongodb://127.0.0.1:27017/pawklan',
+      ttl: 14 * 24 * 60 * 60 }),
+}));
 app.engine('handlebars',handlebars.engine);
 app.set('view engine', 'handlebars');
 // handlebars Partials setup
@@ -42,11 +76,12 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser(credentials.cookiesecret));
+app.use(require('express-session')());
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(require('express-session')());
 app.use(flash());
 app.use(express.static(path.join(__dirname, 'public')));
+
 
 // middle ware for flash messages
 app.use(function(req, res, next){
@@ -56,29 +91,14 @@ app.use(function(req, res, next){
   delete req.session.flash;
   next();
   });
-//link in mongo
-var opts = {
-  server: {
-  socketOptions: { keepAlive: 1 }
-  }
-  };
-  switch(app.get('env')){
-    
-    case 'development':
-    mongoose.connect(credentials.mongo.development.connectionString, opts);
-    console.log('mongo connected')
-    break;
-    case 'production':
-    mongoose.connect(credentials.mongo.production.connectionString, opts);
-    break;
-    default:
-    throw new Error('Unknown execution environment: ' + app.get('env'));
-  }
-  
-
 //routes
-require('./routes/interface')(app);
 require('./routes/form-handler')(app);
+require('./routes/interface-admin')(app);
+require('./routes/form-handlerUI')(app);
+require('./routes/interface')(app);
+require('./routes/categories')(app)
+
+
 
 app.use(function(req, res){
   res.status('404');

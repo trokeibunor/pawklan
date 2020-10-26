@@ -1,46 +1,31 @@
-var express = require('express');
-var app = express();
-var admin = express.Router();
-var vhost = require('vhost');
-
-
-// vhost for dashboard routes
-
 module.exports = function(app){
-  app.use(vhost('admin.*',admin));
 /* GET home page. */
-app.get('/', function(req, res, next) {
+app.get('/',function(req, res, next) {
   res.render('index');
 });
 app.get('/shop', function(req,res,next){
   res.render('shop')
 });
-app.get('/categories', function(req,res,next){
-  res.render('categories-index',{layout:'categories'})
-});
 app.get('/about',(req,res,next)=>{
   res.render('aboutus')
 });
-// dashboard routes
-admin.get('/login',(req,res,next)=>{
-  res.render('admin/login')
+app.get('/gallery',(req,res,next)=>{
+  res.render('/gallery')
 })
-admin.get('/',function(req,res,next){
-  res.render('admin/home', {layout:'admin'})
+// the use of passport
+app.get('/login',(req,res,next)=>{
+  res.render('login')
 });
-admin.get('/staff-home',(req,res,next)=>{
-  res.render('admin/staff-home',{
-    layout : 'admin'
-  })
+app.get('/logout',(req,res,next)=>{
+  res.render('logout')
+});
+app.get('/signup',(req,res,next)=>{
+  res.render('signup')
+});
+app.get('/cart',(req,res,next)=>{
+  res.render('cart');
 })
-admin.get('/product', (req,res,next)=>{
-  res.render('admin/product', {
-    layout : 'admin',
-  })
-})
-admin.get('/staff', (req,res,next)=>{
-  res.render('admin/staff',{layout: 'admin'})
-})
+app.get('/wishlist',(req,res,next)=>{
+  res.render('wishlist');
+});
 }
-
-

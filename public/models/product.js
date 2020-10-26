@@ -13,12 +13,20 @@ var productsSchema = mongoose.Schema({
     sku : Number,
     date : String,
     packagesSold : Number,
+    stockLeft: Number,
     featured: String,
     addedBy: String,
     editedBy: String,
-    path: String,
+    path: [String],
+    available: Boolean
 })
 
 var products = mongoose.model('products', productsSchema);
+// write functions for stock left
+
+// write funtions for most orders
+
+// write functions for new orders
+
 
 module.exports = products;

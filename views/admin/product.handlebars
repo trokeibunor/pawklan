@@ -11,24 +11,32 @@
                 <th>Name</th>
                 <th>Category</th>
                 <th>Quantity</th>
-                <th>Stock(left)</th>
-                <th>Packages Sold</th>
+                <th>price</th>
+                <th>Added By</th>
+                <th>Edited By</th>
+                <th>Packeges Sokd</th>
+                <th>Stock Left</th>
                 <th>Edit</th>
                 <th>Delete</th>
             </tr>
             </thead>
+            {{#each products}}
             <tbody>
                 <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>{{id}}</td>
+                    <td>{{name}}</td>
+                    <td>{{category}}</td>
+                    <td>{{sku}}</td>
+                    <td>{{price}}</td>
+                    <td>{{addedby}}</td>
+                    <td>{{editedby}}</td>
+                    <td>{{packagesSold}}</td>
+                    <td>{{stockLeft}}</td>
+                    <td><a href="/edit-product?id={{id}}" class="btn btn-link edit-button"><i class="far fa-edit"></i></a></td>
+                    <td><a href="/delete-product?id={{id}}" class="btn btn-link delete-button"><i class="far fa-trash-alt"></i></a></td>
                 </tr>
             </tbody>
+            {{/each}}
         </table>
     </div>
     {{!-- Add  Product  --}}
@@ -155,7 +163,7 @@
                                 <div class="col-4">
                                     <div class="form-check">
                                         <input type="checkbox" name="SC_shorts" id="SC_shorts" value="Shorts" class="form-check-input">
-                                        <label class="form-check-label" for="SC_shorts">Shorts</label>
+                                        <label class="form-check-label" for="SC_shorts">Shorts && Pants</label>
                                     </div>
                                 </div>
                                 <div class="col-4">

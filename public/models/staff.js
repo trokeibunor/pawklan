@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var bcrypt =  require('bcryptjs');
 
 const { model } = require('./product');
-var flash = require('connect-flash');
+
 var staffSchema = mongoose.Schema({
     name: String,
     email: String,
@@ -13,6 +13,9 @@ var staffSchema = mongoose.Schema({
     position: String,
     salary: Number,
     phone: Number,
+    messages: [String],
+    availble: Boolean
+
 });
 
 var staff = mongoose.model('staff', staffSchema);
@@ -24,4 +27,9 @@ module.exports.getStaffByEmail = function(email,callback){
     var query = {email: email};
     staff.findOne(query,callback);
 };
+module.exports.getStaffPost = function(email,callback){
+    var query = {email: email};
+    staff.findOne(query,callback);
+};
+
 

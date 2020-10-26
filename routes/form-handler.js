@@ -28,10 +28,11 @@ function sort(val){
 module.exports = function (app){
     var admin  = express.Router();
     app.use(vhost('admin.*',admin));
+
     passport.serializeUser(function(staff,done){
         done(null,staff.id)
     });
-    passport.deserializeUser(function(id,user){
+    passport.deserializeUser(function(id,done){
         staff.getStaffById(id, function(err,staff){
             done(err,staff)
         })
@@ -51,6 +52,7 @@ module.exports = function (app){
                     console.log('please check username');
                     return done(null, false);
                 };
+                
                 // validate password
                 if(bcrypt.compareSync(password,bcrypt.hashSync(password,bcrypt.genSaltSync(10))) == true){
                     return done(null,staff);
@@ -58,26 +60,53 @@ module.exports = function (app){
                     console.log(password)
                     console.log('error from here');
                     return done(null,false);
-                }
-                });
+                };
+                // test staff login
+            });
+            
         }
     )
 )
     // Forms
     // handle login form
+    function reqPath(path){
+        return  path.split('\\').slice(1).join('\\')
+    };
     admin.post('/login',passport.authenticate('local',{failureRedirect: '/login',failureFlash:'invalid username or password'}), (req,res)=>{
-        req.session.flash = {
-            type: 'success',
-            intro: 'Login Successful',
-            message: ':  ' + req.body.email,
-        }
-        res.redirect('/');
+        staff.getStaffPost(req.body.email, function(err,staff){
+            if(err){
+                console.log(err);
+                throw err
+            }
+            if(staff.position == 'attendant'){
+                req.session.username = staff.name;
+                console.log(req.session.username);
+                req.session.flash = {
+                    type: 'success',
+                    intro: 'Login Successful',
+                    message: ':  ' + req.session.username,
+                }
+                res.redirect('/staff-home')
+            }else if(staff.position == 'admin' || 'supervisor'){
+                req.session.username = staff.name;
+                console.log(req.session.username);
+                req.session.flash = {
+                    type: 'success',
+                    intro: 'Login Successful',
+                    message: ':  ' + req.session.username,
+                }
+                res.redirect('/')
+            }
+        })
+        
     })
     // handle add Product form
     admin.post('/process-product',upload.array('productImages', 5),function(req,res,next){
-        console.log(req.file.path);
-        // var path = req.files.path;
-        // const reqPath = path.split('\\').slice(1).join('\\');
+        // console.log(req.file.path);
+        var file = req.files
+        var path = [reqPath(file[0].path),reqPath(file[1].path),reqPath(req.files[2].path)
+            ,reqPath(req.files[3].path),reqPath(req.files[4].path)];
+        console.log(path);
         var color_array = req.body.productColour;
         var subCategories_array = [req.body.SC_hoodies,req.body.SC_tops,req.body.SC_outwear,
             req.body.SC_shorts,req.body.SC_jackets,req.body.SC_sweatshirts,
@@ -99,9 +128,9 @@ module.exports = function (app){
             subcategories: subCategories_array,
             tags: tags_array,
             description: req.body.productDescription,
-            //remember to add the added by 
+            addedBy: req.session.username, 
             featured: req.body.productFeatured,
-            // path: path,
+            path: path,
             date: now,
         });
         try {
@@ -162,7 +191,7 @@ module.exports = function (app){
         });
     });
     // Add staff form
-
+    
     // Edit Staff details form
     admin.post('/process-staff',upload.single('staffImage'),(req,res,next)=>{
         var salt = bcrypt.genSaltSync(10);
@@ -199,9 +228,4 @@ module.exports = function (app){
             res.redirect(303,'/staff');
         }
     })
-    // From U.I user Email subscription form
-
-    // Search form
-
-
 };

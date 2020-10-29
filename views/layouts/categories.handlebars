@@ -13,6 +13,9 @@
     <link rel="stylesheet" href="/assets/owl-carousel-dis/assets/owl.carousel.min.css">
     <link rel="stylesheet" href="/assets/owl-carousel-dis/assets/owl.theme.default.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Our Custom CSS -->
     <link rel="stylesheet" href="/stylesheets/categories.css">
     <link rel="stylesheet" href="/stylesheets/styleshop.css">
@@ -34,7 +37,7 @@
                     <a href="#Submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" >Categories</a>
                     <ul class="collapse list-unstyled" id="Submenu">
                         <li class="active">
-                            <a href="/"><span><i class="fas fa-male"></i></span> Men's Fashion</a>
+                            <a href="/categories"><span><i class="fas fa-male"></i></span> Men's Fashion</a>
                         </li>
                         <li>
                             <a href="#"><span><i class="fas fa-female"></i></span> Ladies's wears</a>
@@ -46,15 +49,26 @@
                             <a href="#"><span><i class="fab fa-redhat"></i></span> Headwear</a>
                         </li>
                         <li>
-                            <a href="#">Accessories</a>
+                            <a href="#"><span><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-watch" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M4 14.333v-1.86A5.985 5.985 0 0 1 2 8c0-1.777.772-3.374 2-4.472V1.667C4 .747 4.746 0 5.667 0h4.666C11.253 0 12 .746 12 1.667v1.86A5.985 5.985 0 0 1 14 8a5.985 5.985 0 0 1-2 4.472v1.861c0 .92-.746 1.667-1.667 1.667H5.667C4.747 16 4 15.254 4 14.333zM13 8A5 5 0 1 0 3 8a5 5 0 0 0 10 0z"/>
+                                <path d="M13.918 8.993A.502.502 0 0 0 14.5 8.5v-1a.5.5 0 0 0-.582-.493 6.044 6.044 0 0 1 0 1.986z"/>
+                                <path fill-rule="evenodd" d="M8 4.5a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-.5.5H6a.5.5 0 0 1 0-1h1.5V5a.5.5 0 0 1 .5-.5z"/>
+                                </svg></span> 
+                            Accessories</a>
                         </li>
                         <li>
-                            <a href="#">Footwears</a>
+                            <a href="#"><span><i class="fas fa-shoe-prints"></i></span> Footwears</a>
                         </li>
                     </ul>
                 </li>
                 <li>
                     <a href="/about">Our Brand</a>
+                </li>
+                <li>
+                    <a href="/cart">Cart</a>
+                </li>
+                <li>
+                    <a href="/wishlist">Wishlist</a>
                 </li>
                 <li>
                     <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pawklan Pages</a>
@@ -76,6 +90,9 @@
                 <li>
                     <a href="/about#contact">Contact Us</a>
                 </li>
+                <li>
+                    <a href="/login">Login</a>
+                </li>
             </ul>
             <hr class="line">
             <ul class="list-unstyled">
@@ -88,7 +105,7 @@
         <div id="content">
             <nav class="navbar navbar-expand-lg navbar-light bg-dark shadow-lg">
                 <div class="container-fluid">
-                    <button type="button" id="sidebarCollapse" class="btn btn-sm">
+                    <button type="button" id="sidebarCollapse" class="btn footer-btn btn-sm">
                         <i class="fas fa-toggle-on" style="color: black;"></i>
                     </button>
                     <button class="btn btn-dark d-inline-block d-lg-none ml-auto" style="background-color: gray;" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -130,7 +147,7 @@
                 0:{
                     items:2
                 },
-                600:{
+                650:{
                     items:3
                 },
                 1000:{

@@ -31,5 +31,9 @@ module.exports.getStaffPost = function(email,callback){
     var query = {email: email};
     staff.findOne(query,callback);
 };
+module.exports.isStaff = function(email,callback){
+    var query = {email: email};
+    return staff.findOne(query,callback);
+}
 
 

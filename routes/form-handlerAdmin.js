@@ -20,6 +20,7 @@ var now = moment();
 var passport = require('passport') 
     ,LocalStrategy = require('passport-local').Strategy;
 var bcrypt = require('bcryptjs');
+const customer = require('../public/models/user');
 function sort(val){
     if (val != undefined)
     return val;
@@ -28,16 +29,24 @@ function sort(val){
 module.exports = function (app){
     var admin  = express.Router();
     app.use(vhost('admin.*',admin));
-
-    passport.serializeUser(function(staff,done){
-        done(null,staff.id)
+    passport.serializeUser(function(user,done){
+        if (staff.isStaff(user.email)){
+            done(null,user.id)
+        }else if(customer.isUser(user.email)){
+            done(null, user.id)
+        }
+        // if(user){
+        //     done(null,user.id)
+        // }else if(staff){
+        //     done(null,staff.id)
+        // }
     });
     passport.deserializeUser(function(id,done){
         staff.getStaffById(id, function(err,staff){
             done(err,staff)
         })
     });
-    passport.use(
+    passport.use('staff-local',
         new LocalStrategy({
             usernameField: 'email',
             passwordField: 'password',
@@ -63,7 +72,7 @@ module.exports = function (app){
                 };
                 // test staff login
             });
-            
+
         }
     )
 )
@@ -72,7 +81,7 @@ module.exports = function (app){
     function reqPath(path){
         return  path.split('\\').slice(1).join('\\')
     };
-    admin.post('/login',passport.authenticate('local',{failureRedirect: '/login',failureFlash:'invalid username or password'}), (req,res)=>{
+    admin.post('/login',passport.authenticate('staff-local',{failureRedirect: '/login',failureFlash:'invalid username or password'}), (req,res)=>{
         staff.getStaffPost(req.body.email, function(err,staff){
             if(err){
                 console.log(err);
@@ -98,7 +107,11 @@ module.exports = function (app){
                 res.redirect('/')
             }
         })
-        
+    });
+    admin.get('/logout',(req,res)=>{
+        console.log(req.user)
+        req.logout();
+        res.redirect('/login')
     })
     // handle add Product form
     admin.post('/process-product',upload.array('productImages', 5),function(req,res,next){
@@ -228,4 +241,5 @@ module.exports = function (app){
             res.redirect(303,'/staff');
         }
     })
+    
 };

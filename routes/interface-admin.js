@@ -1,5 +1,4 @@
 var express = require('express');
-var app = express();
 var admin = express.Router();
 var vhost = require('vhost');
 var product = require('../public/models/product');
@@ -10,7 +9,7 @@ module.exports = function(app){
       admin.get('/login',(req,res,next)=>{
         res.render('admin/login')
       })
-      admin.get('/',ensureAuthenticated,function(req,res,next){
+      admin.get('/',ensureStaffAuthenticated,function(req,res,next){
         res.render('admin/home', {layout:'admin',user: req.session.username})
       });
       admin.get('/staff-home',(req,res,next)=>{
@@ -19,7 +18,7 @@ module.exports = function(app){
           user: req.session.username
         })
       })
-      admin.get('/product',ensureAuthenticated,(req,res,next)=>{
+      admin.get('/product',ensureStaffAuthenticated,(req,res,next)=>{
         product.find({available: true},function(err,products){
           var content = {
               products : products.map(function(product){
@@ -37,11 +36,12 @@ module.exports = function(app){
                   }
               }),
               layout: 'admin',
+              user: req.session.username,
           }   
           res.render('admin/product',content)
       })
       })
-      admin.get('/staff',ensureAuthenticated ,(req,res,next)=>{
+      admin.get('/staff',ensureStaffAuthenticated ,(req,res,next)=>{
         staff.find({available: true},function(err,staffs){
           var content = {
               staffs : staffs.map(function(product){
@@ -57,19 +57,27 @@ module.exports = function(app){
                   }
               }),
               layout: 'admin',
+              user: req.session.username,
           }   
-          res.render('admin/product',content)
+          res.render('admin/staff',content)
       })
       });
+      // gallery
+      admin.get('/gallery',(req,res,next)=>{
+        res.render('admin/gallery',{layout: 'admin'})
+      })
+      // forgotpassword
+      admin.get('/forgotPassword',(req,res,next)=>{
+        res.render('admin/forgotPasswordAdmin')
+      })
       // dynamic dashboard routes
       // edit staff
       // edit product
-
-function ensureAuthenticated(req,res,next){
-  if(req.isAuthenticated()){
-    return next();
-  }else{
-    res.redirect('/login')
-  }
-}
+      function ensureStaffAuthenticated(req,res,next){
+        if(req.isAuthenticated()){
+          return next();
+        }else{
+          res.redirect('/login')
+        }
+      }
 }

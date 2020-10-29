@@ -1,0 +1,49 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-lg shop-nav">
+    <a class="navbar-brand" href="#">PawKlan</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/shop">Shop</a>
+        </li>
+        <li class="nav-item">
+            <a href="/categories" class="nav-link">Categories</a>
+        </li>
+        <li class="nav-item active">
+            <a href="/gallery" class="nav-link">Gallery <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+            <a href="/about" class="nav-link">Our brand</a>
+        </li>
+        <li class="nav-item">
+            <a href="/cart" class="nav-link">Cart</a>
+        </li>
+        <li class="nav-item">
+            <a href="/wishlist" class="nav-link">Wishlist</a>
+        </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn my-2 my-sm-0 footer-btn" type="submit">Search</button>
+            <a href="/login" class="btn ml-2 my-2 my-sm-0 footer-btn" id="loginbtn">
+                <span class="fas fa-sign-in-alt"></span>
+            </a>
+        </form>
+    </div>
+</nav>
+    {{!-- Start of gallery section --}}
+<section>
+    <div class="col-sm-12 col-md-4" id="gallery">
+        <img src="/images/DSC_6439.jpg" class="galleryImg shadow" alt="....Image">
+        {{!-- Model Name --}}
+        <p class="gallImageName"><strong>Name:</strong>Hello world</p>
+        <p class="gallImageDesc">Hi there my name is Okeibunor Emmanuel.....</p>
+    </div>
+</section>
+{{>footer}}

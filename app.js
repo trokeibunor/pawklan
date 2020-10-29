@@ -72,7 +72,7 @@ app.use(function(req, res, next){
   next();
   });
 
-app.use(logger('dev'));
+// app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser(credentials.cookiesecret));
@@ -85,19 +85,18 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // middle ware for flash messages
 app.use(function(req, res, next){
-  // if there's a flash message, transfer
-  // it to the context, then clear it
   res.locals.flash = req.session.flash;
   delete req.session.flash;
   next();
   });
 //routes
-require('./routes/form-handler')(app);
+//  Dashboard routes
+require('./routes/form-handlerAdmin')(app);
 require('./routes/interface-admin')(app);
+//  User interface routes
 require('./routes/form-handlerUI')(app);
 require('./routes/interface')(app);
 require('./routes/categories')(app)
-
 
 
 app.use(function(req, res){

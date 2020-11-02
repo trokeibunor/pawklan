@@ -1,8 +1,20 @@
 var express = require('express')
-var customer = require('../public/models/user');
+const customer = require('../public/models/user');
 var bcrypt = require('bcryptjs');
 const credentials = require('../public/lib/credentials');
-
+const  submail  = require('../public/models/subscriptionEmail');
+const customerMail = require('../public/models/customerCare')
+// NodeMailer Logic
+var nodeMailer = require('nodemailer');
+const { text } = require('express');
+const customerCareMail = require('../public/models/customerCare');
+var mailTransport = nodeMailer.createTransport('SMTP',{
+        service: 'Gmail',
+        auth: {
+        user: credentials.gmail.user,
+        pass: credentials.gmail.password,
+    }
+});
 module.exports = function(app){
     // User authentication
     var passportUI = require('passport') 
@@ -27,7 +39,7 @@ module.exports = function(app){
         });
     }
     ));
-    // local sign in
+    // local sign in passport middleware
     passportUI.use( 'user-local',
         new LocalStrategy({
             usernameField: 'email',
@@ -58,6 +70,7 @@ module.exports = function(app){
         }
     )
 )
+    // passport Google User Authentication
     app.get('/auth/google',
     passportUI.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] }));
     app.get('/auth/google/callback', 
@@ -70,6 +83,7 @@ module.exports = function(app){
         }
         res.redirect('/');
     });
+    // Sign up Logic
     app.post('/signup',(req,res,next)=>{
         var salt = bcrypt.genSaltSync(10);
         var hash = bcrypt.hashSync(req.body.password, salt);
@@ -84,15 +98,96 @@ module.exports = function(app){
             type: 'success',
             intro: 'User created ',
             message: ': please Login',
-        }
+        };
+        mailTransport.sendMail({
+            from: '"PawKlan Fashion" <pawKlan.com>',
+            to: req.body.email,
+            subject: "PawKlan user Sign up",
+            html: '<h1>Pawklan Fashion</h1>\n<p>Thanks for sign up for Pawklan Fashion the best Fashion store in the Globe ' +
+            'PawKlan Fashion. <b>We enjoy your Patronage!</b>',
+            generateTextFromHtml: true,
+        }, function(err){
+        if(err) console.error( 'Unable to send email: ' + error );
+        });
         res.redirect('/login');
     });
+    // Login Form Handling
     app.post('/login',passportUI.authenticate('user-local',{failureRedirect: '/login',failureFlash:'invalid username or password'}), (req,res)=>{
         console.log(req.user)
+        // create user session details
         req.session.username = req.user.name;
-        console.log('login successful')
+        req.session.email = req.body.email;
+        req.session.flash = {
+            type: 'success',
+            intro: 'Login Successful: ',
+            message: req.session.username,
+        };
+        mailTransport.sendMail({
+            from: '"PawKlan Fashion" <pawKlan.com>',
+            to: req.body.email,
+            subject: "PawKlan user Sign up",
+            html: '<h1>Pawklan Fashion</h1>\n<p>Thanks for sign up for Pawklan Fashion the best Fashion store in the Globe ' +
+            'PawKlan Fashion. <b>We enjoy your Patronage!</b>',
+            generateTextFromHtml: true,
+        }, function(err){
+        if(err) console.error( 'Unable to send email: ' + error );
+        });
         res.redirect('/')
     });
+    // subscription mail logic
+    app.post('/subEmail',(req,res)=>{
+        var pawMail = new Object({
+            email: req.body.email
+        })
+        new submail(pawMail).save();
+        // send mail
+        mailTransport.sendMail({
+            from: '"PawKlan Fashion" <pawKlan.com>',
+            to: req.body.email,
+            subject: "Subscription to our NewsLetter",
+            html: '<h1>Pawklan Fashion</h1>\n<p>Thanks for subscribing to our store Updates ' +
+            'PawKlan Fashion. <b>We enjoy your Patronage!</b>',
+            generateTextFromHtml: true,
+        }, function(err){
+        if(err) console.error( 'Unable to send email: ' + error );
+        });
+        res.redirect('/')
+    });
+    // forgot password form Handling
+    app.post('/forgotPassword', (req,res)=>{
+        mailTransport.sendMail({
+            from: '"PawKlan Fashion" <pawKlan.com>',
+            to: req.body.email,
+            subject: "Forgot Password",
+            html: '<h1>Pawklan Fashion</h1>\n<p>Thanks for choosing pawklan Fashion ' +
+            'Please be patient while we resend you a login link.If the link does not come soon'+
+            ', try to login with your mail. <b>Sorry for the inconvinience We enjoy your Patronage!</b>',
+            generateTextFromHtml: true,
+        }, function(err){
+        if(err) console.error( 'Unable to send email: ' + error );
+        });
+        res.redirect('/')
+    })
+    // contact form Form Handling
+    app.post('/contact',(req,res)=>{
+        var pawCustomer = new Object({
+            email: req.body.email,
+            message: req.body.contact-text,
+        })
+        new customerCareMail(pawCustomer).save();
+        // send mail
+        mailTransport.sendMail({
+            from: '"PawKlan Fashion" <pawKlan.com>',
+            to: req.body.email,
+            subject: "Pawklan Customer Service",
+            html: '<h1>Pawklan Fashion</h1>\n<p>Thanks for contacting Us ' +
+            'PawKlan Fashion would ensure we deal with the issue immediately please be patient. <b>We enjoy your Patronage!</b>',
+            generateTextFromHtml: true,
+        }, function(err){
+        if(err) console.error( 'Unable to send email: ' + error );
+        });
+        res.redirect('/zabout')
+    })
     // logOut route
     app.get('/logout',(req,res)=>{
         req.logout();

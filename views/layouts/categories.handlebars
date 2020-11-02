@@ -33,31 +33,31 @@
                 <h1>Pawklan</h1>
             </div>
             <ul class="list-unstyled components">
-                <li class="active">
+                <li id="categories" class="active">
                     <a href="#Submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" >Categories</a>
                     <ul class="collapse list-unstyled" id="Submenu">
-                        <li class="active">
+                        <li id="men" class="active">
                             <a href="/categories"><span><i class="fas fa-male"></i></span> Men's Fashion</a>
                         </li>
-                        <li>
-                            <a href="#"><span><i class="fas fa-female"></i></span> Ladies's wears</a>
+                        <li id="female">
+                            <a href="/female"><span><i class="fas fa-female"></i></span> Ladies's wears</a>
                         </li>
-                        <li>
-                            <a href="#"><span><i class="fas fa-child"></i></span> Children</a>
+                        <li id="children">
+                            <a href="/children"><span><i class="fas fa-child"></i></span> Children</a>
                         </li>
-                        <li>
-                            <a href="#"><span><i class="fab fa-redhat"></i></span> Headwear</a>
+                        <li id="headwear">
+                            <a href="/headwear"><span><i class="fab fa-redhat"></i></span> Headwear</a>
                         </li>
-                        <li>
-                            <a href="#"><span><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-watch" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <li id="accessories">
+                            <a href="/accessories"><span><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-watch" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" d="M4 14.333v-1.86A5.985 5.985 0 0 1 2 8c0-1.777.772-3.374 2-4.472V1.667C4 .747 4.746 0 5.667 0h4.666C11.253 0 12 .746 12 1.667v1.86A5.985 5.985 0 0 1 14 8a5.985 5.985 0 0 1-2 4.472v1.861c0 .92-.746 1.667-1.667 1.667H5.667C4.747 16 4 15.254 4 14.333zM13 8A5 5 0 1 0 3 8a5 5 0 0 0 10 0z"/>
                                 <path d="M13.918 8.993A.502.502 0 0 0 14.5 8.5v-1a.5.5 0 0 0-.582-.493 6.044 6.044 0 0 1 0 1.986z"/>
                                 <path fill-rule="evenodd" d="M8 4.5a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-.5.5H6a.5.5 0 0 1 0-1h1.5V5a.5.5 0 0 1 .5-.5z"/>
                                 </svg></span> 
                             Accessories</a>
                         </li>
-                        <li>
-                            <a href="#"><span><i class="fas fa-shoe-prints"></i></span> Footwears</a>
+                        <li id="footwear">
+                            <a href="/footwear"><span><i class="fas fa-shoe-prints"></i></span> Footwears</a>
                         </li>
                     </ul>
                 </li>
@@ -123,11 +123,15 @@
             </nav>
             {{!-- Using sessions to display flash messages --}}
             {{#if flash}}
-                <div class="alert alert-dismissible alert-{{flash.type}}">
-                    <button type="button" class="close"
-                    data-dismiss="alert" aria-hidden="true">&times;<button>
-                    <strong>{{flash.intro}}</strong> {{{flash.message}}}
-                </div>  
+                <div class="container">
+                    <div class="col-8 mx-auto">
+                        <div class="alert alert-dismissible alert-{{flash.type}}">
+                            <button type="button" class="close"
+                            data-dismiss="alert" aria-hidden="true">&times;<button>
+                            <strong>{{flash.intro}}</strong> {{{flash.message}}}
+                        </div>
+                    </div>
+                </div> 
             {{/if}}
             {{{body}}}
         </div>
@@ -154,7 +158,8 @@
                     items:5
                 }
             }
-        })
+        });
+
     </script>
     <!-- jQuery CDN - Slim version (=without AJAX) -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

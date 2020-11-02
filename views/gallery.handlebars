@@ -39,11 +39,18 @@
 </nav>
     {{!-- Start of gallery section --}}
 <section>
-    <div class="col-sm-12 col-md-4" id="gallery">
-        <img src="/images/DSC_6439.jpg" class="galleryImg shadow" alt="....Image">
-        {{!-- Model Name --}}
-        <p class="gallImageName"><strong>Name:</strong>Hello world</p>
-        <p class="gallImageDesc">Hi there my name is Okeibunor Emmanuel.....</p>
+    <div class="container">
+        <div class="row">
+            {{#each photos}}
+            <div class="col-sm-10 col-md-4 mx-auto" id="gallery">
+                <img src="{{path}}" class="galleryImg shadow-lg" alt="....Image">
+                {{!-- Model Name --}}
+                <p class="gallImageName text-center">{{title}}</p>
+                <p class="gallImageDesc">{{description}}</p>
+            </div>
+            {{/each}}
+        </div>
     </div>
 </section>
+
 {{>footer}}

@@ -1,6 +1,7 @@
 var express = require('express');
 var admin = express.Router();
 var vhost = require('vhost');
+const gallery = require('../public/models/gallery');
 var product = require('../public/models/product');
 var staff = require('../public/models/staff');
 
@@ -12,7 +13,7 @@ module.exports = function(app){
       admin.get('/',ensureStaffAuthenticated,function(req,res,next){
         res.render('admin/home', {layout:'admin',user: req.session.username})
       });
-      admin.get('/staff-home',(req,res,next)=>{
+      admin.get('/staff-home',ensureStaffAuthenticated,(req,res,next)=>{
         res.render('admin/staff-home',{
           layout:'admin',
           user: req.session.username
@@ -44,7 +45,7 @@ module.exports = function(app){
       admin.get('/staff',ensureStaffAuthenticated ,(req,res,next)=>{
         staff.find({available: true},function(err,staffs){
           var content = {
-              staffs : staffs.map(function(product){
+              staffs : staffs.map(function(staff){
                   return{
                       id:staff.id,
                       name: staff.name,
@@ -60,11 +61,25 @@ module.exports = function(app){
               user: req.session.username,
           }   
           res.render('admin/staff',content)
-      })
+        })
       });
       // gallery
-      admin.get('/gallery',(req,res,next)=>{
-        res.render('admin/gallery',{layout: 'admin'})
+      admin.get('/gallery',ensureStaffAuthenticated,(req,res,next)=>{
+        gallery.find({available: true},function(err, photos){
+          var content = {
+            photos: photos.map(function(image){
+              return {
+                id: image.id,
+                path: image.path,
+                title: image.title,
+                description: image.description,
+              }
+            }),
+            layout: 'admin',
+            user: req.session.username
+          }
+          res.render('admin/gallery',content)
+        })
       })
       // forgotpassword
       admin.get('/forgotPassword',(req,res,next)=>{

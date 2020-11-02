@@ -142,7 +142,7 @@
             </div>
         </li>
         <li class="nav-item">
-            <a  href="/logout" class="nav-link"role="button">
+            <a  href="/logout" class="nav-link small"role="button">
                 Log Out
             </a>
         </li>
@@ -222,7 +222,7 @@
                 </ul>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="/gallery" class="nav-link">
                 <i class="nav-icon far fa-image"></i>
                 <p>
                     GALLERY
@@ -287,10 +287,10 @@
         <!-- Main content -->
         <div class="content">
         {{#if flash}}
-            <div class="alert alert-dismissible alert-{{flash.type}}">
+            <div class="alert alert-dismissible alert-{{flash.type}}" style="opacity: 0.7;z-index:auto;">
             <button type="button" class="close"
             data-dismiss="alert" aria-hidden="true">&times;<button>
-            <strong>{{flash.intro}}</strong> {{{flash.message}}}
+            <span style="font-weight: bold;opacity:1;">{{flash.intro}}</span>{{{flash.message}}}
             </div>
         {{/if}}
         {{{body}}}

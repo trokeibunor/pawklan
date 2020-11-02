@@ -14,7 +14,7 @@ var upload = multer({ storage: storage });
 var vhost = require('vhost');
 var product = require('../public/models/product');
 var staff = require('../public/models/staff');
-
+var gallery = require('../public/models/gallery');
 var now = moment();
 // User authentication
 var passport = require('passport') 
@@ -124,7 +124,7 @@ module.exports = function (app){
         var subCategories_array = [req.body.SC_hoodies,req.body.SC_tops,req.body.SC_outwear,
             req.body.SC_shorts,req.body.SC_jackets,req.body.SC_sweatshirts,
             req.body.SC_underwear,req.body.SC_socks,req.body.SC_matching,
-            req.body.SC_skirts,req.body.SC_dresses].filter(sort); 
+            req.body.SC_skirts,req.body.SC_dresses,req.body.SC_male,req.body.SC_female,req.body.SC_child].filter(sort); 
         var tags_array = [req.body.t_hoodies,req.body.t_tops,req.body.t_outwear,
             req.body.t_shorts,req.body.t_jackets,req.body.t_sweatshirts,
             req.body.t_underwear,req.body.t_socks,req.body.t_matching,
@@ -204,8 +204,6 @@ module.exports = function (app){
         });
     });
     // Add staff form
-    
-    // Edit Staff details form
     admin.post('/process-staff',upload.single('staffImage'),(req,res,next)=>{
         var salt = bcrypt.genSaltSync(10);
         var hash = bcrypt.hashSync(req.body.staffPassword, salt);
@@ -240,6 +238,36 @@ module.exports = function (app){
         } finally{
             res.redirect(303,'/staff');
         }
+    }) 
+    // gallery upload
+    admin.post('/galleryUpload',upload.single('galleryImage'),(req,res,next)=>{
+        console.log(req.file)
+        var pawGallery = new Object({
+            title : req.body.galleryTitle,
+            description: req.body.galleryDesc,
+            path: reqPath(req.file.path),
+            available: true,
+            addedBy: req.session.username
+        });
+        
+        try {
+            new gallery(pawGallery).save();
+            console.log(pawGallery);
+            req.session.flash = {
+                type:'success',
+                intro: 'Request success',
+                message: 'Product Added',
+            };
+        } catch (error) {
+            req.session.flash = {
+                type:'danger',
+                intro: 'Request Failure',
+                message: 'Please Check variables and try again',
+            };
+            console.log(error);
+        } finally{
+            res.redirect(303,'/gallery');
+        }
+
     })
-    
 };

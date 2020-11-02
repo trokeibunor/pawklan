@@ -1,0 +1,82 @@
+<div class="container-fluid">
+    <h3>Kids</h3>
+    <h4>Tops & Jackets</h4>
+    <div class="owl-carousel owl-theme" style="height: 65%;">
+        {{#each tops}}
+            <div class="item correct">
+                <a href="/viewProduct?id={{id}}">
+                    <img src="{{image}}" alt=""
+                    class="shadow-lg" id="carousel-image shadow-lg">
+                    <span id="discount" class="badge badge-success">{{discount}}% off</span>
+                </a>
+                <p class="product-text">{{name}}</p>
+                <p class="price-text">${{price}}.00</p>
+            </div>
+        {{/each}}
+    </div>
+    <h4>Dresses</h4>
+    <div class="owl-carousel owl-theme"style="height: 65%;">
+        {{#each dresses}}
+            <div class="item correct">
+                <a href="/viewProduct?id={{id}}">
+                    <img src="{{image}}" alt=""
+                    class="shadow-lg" id="carousel-image shadow-lg">
+                    <span id="discount" class="badge badge-success">{{discount}}% off</span>
+                </a>
+                <p class="product-text">{{name}}</p>
+                <p class="price-text">${{price}}.00</p>
+            </div>
+        {{/each}}
+    </div>
+    <h4>Skirts & Shorts</h4>
+    <div class="owl-carousel owl-theme"style="height: 65%;">
+        {{#each pants}}
+            <div class="item correct">
+                <a href="/viewProduct?id={{id}}">
+                    <img src="{{image}}" alt=""
+                    class="shadow-lg" id="carousel-image shadow-lg">
+                    <span id="discount" class="badge badge-success">{{discount}}% off</span>
+                </a>
+                <p class="product-text">{{name}}</p>
+                <p class="price-text">${{price}}.00</p>
+            </div>
+        {{/each}}
+    </div>
+    <h4>Matching Sets & Outwear</h4>
+    <div class="owl-carousel owl-theme"style="height: 65%;">
+        {{#each outwear}}
+            <div class="item correct">
+                <a href="/viewProduct?id={{id}}">
+                    <img  src="{{image}}" alt=""
+                    class="shadow-lg" id="carousel-image shadow-lg">
+                    <span id="discount" class="badge badge-success">{{discount}}% off</span>
+                </a>
+                <p class="product-text">{{name}}</p>
+                <p class="price-text">${{price}}.00</p>
+            </div>
+        {{/each}}
+    </div>
+    <h4>Underwear & Socks</h4>
+    <div class="owl-carousel owl-theme"style="height: 65%;">
+        {{#each underwear}}
+            <div class="item correct">
+                <a href="/viewProduct?id={{id}}">
+                    <img src="{{image}}" alt=""
+                    class="shadow-lg" id="carousel-image shadow-lg">
+                    <span id="discount" class="badge badge-success">{{discount}}% off</span>
+                </a>
+                <p class="product-text">{{name}}</p>
+                <p class="price-text">${{price}}.00</p>
+            </div>
+        {{/each}}
+    </div>
+</div>
+<script>
+    var categories = document.getElementById('categories');
+    var men = document.getElementById('men');
+    var chidren =document.getElementById('children');
+
+    categories.classList.remove('active');
+    men.classList.remove('active');
+    female.classList.add('active');
+</script>

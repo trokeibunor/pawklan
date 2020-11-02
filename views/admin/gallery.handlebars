@@ -1,14 +1,15 @@
-{{#section head}}
+{{#section 'head'}}
     <link rel="stylesheet" href="/assets/owl-carousel-dis/assets/owl.carousel.min.css">
     <link rel="stylesheet" href="/assets/owl-carousel-dis/assets/owl.theme.default.min.css">
 {{/section}}
-    <form action="/galleryUpload" method="post">
+    <form action="/galleryUpload" method="post" enctype="multipart/form-data"
         <div class="row">
             <div class="col-sm-12 col-md-6">
-                <div class="imageView" style="height: 65vh; width:100%; background-color: gray;">
-
+                <div class="imageView" style="height: 65vh; width:100%;display: flex;">
+                    <p><img id="output"  alt="" style="cursor: not-allowed;width:100%;height:100%; object-fit: contain;
+                    align-self:center;align-content:center;"></p>
                 </div>
-                <input type="file" name="galleryImage" class="form-file-control mt-2" id="galleryImage">
+                <input type="file" name="galleryImage" accept="image/*" onchange="loadFile(event)" class="form-file-control mt-2" id="galleryImage">
             </div>
             <div class="col-sm-12 col-md-6">
                 <div class="form-group">
@@ -23,33 +24,20 @@
             </div>
         </div> 
     </form>
-    <div class="container-fluid">
+    <div class="container-fluid m-2">
         <div class="owl-carousel owl-theme">
+            {{#each photos}}
             <div class="item">
-                <img src="" alt="">
+                <img src="{{path}}" alt="" style="object-fit: fill;width:100%;height:250px;">
+                <p class="small lead">{{title}}</p>
+                <a href="/delete-image?id={{id}}" class="btn btn-block btn-outline-danger">
+                <i class="far fa-trash-alt"></i>Delete</a>
             </div>
+            {{/each}}
         </div>
     </div>
-<script type="text/javascript">
-    // owl-carousel script
-        $('.owl-carousel').owlCarousel({
-            loop:true,
-            margin:10,
-            nav:true,
-            responsive:{
-                0:{
-                    items:2
-                },
-                650:{
-                    items:3
-                },
-                1000:{
-                    items:5
-                }
-            }
-        })
-    </script>
 {{!-- Owl carousel script --}}
-{{#section javascripts}}
+{{#section 'javascripts'}}
     <script src="/assets/owl-carousel-dis/owl.carousel.min.js"></script>
+    <script src="/javascripts/galleryControl.js"></script>
 {{/section}}

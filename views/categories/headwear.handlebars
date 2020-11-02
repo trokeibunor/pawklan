@@ -1,0 +1,54 @@
+<div class="container-fluid">
+    <h3>Caps & Hats</h3>
+    <h4>Men's Section</h4>
+    <div class="owl-carousel owl-theme" style="height: 65%;">
+        {{#each male}}
+            <div class="item correct">
+                <a href="/viewProduct?id={{id}}">
+                    <img src="{{image}}" alt=""
+                    class="shadow-lg" id="carousel-image shadow-lg">
+                    <span id="discount" class="badge badge-success">{{discount}}% off</span>
+                </a>
+                <p class="product-text">{{name}}</p>
+                <p class="price-text">${{price}}.00</p>
+            </div>
+        {{/each}}
+    </div>
+    <h4>Ladies</h4>
+    <div class="owl-carousel owl-theme" style="height: 65%;">
+        {{#each female}}
+            <div class="item correct">
+                <a href="/viewProduct?id={{id}}">
+                    <img src="{{image}}" alt=""
+                    class="shadow-lg" id="carousel-image shadow-lg">
+                    <span id="discount" class="badge badge-success">{{discount}}% off</span>
+                </a>
+                <p class="product-text">{{name}}</p>
+                <p class="price-text">${{price}}.00</p>
+            </div>
+        {{/each}}
+    </div>
+    <h4>Children</h4>
+    <div class="owl-carousel owl-theme" style="height: 65%;">
+        {{#each child}}
+            <div class="item correct">
+                <a href="/viewProduct?id={{id}}">
+                    <img src="{{image}}" alt=""
+                    class="shadow-lg" id="carousel-image shadow-lg">
+                    <span id="discount" class="badge badge-success">{{discount}}% off</span>
+                </a>
+                <p class="product-text">{{name}}</p>
+                <p class="price-text">${{price}}.00</p>
+            </div>
+        {{/each}}
+    </div>
+</div>
+<script>
+    var categories = document.getElementById('categories');
+    var men = document.getElementById('men');
+    var headwear =document.getElementById('headwear');
+
+    categories.classList.remove('active');
+    men.classList.remove('active');
+    headwear.classList.add('active');
+</script>

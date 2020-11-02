@@ -1,6 +1,7 @@
 var express = require('express')
 var customer = require('../public/models/user');
 var bcrypt = require('bcryptjs');
+const credentials = require('../public/lib/credentials');
 
 module.exports = function(app){
     // User authentication
@@ -16,8 +17,8 @@ module.exports = function(app){
     //   credentials (in this case, an accessToken, refreshToken, and Google
     //   profile), and invoke a callback with a user object.
     passportUI.use(new GoogleStrategy({
-        clientID: '692249458486-643j5hcss17nih3102b03cfrgami2lre.apps.googleusercontent.com',
-        clientSecret: 'ZsdC55S9B2n2DLArqxNxd3ys',
+        clientID: credentials.oauth.clientID,
+        clientSecret: credentials.oauth.clientSecret,
         callbackURL: "http://localhost:3000"
     },
     function(accessToken, refreshToken, profile, done) {

@@ -35,11 +35,6 @@ module.exports = function (app){
         }else if(customer.isUser(user.email)){
             done(null, user.id)
         }
-        // if(user){
-        //     done(null,user.id)
-        // }else if(staff){
-        //     done(null,staff.id)
-        // }
     });
     passport.deserializeUser(function(id,done){
         staff.getStaffById(id, function(err,staff){

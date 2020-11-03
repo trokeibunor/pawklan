@@ -29,7 +29,10 @@ helpers: {
   if(!this._sections) this._sections = {};
   this._sections[name] = options.fn(this);
   return null;
-  }}
+  }},
+  multiply: function(x,y){
+    return y * x;
+  }
 });
 // Set upp mongo
 //link in mongo

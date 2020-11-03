@@ -40,7 +40,20 @@ app.get('/signup',(req,res,next)=>{
   res.render('signup')
 });
 app.get('/cart',ensureUserAuthenticated,(req,res,next)=>{
-  res.render('cart');
+  // get cart from sessions
+  var cart = req.session.cart;
+  var displayCart = {items:[],total:0};
+  var total = 0;
+  
+  // Get total
+  for(var item in cart){
+    displayCart.items.push(cart[item]);
+    total += cart[item].qty * cart[item].price;
+  }
+  displayCart.total = total;
+  res.render('cart',{
+   cart: displayCart,
+  });
 })
 app.get('/wishlist',ensureUserAuthenticated,(req,res,next)=>{
   res.render('wishlist');
@@ -49,21 +62,22 @@ app.get('/forgotPassword',(req,res,next)=>{
   res.render('forgotPasswordUI')
 })
 app.get('/viewProduct',ensureUserAuthenticated,(req,res,next)=>{
-  product.find({id: req.query.id},(err,products)=>{
+  product.find({_id: req.query.id},(err,products)=>{
     var content = {
-      products: products.map(function(item){
+      products: products.map(function(product){
         return{
-          name: item.name,
-          desciption: item.description,
-          price: item.price,
-          color: item.color,
-          path: item.path,
+          id: req.query.id,
+          name: product.name,
+          description: product.description,
+          price: product.price,
+          color: product.color,
+          path: product.path,
+          indexPath : product.path[0]
         }
       })
     }
     res.render('view-product',content)
   })
-  res.render('view-product')
 })
 function ensureUserAuthenticated(req,res,next){
   if(req.session.username != undefined){

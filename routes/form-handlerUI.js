@@ -3,12 +3,12 @@ const customer = require('../public/models/user');
 var bcrypt = require('bcryptjs');
 const credentials = require('../public/lib/credentials');
 const  submail  = require('../public/models/subscriptionEmail');
-const customerMail = require('../public/models/customerCare')
 // NodeMailer Logic
 var nodeMailer = require('nodemailer');
-const { text } = require('express');
+const { text, raw } = require('express');
 const customerCareMail = require('../public/models/customerCare');
-var mailTransport = nodeMailer.createTransport('SMTP',{
+const products = require('../public/models/product');
+var mailTransport = nodeMailer.createTransport({
         service: 'Gmail',
         auth: {
         user: credentials.gmail.user,
@@ -106,8 +106,8 @@ module.exports = function(app){
             html: '<h1>Pawklan Fashion</h1>\n<p>Thanks for sign up for Pawklan Fashion the best Fashion store in the Globe ' +
             'PawKlan Fashion. <b>We enjoy your Patronage!</b>',
             generateTextFromHtml: true,
-        }, function(err){
-        if(err) console.error( 'Unable to send email: ' + error );
+        }, function(error){
+        if(error) console.error( 'Unable to send email: ' + error );
         });
         res.redirect('/login');
     });
@@ -125,12 +125,12 @@ module.exports = function(app){
         mailTransport.sendMail({
             from: '"PawKlan Fashion" <pawKlan.com>',
             to: req.body.email,
-            subject: "PawKlan user Sign up",
+            subject: "PawKlan user Login",
             html: '<h1>Pawklan Fashion</h1>\n<p>Thanks for sign up for Pawklan Fashion the best Fashion store in the Globe ' +
             'PawKlan Fashion. <b>We enjoy your Patronage!</b>',
             generateTextFromHtml: true,
-        }, function(err){
-        if(err) console.error( 'Unable to send email: ' + error );
+        }, function(error){
+        if(error) console.error( 'Unable to send email: ' + error );
         });
         res.redirect('/')
     });
@@ -148,8 +148,8 @@ module.exports = function(app){
             html: '<h1>Pawklan Fashion</h1>\n<p>Thanks for subscribing to our store Updates ' +
             'PawKlan Fashion. <b>We enjoy your Patronage!</b>',
             generateTextFromHtml: true,
-        }, function(err){
-        if(err) console.error( 'Unable to send email: ' + error );
+        }, function(error){
+        if(error) console.error( 'Unable to send email: ' + error );
         });
         res.redirect('/')
     });
@@ -163,8 +163,8 @@ module.exports = function(app){
             'Please be patient while we resend you a login link.If the link does not come soon'+
             ', try to login with your mail. <b>Sorry for the inconvinience We enjoy your Patronage!</b>',
             generateTextFromHtml: true,
-        }, function(err){
-        if(err) console.error( 'Unable to send email: ' + error );
+        }, function(error){
+        if(error) console.error( 'Unable to send email: ' + error );
         });
         res.redirect('/')
     })
@@ -183,10 +183,37 @@ module.exports = function(app){
             html: '<h1>Pawklan Fashion</h1>\n<p>Thanks for contacting Us ' +
             'PawKlan Fashion would ensure we deal with the issue immediately please be patient. <b>We enjoy your Patronage!</b>',
             generateTextFromHtml: true,
-        }, function(err){
-        if(err) console.error( 'Unable to send email: ' + error );
+        }, function(error){
+        if(error) console.error( 'Unable to send email: ' + error );
         });
-        res.redirect('/zabout')
+        res.redirect('/about')
+    });
+    // Add product to cart
+    app.post('/cart',(req,res)=>{
+        req.session.cart = req.session.cart || {};
+        var cart = req.session.cart;
+        products.find({_id: req.query.id},(err,product)=>{
+            if(err){
+                console.log(err)
+            }
+            if(cart[req.query.id]){
+                cart[req.query.id].qty++;
+            }else{
+                var required  = {
+                    product: product.map(function(item){
+                        return{
+                            item: item.id,
+                            name: item.name,
+                            price: item.price,
+                            qty: 1,
+                        }
+                    })
+                    
+                }
+                cart[req.query.id] = required.product[0]; 
+            }
+            res.redirect('/cart'); 
+        })
     })
     // logOut route
     app.get('/logout',(req,res)=>{

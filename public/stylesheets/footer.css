@@ -3,7 +3,7 @@
 ====================== */
 
 /* Main Footer */
-footer .main-footer .main-footer-aug{	padding: 20px 0;	background: #252525;}
+footer .main-footer{	padding: 20px 0;	background: #252525;}
 footer ul{	padding-left: 0;	list-style: none;}
 
 /* Copy Right Footer */
@@ -20,12 +20,12 @@ footer ul{	padding-left: 0;	list-style: none;}
 .footer-top{	background: #252525;	padding-bottom: 30px;	margin-bottom: 30px;	border-bottom: 3px solid #222;}
 
 /* Footer transparent */
-footer.transparent .footer-top, footer.transparent .main-footer .main-footer-aug{	background: transparent;}
+footer.transparent .footer-top, footer.transparent .main-footer{	background: transparent;}
 footer.transparent .footer-copyright{	background: none repeat scroll 0 0 rgba(0, 0, 0, 0.3) ;}
 
 /* Footer light */
 footer.light .footer-top{	background: #f9f9f9;}
-footer.light .main-footer .main-footer-aug{	background: #f9f9f9;}
+footer.light .main-footer{	background: #f9f9f9;}
 footer.light .footer-copyright{	background: none repeat scroll 0 0 rgba(255, 255, 255, 0.3) ;}
 
 /* Footer 4 */

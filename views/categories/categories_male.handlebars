@@ -1,62 +1,98 @@
 
 <div class="container-fluid">
     <h3>Male Category</h3>
-    <h4>Tops & Jackets</h4>
-    <div class="owl-carousel owl-theme" style="height: 65%;">
-        {{#each tops}}
-            <div class="item correct">
-                <a href="/viewProduct?id={{id}}">
-                    <img src="{{image}}" alt=""
-                    class="shadow-lg" id="carousel-image shadow-lg">
-                    <span id="discount" class="badge badge-success">{{discount}}% off</span>
-                </a>
-                <p class="product-text">{{name}}</p>
-                <p class="price-text">${{price}}.00</p>
-            </div>
-        {{/each}}
-    </div>
-    <h4>Pants & Shorts</h4>
-    <div class="owl-carousel owl-theme"style="height: 65%;">
-        {{#each pants}}
-            <div class="item correct">
-                <a href="/viewProduct?id={{id}}">
-                    <img src="{{image}}" alt=""
-                    class="shadow-lg" id="carousel-image shadow-lg">
-                    <span id="discount" class="badge badge-success">{{discount}}% off</span>
-                </a>
-                <p class="product-text">{{name}}</p>
-                <p class="price-text">${{price}}.00</p>
-            </div>
-        {{/each}}
-    </div>
-    <h4>Matching Sets & Outwear</h4>
-    <div class="owl-carousel owl-theme"style="height: 65%;">
-        {{#each outwear}}
-            <div class="item correct">
-                <a href="/viewProduct?id={{id}}">
-                    <img  src="{{image}}" alt=""
-                    class="shadow-lg" id="carousel-image shadow-lg">
-                    <span id="discount" class="badge badge-success">{{discount}}% off</span>
-                </a>
-                <p class="product-text">{{name}}</p>
-                <p class="price-text">${{price}}.00</p>
-            </div>
-        {{/each}}
-    </div>
-    <h4>Underwear & Socks</h4>
-    <div class="owl-carousel owl-theme"style="height: 65%;">
-        {{#each underwear}}
-            <div class="item correct">
-                <a href="/viewProduct?id={{id}}">
-                    <img src="{{image}}" alt=""
-                    class="shadow-lg" id="carousel-image shadow-lg">
-                    <span id="discount" class="badge badge-success">{{discount}}% off</span>
-                </a>
-                <p class="product-text">{{name}}</p>
-                <p class="price-text">${{price}}.00</p>
-            </div>
-        {{/each}}
-    </div>
+    {{#if tops}}
+        <h4>Tops & Jackets</h4>
+            <div class="owl-carousel owl-theme" id="owl-one">
+            {{#each tops}}
+                <div class="item" style="width: 15rem;">
+                    <a href="/viewProduct?id={{id}}" class="image-container">
+                        <img src="{{image}}" alt="" style="height: 300px;"
+                        class="shadow-lg card-img" id="carousel-image shadow-lg">
+                    </a>
+                    <div id="details" class="shadow-lg">
+                        <p id="discount" class="badge badge-success">{{discount}}% off</p>
+                        <p class="product-text">{{name}}</p>
+                        <p class="price-text">${{price}}.00</p>
+                    </div>   
+                </div>
+            {{/each}}       
+        </div>
+    {{/if}}
+    {{#if pants}}
+        <h4>Pants & Shorts</h4>
+       <div class="owl-carousel owl-theme" id="owl-one">
+            {{#each pants}}
+                <div class="item" style="width: 15rem;">
+                    <a href="/viewProduct?id={{id}}" class="image-container">
+                        <img src="{{image}}" alt="" style="height: 300px;"
+                        class="shadow-lg card-img" id="carousel-image shadow-lg">
+                    </a>
+                    <div id="details"><p id="discount" class="badge badge-success">{{discount}}% off</p>
+                        <p class="product-text">{{name}}</p>
+                        <p class="price-text">${{price}}.00</p>
+                    </div>   
+                </div>
+            {{/each}}       
+        </div>
+    {{/if}}
+    {{#if outwear}}
+        <h4>Matching Sets & Outwear</h4>
+        <div class="owl-carousel owl-theme" id="owl-one">
+            {{#each outwear}}
+                <div class="item" style="width: 15rem;">
+                    <a href="/viewProduct?id={{id}}" class="image-container">
+                        <img src="{{image}}" alt="" style="height: 300px;"
+                        class="shadow-lg card-img" id="carousel-image shadow-lg">
+                    </a>
+                    <div id="details"><p id="discount" class="badge badge-success">{{discount}}% off</p>
+                        <p class="product-text">{{name}}</p>
+                        <p class="price-text">${{price}}.00</p>
+                    </div>   
+                </div>
+            {{/each}}       
+        </div>
+    {{/if}}
+    {{#if underwear}}
+        <h4>Underwear & Socks</h4>
+        <div class="owl-carousel owl-theme" id="owl-one">
+            {{#each underwear}}
+                <div class="item" style="width: 15rem;">
+                    <a href="/viewProduct?id={{id}}" class="image-container">
+                        <img src="{{image}}" alt="" style="height: 300px;"
+                        class="shadow-lg card-img" id="carousel-image shadow-lg">
+                    </a>
+                    <div id="details"><p id="discount" class="badge badge-success">{{discount}}% off</p>
+                        <p class="product-text">{{name}}</p>
+                        <p class="price-text">${{price}}.00</p>
+                    </div>   
+                </div>
+            {{/each}}       
+        </div>
+    {{/if}}
 </div>
 
-
+{{#section 'javascript'}}
+    <script>
+        $('document').ready(function(){
+            $('.owl-carousel').owlCarousel({
+                loop: true,
+                margin:10,
+                nav:true,
+                autoWidth: true,
+                responsiveClass: true,
+                responsive:{
+                    0:{
+                        items:2
+                    },
+                    600:{
+                        items:3
+                    },
+                    1000:{
+                        items:5
+                    }
+                }
+            });
+        })
+    </script>
+{{/section}}

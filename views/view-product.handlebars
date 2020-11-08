@@ -50,11 +50,18 @@
         </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn my-2 my-sm-0 footer-btn" type="submit">Search</button>
-            <a href="/login" class="btn ml-2 my-2 my-sm-0 footer-btn" style="color: white;" id="loginbtn">
-                <span class="fas fa-sign-in-alt"></span>
-            </a>
+                <input class="form-control mr-sm-2" name="searchForm" type="search" placeholder="Search" aria-label="Search">
+                {{#if user}}
+                <a href="/logout" class="btn ml-2 my-2 my-sm-0 footer-btn" id="loginbtn">
+                    Log Out
+                    <span class="fas fa-sign-out-alt" style="color: white;" ></span>
+                </a>
+                {{else}}
+                <a href="/login" class="btn ml-2 my-2 my-sm-0 footer-btn" id="loginbtn">
+                    Login
+                    <span class="fas fa-sign-in-alt" style="color: white;"></span>
+                </a>
+            {{/if}}
         </form>
     </div>
 </nav>
@@ -68,33 +75,31 @@
     <div class="card-body">
         <div class="row">
         <div class="col-12 col-sm-6">
-            <h3 class="d-inline-block d-sm-none">LOWA Men’s Renegade GTX Mid Hiking Boots Review</h3>
+            <h3 class="d-inline-block d-sm-none">{{slug}}</h3>
             <div class="col-12">
             <img src="{{indexPath}}" class="product-image" alt="Product Image">
             </div>
             <div class="col-12 product-image-thumbs">
             {{#each path}}    
-            <div class="product-image-thumb "><img src="{{this}}" alt="Product Image"></div>
-            {{!-- <div class="product-image-thumb"><img src="/images/IMG_4811.JPG" alt="Product Image"></div>
-            <div class="product-image-thumb"><img src="/images/IMG_4814.JPG" alt="Product Image"></div>
-            <div class="product-image-thumb"><img src="/images/IMG_5007.JPG" alt="Product Image"></div>
-            <div class="product-image-thumb"><img src="/images/pexels-lucas-pezeta.jpg" alt="Product Image"></div> --}}
+            <div class="product-image-thumb"><img class="small-product-thumb" src="{{this}}" alt="Product Image"></div>
             {{/each}}
             </div>
         </div>
         <div class="col-12 col-sm-6">
             <h3 class="my-3">{{name}}</h3>
-            <p>{{description}}</p>
+            <p>{{slug}}</p>
 
             <hr>
             <h4>Available Colors</h4>
-            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+            <div class="btn-group btn-group-toggle" data-toggle="buttons" id="colourLabel">
             {{#each color}}
             <label class="btn btn-default text-center">
-                <input type="radio" name="color_option" id="color_option_a1" autocomplete="off" checked="">
+                
+                <input type="radio" name="color_option" form="cartForm" form="wishlistForm" autocomplete="off" value="{{this}}">
                 {{this}}
                 <br>
                 <i class="fas fa-circle fa-2x text-{{this}}"></i>
+                
             </label>
             {{/each}}
             </div>
@@ -102,25 +107,25 @@
             <h4 class="mt-3">Size <small>Please select one</small></h4>
             <div class="btn-group btn-group-toggle" data-toggle="buttons">
             <label class="btn btn-default text-center">
-                <input type="radio" name="color_option" id="color_option_b1" autocomplete="off">
+                <input type="radio" name="size_option" form="cartForm" form="wishlistForm" autocomplete="off" value="small">
                 <span class="text-xl">S</span>
                 <br>
                 Small
             </label>
             <label class="btn btn-default text-center">
-                <input type="radio" name="color_option" id="color_option_b2" autocomplete="off">
+                <input type="radio" name="size_option" form="cartForm" form="wishlistForm" autocomplete="off" value="medium">
                 <span class="text-xl">M</span>
                 <br>
                 Medium
             </label>
             <label class="btn btn-default text-center">
-                <input type="radio" name="color_option" id="color_option_b3" autocomplete="off">
+                <input type="radio" name="size_option"form="cartForm" form="wishlistForm" autocomplete="off" value="large">
                 <span class="text-xl">L</span>
                 <br>
                 Large
             </label>
             <label class="btn btn-default text-center">
-                <input type="radio" name="color_option" id="color_option_b4" autocomplete="off">
+                <input type="radio" name="size_option" form="cartForm" form="wishlistForm" autocomplete="off" value="Extra Large">
                 <span class="text-xl">XL</span>
                 <br>
                 Xtra-Large
@@ -137,11 +142,11 @@
             </div>
 
             <div class="mt-4">
-                <form action="/cart?id={{id}}" class="btn btn-primary btn-lg btn-flat" method="post">
+                <form action="/cart?id={{id}}" class="btn btn-primary btn-lg btn-flat" method="post" id="cartForm">
                     <input type="submit" class="btn btn-primary" value="Add to cart" >
                     <i class="fas fa-cart-plus fa-lg mr-2"></i>
                 </form>
-                <form action="/wishlist?id={{id}}" class="btn btn-primary btn-lg btn-flat" method="post">
+                <form action="/wishlist?id={{id}}" class="btn btn-primary btn-lg btn-flat" method="post" id="wishlistForm">
                     <input type="submit" class="btn btn-primary" value="Add to Wishlist">
                     <i class="fas fa-heart fa-lg mr-2"></i>  
                 </form>
@@ -168,13 +173,28 @@
         <nav class="w-100">
             <div class="nav nav-tabs" id="product-tab" role="tablist">
             <a class="nav-item nav-link active" id="product-desc-tab" data-toggle="tab" href="#product-desc" role="tab" aria-controls="product-desc" aria-selected="true">Description</a>
-            <a class="nav-item nav-link" id="product-comments-tab" data-toggle="tab" href="#product-comments" role="tab" aria-controls="product-comments" aria-selected="false">Comments</a>
+            <a class="nav-item nav-link" id="product-comments-tab" data-toggle="tab" href="#product-comments" role="tab" aria-controls="product-comments" aria-selected="false">Review</a>
             <a class="nav-item nav-link" id="product-rating-tab" data-toggle="tab" href="#product-rating" role="tab" aria-controls="product-rating" aria-selected="false">Rating</a>
             </div>
         </nav>
         <div class="tab-content p-3" id="nav-tabContent">
-            <div class="tab-pane fade show active" id="product-desc" role="tabpanel" aria-labelledby="product-desc-tab"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi vitae condimentum erat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed posuere, purus at efficitur hendrerit, augue elit lacinia arcu, a eleifend sem elit et nunc. Sed rutrum vestibulum est, sit amet cursus dolor fermentum vel. Suspendisse mi nibh, congue et ante et, commodo mattis lacus. Duis varius finibus purus sed venenatis. Vivamus varius metus quam, id dapibus velit mattis eu. Praesent et semper risus. Vestibulum erat erat, condimentum at elit at, bibendum placerat orci. Nullam gravida velit mauris, in pellentesque urna pellentesque viverra. Nullam non pellentesque justo, et ultricies neque. Praesent vel metus rutrum, tempus erat a, rutrum ante. Quisque interdum efficitur nunc vitae consectetur. Suspendisse venenatis, tortor non convallis interdum, urna mi molestie eros, vel tempor justo lacus ac justo. Fusce id enim a erat fringilla sollicitudin ultrices vel metus. </div>
-            <div class="tab-pane fade" id="product-comments" role="tabpanel" aria-labelledby="product-comments-tab"> Vivamus rhoncus nisl sed venenatis luctus. Sed condimentum risus ut tortor feugiat laoreet. Suspendisse potenti. Donec et finibus sem, ut commodo lectus. Cras eget neque dignissim, placerat orci interdum, venenatis odio. Nulla turpis elit, consequat eu eros ac, consectetur fringilla urna. Duis gravida ex pulvinar mauris ornare, eget porttitor enim vulputate. Mauris hendrerit, massa nec aliquam cursus, ex elit euismod lorem, vehicula rhoncus nisl dui sit amet eros. Nulla turpis lorem, dignissim a sapien eget, ultrices venenatis dolor. Curabitur vel turpis at magna elementum hendrerit vel id dui. Curabitur a ex ullamcorper, ornare velit vel, tincidunt ipsum. </div>
+            <div class="tab-pane fade show active" id="product-desc" role="tabpanel" aria-labelledby="product-desc-tab"> {{description}} </div>
+            <div class="tab-pane fade" id="product-comments" role="tabpanel" aria-labelledby="product-comments-tab"> 
+                <form action="/product-comment" method="post">
+                    <input type="hidden" name="username" value="{{user}}">
+                    <input type="hidden" name="product" value="{{id}}">
+                    <div class="form-row">
+                        <div class="col-sm-12 col-md-12">
+                            <div class="form-group">
+                                <label for="product-comment-text">Please Review the Product: </label>
+                                <textarea name="product-comment-text" id="product-comment-text"
+                                rows="5" class="form-control" cols="100"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="submit" value="Submit Comment" class="btn btn-outline-info">
+                </form>
+            </div>
             <div class="tab-pane fade" id="product-rating" role="tabpanel" aria-labelledby="product-rating-tab"> Cras ut ipsum ornare, aliquam ipsum non, posuere elit. In hac habitasse platea dictumst. Aenean elementum leo augue, id fermentum risus efficitur vel. Nulla iaculis malesuada scelerisque. Praesent vel ipsum felis. Ut molestie, purus aliquam placerat sollicitudin, mi ligula euismod neque, non bibendum nibh neque et erat. Etiam dignissim aliquam ligula, aliquet feugiat nibh rhoncus ut. Aliquam efficitur lacinia lacinia. Morbi ac molestie lectus, vitae hendrerit nisl. Nullam metus odio, malesuada in vehicula at, consectetur nec justo. Quisque suscipit odio velit, at accumsan urna vestibulum a. Proin dictum, urna ut varius consectetur, sapien justo porta lectus, at mollis nisi orci et nulla. Donec pellentesque tortor vel nisl commodo ullamcorper. Donec varius massa at semper posuere. Integer finibus orci vitae vehicula placerat. </div>
         </div>
         </div>
@@ -185,6 +205,7 @@
     </div>
     <!-- /.card -->
 </section>
+<!-- footerSection-->
 <section style="width:100vw; z-index:1;">
     <footer id="footer" class="footer-1">
 <div class="main-footer-aug widgets-dark typo-light" style="width: 100vw; background:#252525;padding: 20px 0;">
@@ -267,14 +288,47 @@
 </section>
 <!-- /.content -->
 </div>
+<script>
+    var reqDoc = document.querySelector('.product-image');
+    var smallDoc = document.querySelectorAll('.product-image-thumb');
+    var small = document.querySelectorAll('.small-product-thumb');
+    smallDoc[0].classList.add('active');  
+    // next phase
+    smallDoc.forEach(element => {
+        element.addEventListener('click', ()=>{
+            if(!element.classList.contains('active')){
+                element.classList.add('active');
+                var reqParent = element.parentElement.children;
+                for (let index = 0; index < reqParent.length; index++) {
+                    const need = reqParent[index];
+                    need.classList.remove('active');
+                };
+                element.classList.add('active');
+                reqDoc.src = element.firstChild.src;
+            }
+        });
+    });
+    //control radion buttons
+    var colourButton = document.getElementById('colourLabel');
+    var needed = colourButton.children;
+    for (let index = 0; index < needed.length; index++) {
+    const col = needed[index];
+    console.log(col);
+    col.addEventListener('click',()=>{
+        if(col.classList.contains('focus')){
+            col.style.backgroundColor = "lightgray";
+        }
+    });
+    }
+</script>
 
-  {{#section 'javascripts'}}
-    <!-- jQuery -->
-    <script src="../../plugins/jquery/jquery.min.js"></script>
-    <!-- Bootstrap 4 -->
-    <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- AdminLTE App -->
-    <script src="../../dist/js/adminlte.min.js"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="../../dist/js/demo.js"></script
-  {{/section}}
+{{#section 'javascripts'}}
+<!-- jQuery -->
+<script src="../../plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="../../dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="../../dist/js/demo.js"></script
+{{/section}}

@@ -7,24 +7,11 @@ module.exports = function(app){
     app.get('/categories', function(req,res,next){
         product.find( {category: 'male'},function(err,products){
             var content = {
-                products: products.map(function(product){
-                        return {
-                            id: product.id,
-                            name:product.name,
-                            sku: product.sku,
-                            description:product.description,
-                            price: product.price,
-                            color: product.color,
-                            image: product.path[0],
-                            tags: product.tags,
-                            subcategories: product.subcategories,
-                        }
-                    }
-                ),
-                // subcategory classification
-                // tops
                 tops: products.map(function(item){
-                    if(product.find({subcategories: {$in : ['Tops'|| 'Hoodies'||'Jackets'||'Sweatshirts']}})){
+                    if(item.subcategories.includes('Tops')
+                    ||item.subcategories.includes('Hoodies')
+                    ||item.subcategories.includes('Jackets')
+                    ||item.subcategories.includes('Sweatshirts')){
                         return {
                             id: item.id,
                             name:item.name,
@@ -33,14 +20,14 @@ module.exports = function(app){
                             discount: item.discount || 'Zero',
                             price: item.price,
                             color: item.color,
-                            image: item.path[0],
+                            image: item.path[1],
                             tags: products.tags,
                         }
                     }
                 }),
                 // pants & shorts
                 pants: products.map(function(item){
-                    if(product.find({subcategories: {$in : ['Shorts']}})){
+                    if(item.subcategories.includes('Shorts')){
                         return {
                             id: item.id,
                             name:item.name,
@@ -56,7 +43,8 @@ module.exports = function(app){
                 }),
                 // // outwear & matching Sets
                 outwear: products.map(function(item){
-                    if(product.find({subcategories: {$in : ['Matching Sets'||'Outwear']}})){
+                    if(item.subcategories.includes('Matching Sets')
+                    ||item.subcategories.includes('Outwear')){
                         return {
                             id: item.id,
                             name:item.name,
@@ -72,7 +60,8 @@ module.exports = function(app){
                 }),
                 // // Socks and Underwear
                 underwear: products.map(function (item) {
-                        if(product.find({subcategories: {$in : ['Underwear'||'Socks']}})) {
+                        if(item.subcategories.includes('Underwear')
+                        || item.subcategories.includes('Socks')) {
                             return {
                                 id: item.id,
                                 name: item.name,
@@ -97,24 +86,14 @@ module.exports = function(app){
     app.get('/female', function(req,res,next){
         product.find( {category: 'female'},function(err,products){
             var content = {
-                products: products.map(function(product){
-                        return {
-                            id: product.id,
-                            name:product.name,
-                            sku: product.sku,
-                            description:product.description,
-                            price: product.price,
-                            color: product.color,
-                            image: product.path[0],
-                            tags: product.tags,
-                            subcategories: product.subcategories,
-                        }
-                    }
-                ),
-                // subcategory classification
+                 // subcategory classification
                 // tops
                 tops: products.map(function(item){
-                    if(product.find({subcategories: {$in : ['Tops'|| 'Hoodies'||'Jackets'||'Sweatshirts'||'Crop-tops']}})){
+                    if(item.subcategories.includes('Tops'||'Crop-tops')
+                    ||item.subcategories.includes('Hoddies')
+                    ||item.subcategories.includes('Jackets')
+                    ||item.subcategories.includes('Sweatshirts')
+                    ||item.subcategories.includes('Crop-tops')){
                         return {
                             id: item.id,
                             name:item.name,
@@ -130,7 +109,9 @@ module.exports = function(app){
                 }),
                 // pants & shorts
                 pants: products.map(function(item){
-                    if(product.find({subcategories: {$in : ['Shorts'||'Skirts']}})){
+                    console.log(item.subcategories)
+                    if(item.subcategories.includes('Shorts')||
+                    item.subcategories.includes('Skirts')){
                         return {
                             id: item.id,
                             name:item.name,
@@ -146,7 +127,8 @@ module.exports = function(app){
                 }),
                 // // outwear & matching Sets
                 outwear: products.map(function(item){
-                    if(product.find({subcategories: {$in : ['Matching Sets'||'Outwear']}})){
+                    if(item.subcategories.includes('Matching Sets')
+                    ||item.subcategories.includes('Outwear')){
                         return {
                             id: item.id,
                             name:item.name,
@@ -162,7 +144,8 @@ module.exports = function(app){
                 }),
                 // // Socks and Underwear
                 underwear: products.map(function (item) {
-                        if(product.find({subcategories: {$in : ['Underwear'||'Socks']}})) {
+                        if(item.subcategories.includes('Underwear')
+                        ||item.subcategories.includes('Socks')) {
                             return {
                                 id: item.id,
                                 name: item.name,
@@ -176,21 +159,22 @@ module.exports = function(app){
                             };
                         }
                     }),
-                    dresses: products.map(function (item) {
-                        if(product.find({subcategories: {$in : ['Dresses']}})) {
-                            return {
-                                id: item.id,
-                                name: item.name,
-                                sku: item.sku,
-                                description: item.description,
-                                discount: item.discount || 'Zero',
-                                price: item.price,
-                                color: item.color,
-                                image: item.path[0],
-                                tags: item.tags,
-                            };
-                        }
-                    }),
+                // Dresses
+                dresses: products.map(function (item) {
+                    if(item.subcategories.includes('Dresses')) {
+                        return {
+                            id: item.id,
+                            name: item.name,
+                            sku: item.sku,
+                            description: item.description,
+                            discount: item.discount || 'Zero',
+                            price: item.price,
+                            color: item.color,
+                            image: item.path[0],
+                            tags: item.tags,
+                        };
+                    }
+                }),
                 layout: 'categories',
                 
             };
@@ -202,24 +186,14 @@ module.exports = function(app){
     app.get('/children', function(req,res,next){
         product.find( {category: 'children'},function(err,products){
             var content = {
-                products: products.map(function(product){
-                        return {
-                            id: product.id,
-                            name:product.name,
-                            sku: product.sku,
-                            description:product.description,
-                            price: product.price,
-                            color: product.color,
-                            image: product.path[0],
-                            tags: product.tags,
-                            subcategories: product.subcategories,
-                        }
-                    }
-                ),
-                // subcategory classification
+                 // subcategory classification
                 // tops
                 tops: products.map(function(item){
-                    if(product.find({subcategories: {$in : ['Tops'|| 'Hoodies'||'Jackets'||'Sweatshirts'||'Crop-tops']}})){
+                    if(item.subcategories.includes('Tops'||'Crop-tops')
+                    ||item.subcategories.includes('Hoddies')
+                    ||item.subcategories.includes('Jackets')
+                    ||item.subcategories.includes('Sweatshirts')
+                    ||item.subcategories.includes('Crop-tops')){
                         return {
                             id: item.id,
                             name:item.name,
@@ -235,7 +209,9 @@ module.exports = function(app){
                 }),
                 // pants & shorts
                 pants: products.map(function(item){
-                    if(product.find({subcategories: {$in : ['Shorts'||'Skirts']}})){
+                    console.log(item.subcategories)
+                    if(item.subcategories.includes('Shorts')||
+                    item.subcategories.includes('Skirts')){
                         return {
                             id: item.id,
                             name:item.name,
@@ -251,7 +227,8 @@ module.exports = function(app){
                 }),
                 // // outwear & matching Sets
                 outwear: products.map(function(item){
-                    if(product.find({subcategories: {$in : ['Matching Sets'||'Outwear']}})){
+                    if(item.subcategories.includes('Matching Sets')
+                    ||item.subcategories.includes('Outwear')){
                         return {
                             id: item.id,
                             name:item.name,
@@ -267,7 +244,8 @@ module.exports = function(app){
                 }),
                 // // Socks and Underwear
                 underwear: products.map(function (item) {
-                        if(product.find({subcategories: {$in : ['Underwear'||'Socks']}})) {
+                        if(item.subcategories.includes('Underwear')
+                        ||item.subcategories.includes('Socks')) {
                             return {
                                 id: item.id,
                                 name: item.name,
@@ -281,25 +259,26 @@ module.exports = function(app){
                             };
                         }
                     }),
-                    dresses: products.map(function (item) {
-                        if(product.find({subcategories: {$in : ['Dresses']}})) {
-                            return {
-                                id: item.id,
-                                name: item.name,
-                                sku: item.sku,
-                                description: item.description,
-                                discount: item.discount || 'Zero',
-                                price: item.price,
-                                color: item.color,
-                                image: item.path[0],
-                                tags: item.tags,
-                            };
-                        }
-                    }),
+                // Dresses
+                dresses: products.map(function (item) {
+                    if(item.subcategories.includes('Dresses')) {
+                        return {
+                            id: item.id,
+                            name: item.name,
+                            sku: item.sku,
+                            description: item.description,
+                            discount: item.discount || 'Zero',
+                            price: item.price,
+                            color: item.color,
+                            image: item.path[0],
+                            tags: item.tags,
+                        };
+                    }
+                }),
                 layout: 'categories',
                 
             };
-            res.render('categories/female',content)
+            res.render('categories/children',content)
         });
         
     });
@@ -308,7 +287,7 @@ module.exports = function(app){
         product.find({category: 'headwear'}, function(err,products){
             var content = {
                 male: products.map(function(item){
-                    if(product.find({subcategories: {$in : ['Male']}})){
+                    if(item.subcategories.includes('Male')){
                         return {
                             id: item.id,
                             name:item.name,
@@ -323,7 +302,7 @@ module.exports = function(app){
                     }
                 }), 
                 female: products.map(function(item){
-                    if(product.find({subcategories: {$in : ['Female']}})){
+                    if(item.subcategories.includes('Female')){
                         return {
                             id: item.id,
                             name:item.name,
@@ -338,7 +317,7 @@ module.exports = function(app){
                     }
                 }),
                 child: products.map(function(item){
-                    if(product.find({subcategories: {$in : ['Child']}})){
+                    if(item.subcategories.includes('Child')){
                         return {
                             id: item.id,
                             name:item.name,
@@ -362,7 +341,7 @@ module.exports = function(app){
         product.find({category: 'accessories'}, function(err,products){
             var content = {
                 male: products.map(function(item){
-                    if(product.find({subcategories: {$in : ['Male']}})){
+                    if(item.subcategories.includes('Male')){
                         return {
                             id: item.id,
                             name:item.name,
@@ -377,7 +356,7 @@ module.exports = function(app){
                     }
                 }), 
                 female: products.map(function(item){
-                    if(product.find({subcategories: {$in : ['Female']}})){
+                    if(item.subcategories.includes('Female')){
                         return {
                             id: item.id,
                             name:item.name,
@@ -392,7 +371,7 @@ module.exports = function(app){
                     }
                 }),
                 child: products.map(function(item){
-                    if(product.find({subcategories: {$in : ['Child']}})){
+                    if(item.subcategories.includes('Child')){
                         return {
                             id: item.id,
                             name:item.name,
@@ -416,7 +395,7 @@ module.exports = function(app){
         product.find({category: 'footwear'}, function(err,products){
             var content = {
                 male: products.map(function(item){
-                    if(product.find({subcategories: {$in : ['Male']}})){
+                    if(item.subcategories.includes('Male')){
                         return {
                             id: item.id,
                             name:item.name,
@@ -431,7 +410,7 @@ module.exports = function(app){
                     }
                 }), 
                 female: products.map(function(item){
-                    if(product.find({subcategories: {$in : ['Female']}})){
+                    if(item.subcategories.includes('Female')){
                         return {
                             id: item.id,
                             name:item.name,
@@ -446,7 +425,7 @@ module.exports = function(app){
                     }
                 }),
                 child: products.map(function(item){
-                    if(product.find({subcategories: {$in : ['Child']}})){
+                    if(item.subcategories.includes('Child')){
                         return {
                             id: item.id,
                             name:item.name,

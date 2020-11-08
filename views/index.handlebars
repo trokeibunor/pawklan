@@ -33,14 +33,18 @@
             </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn my-2 my-sm-0 footer-btn" type="submit">Search</button>
+                <input class="form-control mr-sm-2" name="searchForm" type="search" placeholder="Search" aria-label="Search">
+                {{#if user}}
+                <a href="/logout" class="btn ml-2 my-2 my-sm-0 footer-btn" id="loginbtn">
+                    Log Out
+                    <span class="fas fa-sign-out-alt" style="color: white;" ></span>
+                </a>
+                {{else}}
                 <a href="/login" class="btn ml-2 my-2 my-sm-0 footer-btn" id="loginbtn">
-                    <span class="fas fa-sign-in-alt"></span>
+                    Login
+                    <span class="fas fa-sign-in-alt" style="color: white;"></span>
                 </a>
-                <a href="/login" class="btn ml-2 my-2 my-sm-0 footer-btn d-none" id="loginbtn">
-                    <span class="fas fa-sign-out-alt"></span>
-                </a>
+            {{/if}}
             </form>
         </div>
         </nav>

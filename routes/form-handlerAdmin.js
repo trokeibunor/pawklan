@@ -74,7 +74,11 @@ module.exports = function (app){
     // Forms
     // handle login form
     function reqPath(path){
-        return  path.split('\\').slice(1).join('\\')
+        if(path == undefined){
+            return null
+        }else{
+            return  path.split('\\').slice(1).join('\\')
+        }
     };
     admin.post('/login',passport.authenticate('staff-local',{failureRedirect: '/login',failureFlash:'invalid username or password'}), (req,res)=>{
         staff.getStaffPost(req.body.email, function(err,staff){
@@ -112,8 +116,8 @@ module.exports = function (app){
     admin.post('/process-product',upload.array('productImages', 5),function(req,res,next){
         // console.log(req.file.path);
         var file = req.files
-        var path = [reqPath(file[0].path),reqPath(file[1].path),reqPath(req.files[2].path)
-            ,reqPath(req.files[3].path),reqPath(req.files[4].path)];
+        var path = [reqPath(file[0].path),reqPath(file[1].path),reqPath(file[2].path),
+        reqPath(file[3].path),reqPath(file[4].path)];
         console.log(path);
         var color_array = req.body.productColour;
         var subCategories_array = [req.body.SC_hoodies,req.body.SC_tops,req.body.SC_outwear,

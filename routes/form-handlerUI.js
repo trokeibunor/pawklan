@@ -116,6 +116,7 @@ module.exports = function(app){
         console.log(req.user)
         // create user session details
         req.session.username = req.user.name;
+        req.session.user = req.user;
         req.session.email = req.body.email;
         req.session.flash = {
             type: 'success',
@@ -134,6 +135,7 @@ module.exports = function(app){
         });
         res.redirect('/')
     });
+    
     // subscription mail logic
     app.post('/subEmail',(req,res)=>{
         var pawMail = new Object({
@@ -197,6 +199,7 @@ module.exports = function(app){
                 console.log(err)
             }
             if(cart[req.query.id]){
+                console.log(cart);
                 cart[req.query.id].qty++;
             }else{
                 var required  = {
@@ -205,6 +208,8 @@ module.exports = function(app){
                             item: item.id,
                             name: item.name,
                             price: item.price,
+                            colour: req.body.colour_option,
+                            size: req.body.size_option,
                             qty: 1,
                         }
                     })
@@ -214,9 +219,43 @@ module.exports = function(app){
             }
             res.redirect('/cart'); 
         })
+    });
+    // Add Product to wishlist
+    app.post('/wishlist',(req,res)=>{
+        req.session.wishlist = req.session.wishlist || {};
+        var wishlist = req.session.wishlist;
+        console.log(req.body.size_option);
+        console.log(req.body.color_option);
+        products.find({_id: req.query.id},(err,product)=>{
+            if(err){
+                console.log(err)
+            }
+            if(wishlist[req.query.id]){
+                wishlist[req.query.id]
+            }else{
+                var required  = {
+                    product: product.map(function(item){
+                        return{
+                            item: item.id,
+                            name: item.name,
+                            price: item.price,
+                            colour: req.body.colour_option,
+                            size: req.body.size_option,
+                        }
+                    })
+                }
+                wishlist[req.query.id] = required.product[0];
+                console.log(wishlist); 
+            }
+            res.redirect('/wishlist'); 
+        })
+
     })
     // logOut route
     app.get('/logout',(req,res)=>{
+        req.session.user = null;
+        req.session.username = null;
+        req.session.email = null;
         req.logout();
         res.redirect('/login')
     })

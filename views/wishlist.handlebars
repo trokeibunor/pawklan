@@ -29,11 +29,71 @@
     </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn my-2 my-sm-0 footer-btn" type="submit">Search</button>
-        <a href="/login" class="btn ml-2 my-2 my-sm-0 footer-btn" id="loginbtn">
-            <span class="fas fa-sign-out-alt"></span>
-        </a>
+        <input class="form-control mr-sm-2" name="searchForm" type="search" placeholder="Search" aria-label="Search">
+        {{#if user}}
+            <a href="/logout" class="btn ml-2 my-2 my-sm-0 footer-btn" id="loginbtn">
+                Log Out
+                <span class="fas fa-sign-out-alt" style="color: white;" ></span>
+            </a>
+            {{else}}
+            <a href="/login" class="btn ml-2 my-2 my-sm-0 footer-btn" id="loginbtn">
+                Login
+                <span class="fas fa-sign-in-alt" style="color: white;"></span>
+            </a>
+        {{/if}}
     </form>
 </div>
 </nav>
+<div class="col-sm-10 col-md-6 mx-auto">
+    <div class="card">
+        <div class="card-body">
+                <div class="row">
+                    <div class="col-8">
+                        <h2>WishList</h2>
+                    </div>
+                    <div class="col-4">
+                        <h6><a href="/cart/remove">Empty Wishlist</a></h6>
+                    </div>
+                </div>
+                {{#if wishlist}}
+                        <table class="table table-responsive">
+                        <thead class="shadow">
+                            <tr>
+                                <th>Item</th>
+                                <th>Price</th>
+                                <th>Colour</th>
+                                <th>Size</th>
+                                <th>Add to cart</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        {{#each this}}
+                        <tbody>
+                            {{#each items}}
+                                <tr>
+                                    <td><a href="/viewProduct?id={{item}}">{{name}}</a></td>
+                                    <td>{{price}}</td>
+                                    <td>{{colour}}</td>
+                                    <td>{{size}}</td>
+                                    <td>
+                                        <form action="/cart?id={{item}}" method="post">
+                                            <input type="submit" class="btn btn-sm btn-secondary" value="Add to cart" >
+                                        </form>
+                                    </td>
+                                </tr>
+                            {{/each}}
+                        </tbody>
+                        {{/each}}
+                    </table>
+                    </div>
+                    {{else}}
+                        <div class="row">
+                            <p class="lead m-3 small">There are no items in your WishList</p>
+                        </div>
+                {{/if}}
+        </div>
+    </div>
+</div>
+<div class="mt-5">
+    {{>footer}}
+</div>

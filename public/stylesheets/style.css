@@ -203,11 +203,18 @@ section{
 }
 #loginbtn{
   border-radius: 50px;
-  background-color: black !important;
+  background-color: inherit !important;
+  color: black;
 }
 #loginbtn:hover{
-  background-color: gray !important;
+  background-color: rgb(100, 97, 97) !important;
   border-radius: 25px;
+}
+@media(max-width: 850px){
+  #loginbtn{
+    background-color: rgb(100, 97, 97) !important;
+    border-radius: 25px;
+  }
 }
 /* ================ */
 /* Gallery Page */
@@ -246,4 +253,48 @@ section{
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
+}
+/* Cart and wishList */
+table thead tr th{
+  font-size: 16px;
+  font-weight: normal;
+  font-family: Cambria, 
+  Cochin, Georgia, Times, 'Times New Roman', serif;
+  padding: 2px;
+}
+.col-8 h2{
+  font-family: 'Lobster', cursive;
+  font-size: 1.85rem;
+  font-weight: bolder;
+  text-shadow: 2px 1px gray;
+}
+tbody tr td a{
+  font-family: 'Lobster', cursive;
+  color: black;
+  font-style: italic;
+}
+tbody tr td{
+  font-family: 'Lobster', cursive;
+  color: black;
+  font-size:12px;
+  font-style: normal;
+}
+h4 strong{
+  font-family: 'Lobster', cursive;
+  font-size: 1rem;
+  font-weight: bolder;
+  text-shadow: 2px 1px gray;
+}
+.col-4 h6{
+  text-align: right;
+}
+.col-4 h6 a{
+  color: rgb(216, 122, 122);
+  font-size: 0.85rem;
+}
+#total{
+  font-family: 'Lobster', cursive;
+  font-size: 1rem;
+  font-weight: bolder;
+  text-shadow: 2px 1px gray;
 }

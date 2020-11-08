@@ -18,7 +18,9 @@ var productsSchema = mongoose.Schema({
     addedBy: String,
     editedBy: String,
     path: [String],
-    available: Boolean
+    available: Boolean,
+    rating: [String],
+    comments: [String]
 })
 
 var products = mongoose.model('products', productsSchema);

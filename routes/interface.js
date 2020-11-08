@@ -1,9 +1,15 @@
 var express = require('express');
 const gallery = require('../public/models/gallery');
-const product =  require('../public/models/product')
+const product =  require('../public/models/product');
+
 module.exports = function(app){
   var router = express.Router()
-
+//Get user and parse to all routes
+app.get('*',function(req,res,next){
+  res.locals.user = req.session.user;
+  res.locals.username = req.session.username;
+  next();
+}) 
 /* GET home page. */
 app.get('/',function(req, res, next) {
   res.render('index');
@@ -12,7 +18,7 @@ app.get('/shop', function(req,res,next){
   res.render('shop');
 });
 app.get('/about',(req,res,next)=>{
-  res.render('aboutus');
+  res.render('aboutus', {email: req.session.email});
 });
 app.get('/gallery',(req,res,next)=>{
   gallery.find({available: true},function(err, photos){
@@ -33,9 +39,6 @@ app.get('/gallery',(req,res,next)=>{
 app.get('/login',(req,res,next)=>{
   res.render('login')
 });
-app.get('/logout',(req,res,next)=>{
-  res.render('logout')
-});
 app.get('/signup',(req,res,next)=>{
   res.render('signup')
 });
@@ -44,6 +47,7 @@ app.get('/cart',ensureUserAuthenticated,(req,res,next)=>{
   var cart = req.session.cart;
   var displayCart = {items:[],total:0};
   var total = 0;
+ 
   
   // Get total
   for(var item in cart){
@@ -56,7 +60,16 @@ app.get('/cart',ensureUserAuthenticated,(req,res,next)=>{
   });
 })
 app.get('/wishlist',ensureUserAuthenticated,(req,res,next)=>{
-  res.render('wishlist');
+  var wishlist = req.session.wishlist;
+  var displayWishlist = {items:[]};
+  console.log(wishlist);
+  // Get total
+  for(var item in wishlist){
+    displayWishlist.items.push(wishlist[item]);
+  }
+  res.render('wishlist',{
+   wishlist: displayWishlist,
+  });
 });
 app.get('/forgotPassword',(req,res,next)=>{
   res.render('forgotPasswordUI')
@@ -68,6 +81,7 @@ app.get('/viewProduct',ensureUserAuthenticated,(req,res,next)=>{
         return{
           id: req.query.id,
           name: product.name,
+          slug: product.slug,
           description: product.description,
           price: product.price,
           color: product.color,
@@ -78,7 +92,8 @@ app.get('/viewProduct',ensureUserAuthenticated,(req,res,next)=>{
     }
     res.render('view-product',content)
   })
-})
+});
+
 function ensureUserAuthenticated(req,res,next){
   if(req.session.username != undefined){
     return next();

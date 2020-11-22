@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">  
 {{/section}}
 <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-lg shop-nav">
+    <span><img src="/images/logoimagepawklan-removebg-preview.png" id="navlogo" alt=""></span>
     <a class="navbar-brand" href="#">PawKlan</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -94,12 +95,10 @@
             <div class="btn-group btn-group-toggle" data-toggle="buttons" id="colourLabel">
             {{#each color}}
             <label class="btn btn-default text-center">
-                
                 <input type="radio" name="color_option" form="cartForm" form="wishlistForm" autocomplete="off" value="{{this}}">
                 {{this}}
                 <br>
                 <i class="fas fa-circle fa-2x text-{{this}}"></i>
-                
             </label>
             {{/each}}
             </div>
@@ -314,12 +313,12 @@
     for (let index = 0; index < needed.length; index++) {
     const col = needed[index];
     console.log(col);
-    col.addEventListener('click',()=>{
+    document.querySelector('.body').addEventListener('click',()=>{
         if(col.classList.contains('focus')){
             col.style.backgroundColor = "lightgray";
         }
-    });
-    }
+    })
+}
 </script>
 
 {{#section 'javascripts'}}

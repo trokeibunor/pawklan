@@ -1,4 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light">
+    <span><img src="/images/logoimagepawklan-removebg-preview.png" id="navlogo" alt=""></span>
 <a class="navbar-brand" href="#">PawKlan</a>
 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -44,26 +45,19 @@
     </form>
 </div>
 </nav>
-<div class="col-sm-10 col-md-6 mx-auto">
+<div class="col-sm-10 col-md-5 mx-auto">
     <div class="card">
         <div class="card-body">
                 <div class="row">
-                    <div class="col-8">
-                        <h2>WishList</h2>
-                    </div>
-                    <div class="col-4">
-                        <h6><a href="/cart/remove">Empty Wishlist</a></h6>
-                    </div>
+                    <h2>WishList</h2>
                 </div>
                 {{#if wishlist}}
-                        <table class="table table-responsive">
+                        <table class="table">
                         <thead class="shadow">
                             <tr>
                                 <th>Item</th>
                                 <th>Price</th>
-                                <th>Colour</th>
-                                <th>Size</th>
-                                <th>Add to cart</th>
+                                <th>View</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -71,21 +65,23 @@
                         <tbody>
                             {{#each items}}
                                 <tr>
-                                    <td><a href="/viewProduct?id={{item}}">{{name}}</a></td>
+                                    <td>{{name}}</td>
                                     <td>{{price}}</td>
-                                    <td>{{colour}}</td>
-                                    <td>{{size}}</td>
-                                    <td>
-                                        <form action="/cart?id={{item}}" method="post">
-                                            <input type="submit" class="btn btn-sm btn-secondary" value="Add to cart" >
-                                        </form>
-                                    </td>
+                                    <td id="view"><a href="/viewProduct?id={{item}}">View</a></td>
+                                    <td id="delete"><a href="/removeGoods?id={{item}}">{{delete}}</a></td>
                                 </tr>
                             {{/each}}
                         </tbody>
                         {{/each}}
+                        
                     </table>
+                    <div class="row" id="empty">
+                        <div class="col-sm-12 m-10">
+                            <a href="/emptyWishlist">Empty</a>
+                        </div>
                     </div>
+                    </div>
+
                     {{else}}
                         <div class="row">
                             <p class="lead m-3 small">There are no items in your WishList</p>

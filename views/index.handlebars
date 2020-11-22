@@ -1,8 +1,33 @@
+{{#section 'head'}}
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+<script src="/assets/jquery-3.5.1.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" integrity="sha512-3n19xznO0ubPpSwYCRRBgHh63DrV+bdZfHK52b1esvId4GsfwStQNPJFjeQos2h3JwCmZl0/LgLxSKMAI55hgw==" crossorigin="anonymous"></script>
+<script src="/assets/bootstrap-4.5.2-dist/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+    //coutry modal
+    $(window).on('load',function(){
+        $('.modal').modal('show');
+        console.log('please work')
+    })
+    //$(window).on('load',function(){
+       //$('.loader').fadeOut("slow");
+       //console.log('help')
+    //});
+</script>
+{{/section}}
+{{!-- Use nice loader Image --}}
+{{!-- <div class="loader"></div> --}}
+<!--lauch modal-->
+{{#if currency}}
+    {{else}}
+    {{>currencyModal}}
+{{/if}}
 <header>
     <!--navbar start-->
     <!--landing page header-->
     <div class="jumbotron-fluid index-jumbotron shadow-lg">
         <nav class="navbar navbar-expand-lg navbar-light">
+        <span><img src="/images/logoimagepawklan-removebg-preview.png" id="navlogo" alt=""></span>
         <a class="navbar-brand" href="#">PawKlan</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -31,20 +56,31 @@
             <li class="nav-item">
                 <a href="/wishlist" class="nav-link">WishList</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" id="currencyLink">{{currency}}</a>
+            </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" name="searchForm" type="search" placeholder="Search" aria-label="Search">
+                <div class="dropdown">
+                    <input class="form-control mr-sm-2 dropdown-toggle" name="searchForm" type="search"
+                     placeholder="Search" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                      aria-label="Search">
+                    <div class="dropdown-menu shadow-lg">
+                        <a href="#" class="dropdown-item">Hello</a>
+                        <a href="#" class="dropdown-item">Hello</a>
+                    </div>
+                </div>
                 {{#if user}}
-                <a href="/logout" class="btn ml-2 my-2 my-sm-0 footer-btn" id="loginbtn">
-                    Log Out
-                    <span class="fas fa-sign-out-alt" style="color: white;" ></span>
-                </a>
-                {{else}}
-                <a href="/login" class="btn ml-2 my-2 my-sm-0 footer-btn" id="loginbtn">
-                    Login
-                    <span class="fas fa-sign-in-alt" style="color: white;"></span>
-                </a>
-            {{/if}}
+                    <a href="/logout" class="btn ml-2 my-2 my-sm-0 footer-btn" id="loginbtn">
+                        Log Out
+                        <span class="fas fa-sign-out-alt" style="color: white;" ></span>
+                    </a>
+                    {{else}}
+                    <a href="/login" class="btn ml-2 my-2 my-sm-0 footer-btn" id="loginbtn">
+                        Login
+                        <span class="fas fa-sign-in-alt" style="color: white;"></span>
+                    </a>
+                {{/if}}
             </form>
         </div>
         </nav>
@@ -54,14 +90,15 @@
         </span>
     </div>
 </header>
+
 <!--main body-->
 <section>
     <div class="container">
-         <h5 class="lead text-center mt-5" id="brand-slang">Our Brand, your style</h5>
-        <div class="row mt-2" style="height: 35vh;">
+        <h5 class="lead text-center mt-5" id="brand-slang">Our Brand, your style</h5>
+        <div class="row mt-2">
             <!--paw klan logo-->
-            <div class="col-sm-10 col-md-6 mx-auto">
-                <img src="/images/background_image.jpg" alt="" class="img-fluid logo-img mt-2">
+            <div class="col-sm-10 col-md-6 mx-auto" id="indexImageHolder">
+                <img src="/images/Pawlogopng.png" alt="" class="logo-img mt-2">
             </div>
         </div>  
     </div>
@@ -103,7 +140,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12 col-md-10 mx-auto">
-                <p class="lead text-center">Hey want to receive updates on latest products?</p>
+                <p class="lead text-center" id="about-text">Hey want to receive updates on latest products?</p>
             </div>
         </div>
         <div class="row">
@@ -111,10 +148,10 @@
                 <form action="/subEmail" method="post">
                         <div class="row">
                             <div class="col-sm-6 col-md-10">
-                                <input type="text" class="form-control" name="email" placeholder="Enter you email address">
+                                <input type="text" class="form-control" id="land-form" name="email" placeholder="Enter you email address">
                             </div>
-                            <div class="col-sm-6 col-md-2 mx-auto">
-                                <button type="submit" class="btn text-center" id="land-form-submit">Submit</button>
+                            <div class="col-sm-6 col-md-2">
+                                <button type="submit" class="btn btn-secondary" id="land-form-submit">Submit</button>
                             </div>
                         </div>
                 </form>
@@ -123,6 +160,9 @@
     </div>
 </section>
 {{>footer}}
-
-
-
+<script>
+    document.querySelector('#currencyLink').addEventListener('click',function(){
+        document.querySelector('.modal').modal('show');
+        console.log('please work')
+    })
+</script>

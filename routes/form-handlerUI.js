@@ -3,6 +3,19 @@ const customer = require('../public/models/user');
 var bcrypt = require('bcryptjs');
 const credentials = require('../public/lib/credentials');
 const  submail  = require('../public/models/subscriptionEmail');
+// Multer Logic
+var multer = require('multer');
+var moment = require('moment');
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'public/uploads/images/')   
+    },
+    filename: function (req, file, cb) {
+        cb(null, Date.now() + '-' + file.originalname)      
+    },
+     
+});
+var upload = multer({ storage: storage });
 // NodeMailer Logic
 var nodeMailer = require('nodemailer');
 const { text, raw } = require('express');
@@ -190,42 +203,65 @@ module.exports = function(app){
         });
         res.redirect('/about')
     });
+    // Get Currency
+    app.post('/getCurrency',upload.none(),(req,res)=>{
+        // req.body.countryCode = req.session.currency;
+        var countryCode = req.body.countryCode;
+        req.session.currency= countryCode;
+        console.log(req.session.currency);
+        res.redirect('/')
+      })
     // Add product to cart
     app.post('/cart',(req,res)=>{
         req.session.cart = req.session.cart || {};
         var cart = req.session.cart;
+        var itemID = "."+req.query.id+req.body.color_option+ 
+                        req.body.size_option+".";
         products.find({_id: req.query.id},(err,product)=>{
             if(err){
                 console.log(err)
             }
-            if(cart[req.query.id]){
-                console.log(cart);
-                cart[req.query.id].qty++;
+            if(cart[itemID]){
+                    console.log('from top');
+                    console.log(itemID)
+                    cart[itemID].qty++;
             }else{
                 var required  = {
                     product: product.map(function(item){
                         return{
+                            picture: item.path[0],
                             item: item.id,
+                            hidden: itemID,
                             name: item.name,
                             price: item.price,
-                            colour: req.body.colour_option,
+                            colour: req.body.color_option,
                             size: req.body.size_option,
                             qty: 1,
+                            delete: "X"
                         }
                     })
                     
                 }
-                cart[req.query.id] = required.product[0]; 
+                console.log('from bottom');
+                console.log(itemID);
+                cart[itemID] = required.product[0]; 
+                console.log(cart)
             }
             res.redirect('/cart'); 
         })
     });
+    // Remove Item from cart
+    app.get('/removeItem',(req,res)=>{
+        var stuff = req.query.id;
+        
+        delete req.session.cart[stuff];
+
+        res.redirect('/cart')
+    })
     // Add Product to wishlist
     app.post('/wishlist',(req,res)=>{
         req.session.wishlist = req.session.wishlist || {};
         var wishlist = req.session.wishlist;
-        console.log(req.body.size_option);
-        console.log(req.body.color_option);
         products.find({_id: req.query.id},(err,product)=>{
             if(err){
                 console.log(err)
@@ -239,8 +275,7 @@ module.exports = function(app){
                             item: item.id,
                             name: item.name,
                             price: item.price,
-                            colour: req.body.colour_option,
-                            size: req.body.size_option,
+                            delete: "X"
                         }
                     })
                 }
@@ -250,6 +285,13 @@ module.exports = function(app){
             res.redirect('/wishlist'); 
         })
 
+    })
+    // Remove Item from wishlist
+    app.get('/removeGoods',(req,res)=>{
+        var stuff = req.query.id;
+        delete req.session.wishlist[stuff];
+
+        res.redirect('/wishlist')
     })
     // logOut route
     app.get('/logout',(req,res)=>{

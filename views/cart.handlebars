@@ -1,4 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light">
+    <span><img src="/images/logoimagepawklan-removebg-preview.png" id="navlogo" alt=""></span>
     <a class="navbar-brand" href="#">PawKlan</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -44,19 +45,14 @@
     </div>
 </nav>
 {{!-- Start cart --}}
-<div class="col-sm-10 col-md-6 mx-auto">
-    <div class="card shadow">
+<div class="col-sm-10 col-md-4 mx-auto">
+    <div class="card shadow cart-card">
         <div class="card-body">
                 <div class="row">
-                    <div class="col-8">
-                        <h2>Cart</h2>
-                    </div>
-                    <div class="col-4">
-                        <h6><a href="/cart/remove">Empty cart</a></h6>
-                    </div>
+                    <h2>Cart</h2>
                 </div>
                 {{#if cart}}
-                    <table class="table table-responsive">
+                    <table class="table-responsive table">
                         <thead class="shadow">
                             <tr>
                                 <th>Item</th>
@@ -64,42 +60,44 @@
                                 <th>Unit Price</th>
                                 <th>Colour</th>
                                 <th>Size</th>
-                                <th>Price Total</th>
                                 <th></th>
                             </tr>
                         </thead>
+                        
                         {{#each this}}
                         <tbody>
-                            {{#each items}}
+                            {{#each items}}   
                                 <tr>
                                     <td><a href="/viewProduct?id={{item}}">{{name}}</a></td>
                                     <td>{{qty}}</td>
                                     <td>{{price}}</td>
                                     <td>{{colour}}</td>
                                     <td>{{size}}</td>
-                                    <td>{{itemvalue}}</td>
+                                    <td id="delete">
+                                        <a href="/removeItem?id={{hidden}}" class="text-center">{{delete}}</a>
+                                    </td>
                                 </tr>
-                            {{/each}}
+                            {{/each}} 
                         </tbody>
                         {{/each}}
+                        
                     </table>
-                    
-                        <div class="row">
-                            
-                                <div class="col-sm-6 col-md-6">
-                                    
-                                    <h4 id="total">Total: <strong>$
-                                        {{#each this}}
-                                        {{total}}
-                                        {{/each}}
-                                        </strong> </h4>
-                                    
-                                </div>
-                            
-                        <div class="col-sm-6 col-md-6"></div>
+                    <div class="row">
+                            <div class="col-sm-6 col-md-6">
+                                <h4 id="total">Total: <strong>$
+                                    {{#each this}}
+                                    {{total}}
+                                    {{/each}}
+                                    </strong> 
+                                </h4>
+                            </div>
+                            <div class="col-sm-6 col-md-6"></div>
                     </div>
-                    
-                    
+                    <div class="row" id="empty">
+                        <div class="col-sm-12">
+                            <a href="/emptyCart">Empty</a>
+                        </div>
+                    </div>
                     {{else}}
                         <div class="row">
                             <p class="lead m-3 small">There are no items in your cart</p>

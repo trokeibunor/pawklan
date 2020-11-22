@@ -27,7 +27,7 @@ a:focus {
     border: none;
     border-radius: 0;
     margin-bottom: 40px;
-    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: rgba(85, 84, 84, 0.808) 2px 1px 2px 2px;
 }
 
 .navbar-btn {
@@ -64,7 +64,12 @@ a:focus {
 #sidebar.active {
     margin-left: -250px;
 }
-
+#navlogo{
+    object-fit: cover;
+    width: 50px;
+    height: 50px;
+    z-index: 1;
+  }
 #sidebar .sidebar-header {
     font-family: 'Noto Sans JP', sans-serif;
     font-style: normal;

@@ -7,18 +7,21 @@ var staff = require('../public/models/staff');
 
 module.exports = function(app){
       app.use(vhost('admin.*',admin));
+      admin.get('*',function(req,res,next){
+        res.locals.admin = req.session.admin;
+        res.locals.user = req.session.username;
+        next();
+      })
       admin.get('/login',(req,res,next)=>{
         res.render('admin/login')
       })
       admin.get('/',ensureStaffAuthenticated,function(req,res,next){
-        res.render('admin/home', {layout:'admin',user: req.session.username})
-      });
-      admin.get('/staff-home',ensureStaffAuthenticated,(req,res,next)=>{
-        res.render('admin/staff-home',{
+        res.render('admin/home', {
           layout:'admin',
-          user: req.session.username
+          user: req.session.username,
+          page: 'Home',
         })
-      })
+      });
       admin.get('/product',ensureStaffAuthenticated,(req,res,next)=>{
         product.find({available: true},function(err,products){
           var content = {
@@ -37,6 +40,7 @@ module.exports = function(app){
                   }
               }),
               layout: 'admin',
+              page: 'Product',
               user: req.session.username,
           }   
           res.render('admin/product',content)
@@ -58,6 +62,7 @@ module.exports = function(app){
                   }
               }),
               layout: 'admin',
+              page: 'Staff',
               user: req.session.username,
           }   
           res.render('admin/staff',content)
@@ -76,6 +81,7 @@ module.exports = function(app){
               }
             }),
             layout: 'admin',
+            page: 'Gallery',
             user: req.session.username
           }
           res.render('admin/gallery',content)

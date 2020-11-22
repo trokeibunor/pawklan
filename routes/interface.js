@@ -1,15 +1,24 @@
 var express = require('express');
 const gallery = require('../public/models/gallery');
 const product =  require('../public/models/product');
-
+var convertCurrency = require('nodejs-currency-converter');
+convertCurrency(1,'USD','NGN').then((response)=>{
+  console.log(response);
+})
 module.exports = function(app){
-  var router = express.Router()
 //Get user and parse to all routes
 app.get('*',function(req,res,next){
   res.locals.user = req.session.user;
   res.locals.username = req.session.username;
+  res.locals.currency = req.session.currency;
   next();
 }) 
+// Get currency
+app.post('/getCurrency',(req,res,)=>{
+  req.body.countryCode = req.session.currency;
+  console.log(req.body.countryCode);
+  res.redirect('/')
+});
 /* GET home page. */
 app.get('/',function(req, res, next) {
   res.render('index');
@@ -47,8 +56,6 @@ app.get('/cart',ensureUserAuthenticated,(req,res,next)=>{
   var cart = req.session.cart;
   var displayCart = {items:[],total:0};
   var total = 0;
- 
-  
   // Get total
   for(var item in cart){
     displayCart.items.push(cart[item]);
@@ -59,6 +66,13 @@ app.get('/cart',ensureUserAuthenticated,(req,res,next)=>{
    cart: displayCart,
   });
 })
+// Empty cart
+app.get('/emptyCart',(req,res)=>{
+  delete req.session.cart;
+  res.redirect('/cart');
+})
+
+// Wishlist
 app.get('/wishlist',ensureUserAuthenticated,(req,res,next)=>{
   var wishlist = req.session.wishlist;
   var displayWishlist = {items:[]};
@@ -71,10 +85,15 @@ app.get('/wishlist',ensureUserAuthenticated,(req,res,next)=>{
    wishlist: displayWishlist,
   });
 });
+// Delete WishList
+app.get('/emptyWishList',(req,res)=>{
+  delete req.session.wishlist;
+  res.redirect('/wishlist');
+})
 app.get('/forgotPassword',(req,res,next)=>{
   res.render('forgotPasswordUI')
 })
-app.get('/viewProduct',ensureUserAuthenticated,(req,res,next)=>{
+app.get('/viewProduct',(req,res,next)=>{
   product.find({_id: req.query.id},(err,products)=>{
     var content = {
       products: products.map(function(product){

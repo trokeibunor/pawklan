@@ -1,98 +1,87 @@
-
 <div class="container-fluid">
-    <h3>Male Category</h3>
-    {{#if tops}}
-        <h4>Tops & Jackets</h4>
-            <div class="owl-carousel owl-theme" id="owl-one">
-            {{#each tops}}
-                <div class="item" style="width: 15rem;">
-                    <a href="/viewProduct?id={{id}}" class="image-container">
-                        <img src="{{image}}" alt="" style="height: 300px;"
-                        class="shadow-lg card-img" id="carousel-image shadow-lg">
-                    </a>
-                    <div id="details" class="shadow-lg">
-                        <p id="discount" class="badge badge-success">{{discount}}% off</p>
-                        <p class="product-text">{{name}}</p>
-                        <p class="price-text">${{price}}.00</p>
-                    </div>   
-                </div>
-            {{/each}}       
+        <div class="section-desc">
+            <h2>MEN's Fashion</h2>
         </div>
-    {{/if}}
-    {{#if pants}}
-        <h4>Pants & Shorts</h4>
-       <div class="owl-carousel owl-theme" id="owl-one">
-            {{#each pants}}
-                <div class="item" style="width: 15rem;">
-                    <a href="/viewProduct?id={{id}}" class="image-container">
-                        <img src="{{image}}" alt="" style="height: 300px;"
-                        class="shadow-lg card-img" id="carousel-image shadow-lg">
-                    </a>
-                    <div id="details"><p id="discount" class="badge badge-success">{{discount}}% off</p>
-                        <p class="product-text">{{name}}</p>
-                        <p class="price-text">${{price}}.00</p>
-                    </div>   
+    <div class="row mx-auto">
+        <div class="col-sm-6 col-md-4 col-lg-3">
+            <div class="card">
+                <div class="image-holder">
+                    <img src="/images/about2.jpg" alt=".....picture">
                 </div>
-            {{/each}}       
-        </div>
-    {{/if}}
-    {{#if outwear}}
-        <h4>Matching Sets & Outwear</h4>
-        <div class="owl-carousel owl-theme" id="owl-one">
-            {{#each outwear}}
-                <div class="item" style="width: 15rem;">
-                    <a href="/viewProduct?id={{id}}" class="image-container">
-                        <img src="{{image}}" alt="" style="height: 300px;"
-                        class="shadow-lg card-img" id="carousel-image shadow-lg">
-                    </a>
-                    <div id="details"><p id="discount" class="badge badge-success">{{discount}}% off</p>
-                        <p class="product-text">{{name}}</p>
-                        <p class="price-text">${{price}}.00</p>
-                    </div>   
+                <div class="category-description">
+                    <h4 class="product-text">
+                        Tops & Jackets
+                    </h4>
+                    <hr class="shadow-lg">
+                    <h5 class="price-text">
+                        Check out the Tops,Jackets, sweatshirts
+                        in pawklan's collection
+                    </h5>
                 </div>
-            {{/each}}       
+                <a href="/categories/tops" class="btn btn-block btn-dark">
+                    View Collection
+                </a>
+            </div>
         </div>
-    {{/if}}
-    {{#if underwear}}
-        <h4>Underwear & Socks</h4>
-        <div class="owl-carousel owl-theme" id="owl-one">
-            {{#each underwear}}
-                <div class="item" style="width: 15rem;">
-                    <a href="/viewProduct?id={{id}}" class="image-container">
-                        <img src="{{image}}" alt="" style="height: 300px;"
-                        class="shadow-lg card-img" id="carousel-image shadow-lg">
-                    </a>
-                    <div id="details"><p id="discount" class="badge badge-success">{{discount}}% off</p>
-                        <p class="product-text">{{name}}</p>
-                        <p class="price-text">${{price}}.00</p>
-                    </div>   
+        <div class="col-sm-6 col-md-4 col-lg-3">
+            <div class="card">
+                <div class="image-holder">
+                    <img src="/images/IMG_5003.JPG" alt=".....picture">
                 </div>
-            {{/each}}       
+                <div class="category-description">
+                    <h4 class="product-text">
+                        Pant & shorts
+                    </h4>
+                    <hr>
+                    <h5 class="price-text">
+                        Check out the Plain pants, knickers,Trousers
+                        in pawklan's collection
+                    </h5>
+                </div>
+                <a href="/categories/pants" class="btn btn-block btn-dark">
+                    View Collection
+                </a>
+            </div>
         </div>
-    {{/if}}
+        <div class="col-sm-6 col-md-4 col-lg-3">
+            <div class="card">
+                <div class="image-holder">
+                    <img src="/images/IMG_5007.JPG" alt=".....picture">
+                </div>
+                <div class="category-description">
+                    <h4 class="product-text">
+                        Matching Sets & Outwear
+                    </h4>
+                    <hr>
+                    <h5 class="price-text">
+                        Check out the perfect Matching Sets and Outwears
+                        in pawklan's collection
+                    </h5>
+                </div>
+                <a href="/categories/matchingSet" class="btn btn-block btn-dark">
+                    View Collection
+                </a>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-4 col-lg-3">
+            <div class="card">
+                <div class="image-holder">
+                    <img src="/images/pk logo  1.jpg" alt=".....picture">
+                </div>
+                <div class="category-description">
+                    <h4 class="product-text">
+                        Underwear & Socks
+                    </h4>
+                    <hr>
+                    <h5 class="price-text">
+                        Check out the Under garments & quality socks
+                        in pawklan's collection
+                    </h5>
+                </div>
+                <a href="/categories/underwear" class="btn btn-block btn-dark">
+                    View Collection
+                </a>
+            </div>
+        </div>
+    </div>
 </div>
-
-{{#section 'javascript'}}
-    <script>
-        $('document').ready(function(){
-            $('.owl-carousel').owlCarousel({
-                loop: true,
-                margin:10,
-                nav:true,
-                autoWidth: true,
-                responsiveClass: true,
-                responsive:{
-                    0:{
-                        items:2
-                    },
-                    600:{
-                        items:3
-                    },
-                    1000:{
-                        items:5
-                    }
-                }
-            });
-        })
-    </script>
-{{/section}}

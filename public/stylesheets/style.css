@@ -1,8 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
 body {
   font: 16px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background-image: url('/images/background_image_fix.jpg');
-  background-repeat: no-repeat;
+  background-color: white;
   background-size: cover;
   background-attachment: fixed;
 }
@@ -16,19 +15,64 @@ a .active{
 /* -------------------- */
 /* LANDING PAGE */
 /* -------------- */
+/* .loader{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  margin: 0 auto;
+  z-index: 9999;
+  background: url('/images/onloadPawklangif.gif') no-repeat;
+  top: 50px;
+  cursor: wait;
+} */
+.modal{
+  background-color: rgba(160, 160, 160, 0.87) !important;
+}
+.modal-header h5{
+  font-family: cursive;
+  font-size: 1.25rem;
+  font-weight: 800;
+  text-align: left;
+  position: static;
+  z-index: 9999;
+}
+.modal-body p{
+  color: #000000;
+  text-align: left;
+  font-size: 0.75rem;
+  font-family: cursive;
+}
+.modal-body form label{
+  font-family: cursive;
+}
+select{
+  font-family: cursive;
+}
+select option{
+  line-height: 1rem;
+  font-family: cursive;
+  font-size: 0.8rem
+}
+.modal-body form input{
+  margin-top: 10px !important;
+  font-family: cursive !important;
+  background-color: rgba(160, 160, 160, 0.87) !important;
+}
 .index-jumbotron{
-  z-index: 2px;
   padding-bottom: 2rem;
+  max-width: 100%;
   height: 100vh;
   color: rgb(0, 0, 0);
+  /* Remember to change loader Image */
   background-image: url('/images/_MG_9794black\ andwhite.jpg') !important;
   background-size: cover;
   background-repeat: repeat;
+  background-origin: border-box;
   background-attachment: scroll;
   background-position: center;
   background-blend-mode: lighten;
   image-rendering: auto;
-  box-shadow: 5px;
+  box-shadow: rgb(112, 111, 111) 0px 0px 5px 5px;
 }
 .navbar{
   font-family: -apple-system, BlinkMacSystemFont, 
@@ -38,7 +82,21 @@ a .active{
 .navbar-brand{
   font-family: cursive;
   font-size: 2rem;
-  
+  color: rgb(71, 61, 3) !important;
+}
+.shop-nav .navbar-brand{
+  color: black !important;
+}
+.shop-nav button span{
+  color: black;
+}
+.shop-nav .collapse ul li a{
+  color: black !important;
+}
+#navlogo{
+  object-fit: cover;
+  width: 50px;
+  height: 50px;
 }
 .sitename{
   font-family: -apple-system, BlinkMacSystemFont, 
@@ -69,10 +127,17 @@ a .active{
   position: sticky;
   top: 80vh;
 }
+#indexImageHolder{
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  object-position: center;
+  background-image: linear-gradient(gray white 2px);
+}
 .logo-img{
   width: 100%;
-  height: 50%;
-  object-fit: cover;
+  height: 100%;
+  object-fit: contain;
   opacity: 0.8;
 }
 #carousel-img{
@@ -87,8 +152,52 @@ a .active{
     margin-top: 5px;
   }
 }
+#land-form{
+  width: 100%;
+}
 #land-form-submit{
+  width: auto;
   background-color: lightgray;
+  color: black;
+  font-family: cursive;
+  font-weight: 600;
+  text-align: left;
+}
+.nav-item a{
+  font-weight: bold;
+  color: rgb(75, 65, 12) !important;
+}
+.nav-item a:hover{
+  color: rgb(194, 186, 186) !important;
+}
+.ch{
+  color: white !important;
+}
+.ch a{
+  font-weight: bold;
+  color: white !important;
+}
+.ch a:hover{
+  color: rgb(211, 207, 207) !important;;
+}
+.active a{
+  font-weight: 900;
+}
+.dropdown-menu{
+  width: 100% !important;
+  background-color: rgb(207, 200, 190);
+}
+.dropdown-item:hover{
+  background-color: rgb(184, 183, 183);
+}
+.dropdown-menu a{
+  font-family: Cambria, Cochin, Georgia,
+   Times, 'Times New Roman', serif;
+  font-style: normal;
+  font-size: 12px;
+  font-weight: 400;
+  margin: 0px 0px 0px 0px;
+  line-height: normal;
 }
 section{
   margin-top: 10px;
@@ -160,49 +269,219 @@ section{
 /* Shop page */
 /* ------------- */
 .shop-jumbo{
-  width: 100%;
+  display: block;
+  max-width: 100%;
+  background-image: url('/images/shop-loadingImg.jpg');
+  object-fit: contain;
+  background-origin: content-box;
+  background-size: 100% 100%;
+  background-clip: padding-box;
+  background-repeat: no-repeat;
+  background-position-y: inherit;
+  background-attachment: scroll;
+  height: 85vh;
+  filter: opacity(90%);
+  -webkit-filter: opacity(90%);
+  box-shadow: rgb(112, 111, 111) 0px 0px 5px 5px;
 }
-.shop-carousel-image{
-  width: 100%;
-  height: 75vh;
-  object-fit: fill;
-}
-@media (min-width: 600px){
-  .shop-carousel-image{
-    height: 100vh;
-    width: 100%;
-    object-fit: cover;
+@media(max-width: 600px){
+  .shop-jumbo{
+    height: 85vh;
   }
 }
+.intro-text{
+  position: absolute;
+  bottom: 20px;
+  left: 10px;
+  z-index: (-1);
+}
+.intro-text img{
+  object-fit: contain;
+  width: 15rem;
+  height: 15rem;
+  margin-left: 10px;
+}
+.intro-text h3{
+  font-size: 1.3em;
+  font-weight: 900;
+  font-family: cursive;
+  color: black;
+  text-shadow: white !important;
+  text-rendering: geometricPrecision;
+  text-size-adjust: auto;
+  font-display: auto;
+}
+.intro-text h6{
+  font-size: 0.8em;
+  text-align: center;
+  font-weight: 600;
+  margin-left: 15px;
+  font-family: cursive;
+  color: rgb(44, 43, 44);
+  text-orientation: upright;
+}
+/* Shop featured product-carousel */
+
 .shop-nav{
   z-index: 20px;
 }
 .best-sellers{
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-size: 24px;
+  text-align: left;
+  font-size: 1.5em;
+  font-weight: 800;
+  font-family: cursive;
+  text-orientation: upright;
+  color: rgb(44, 43, 44);
+  text-shadow: 2px 1px gray;
+  line-height: auto;
+}
+.most-orders{
+  text-align: right;
+  font-size: 1.5em;
+  font-weight: 800;
+  font-family: cursive;
+  text-orientation: upright;
+  color: rgb(44, 43, 44);
+  text-shadow: 2px 1px gray;
+  line-height: auto;
+}
+.product-text{
+  font-size: 18px;
+  text-shadow: -2px 1px gray;
+  line-height: auto;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  text-align: left;
+  color: black;
+  font-weight: bolder;
+  padding-left: 5px;
+}
+.price-text{
+  font-family: 'Courier New', Courier, monospace;
+  overflow: hidden;
+  text-shadow: 1px 1px gray;
+  z-index: 1;
+  font-size: 12px;
   font-weight: bold;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  text-align: left;
+  padding-left: 5px;  
+}
+#discount{
+  text-align: center;
+  color: white;
+  font-size: 8px;
 }
 .new-arrivals{
   font-size: 18px;
   font-weight: bold;
 }
+.featuredImageHolder{
+  max-width: 100%;
+  height: 80%;
+  cursor: pointer;
+
+}
+.item .card{
+  border-color: white !important;
+  border: transparent !important;
+}
+.featuredImageHolder #featuredImage{
+  object-fit: contain;
+  max-width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  border:transparent;
+}
 #featured-text{
-  font-family: 'Lobster', cursive;
+  font-family: cursive;
+  color: inherit;
+  text-align: center;
+  margin-left: 4px;
+  margin-right: 4px;
+  text-rendering: auto;
   font-size: 2rem;
   font-weight: bolder;
   text-shadow: 3px 2px gray;
 }
 #featured-comment{
-  font-family: 'Lobster', cursive;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-size: 14px;
+  margin-left: 2px;
+  margin-right: 2px;
+  font-weight: 700;
+  line-height: auto;
+  text-align: center;
+  text-orientation: upright;
+  color: rgb(71, 61, 3);
+}
+.list-item .row{
+  display: flex;
+}
+.listImageholder{
+  width: 8.5rem;
+  height: 75%;
+  margin: 0px;
+  text-align: auto;
+}
+.list-group{
+  list-style: none !important;
+}
+.listImageholder img{
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: fill;
+  border-radius: 10%;
+}
+section .container-fluid{
+  margin-top: 10px;
+}
+.new-product-text{
+  font-size: 18px;
+  text-shadow: -2px 1px gray;
+  line-height: auto;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  text-align: left;
+  color: black;
+  font-weight: bolder;
+  padding-left: 5px;
+}
+.new-price-text{
+  font-family: 'Courier New', Courier, monospace;
+  overflow: hidden;
+  text-shadow: 1px 1px gray;
+  z-index: 1;
+  font-size: 12px;
+  font-weight: bold;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  text-align: left;
+  padding-left: 5px; 
+}
+.col-8 a{
+  margin-top: 10px;
+  font-family: cursive;
+  font-weight: 400;
+}
+.col-8 a span img{
+  height: 25px;
+  width: 25px;
+  object-fit: contain;
 }
 #picture{
   width: 100%;
-  height: 80%;
+  height: 50%;
   object-fit: contain;
 }
 #loginbtn{
-  border-radius: 50px;
+  border-radius: 25px;
+  box-shadow: rgb(73, 72, 72) 0px 2px 2px 1px;
   background-color: inherit !important;
   color: black;
 }
@@ -219,25 +498,33 @@ section{
 /* ================ */
 /* Gallery Page */
 .galleryImg{
-  border-radius: 15px;
-  border-width: 1px;
-  border-color: aliceblue;
+  border-radius: 5px;
+  perspective: inherit;
   cursor: not-allowed;
   z-index: 1;
   object-fit: cover;
   width: 100%;
   height: 80%;
+  box-shadow: rgb(66, 64, 64) -6px 3px 4px 1px ;
 }
 .gallImageName{
-  font-size: 18px;
+  font-size: 14px;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 800;
+  margin: 2px 0px 0px 2px;
+  text-align: left;
+  text-rendering: geometricPrecision;
+  text-orientation: upright;
 }
 .gallImageDesc{
+  color: rgb(83, 81, 81);
+  margin: 2px 0px 0px 2px;
+  font-family: cursive;
   font-size: 14px;
-  font-style: italic;
-  font-weight: lighter;
+  font-style: normal;
+  font-weight: 600;
   text-overflow: inherit;
+  text-orientation: upright;
   overflow: hidden;
 }
 #gallery{
@@ -257,26 +544,33 @@ section{
 /* Cart and wishList */
 table thead tr th{
   font-size: 16px;
-  font-weight: normal;
+  font-weight: 700;
   font-family: Cambria, 
   Cochin, Georgia, Times, 'Times New Roman', serif;
   padding: 2px;
 }
-.col-8 h2{
+table thead{
+  width: 100% !important;
+}
+.row h2{
   font-family: 'Lobster', cursive;
   font-size: 1.85rem;
   font-weight: bolder;
   text-shadow: 2px 1px gray;
+  margin-left: 10px;
 }
 tbody tr td a{
   font-family: 'Lobster', cursive;
-  color: black;
+  color: rgb(58, 57, 57);
+  font-weight: 700;
+  font-size:12px;
   font-style: italic;
 }
 tbody tr td{
   font-family: 'Lobster', cursive;
-  color: black;
+  color: rgb(58, 57, 57);
   font-size:12px;
+  font-weight: 600;
   font-style: normal;
 }
 h4 strong{
@@ -298,3 +592,58 @@ h4 strong{
   font-weight: bolder;
   text-shadow: 2px 1px gray;
 }
+#delete a{
+  color: rgb(158, 4, 4);
+  font-size: 14px;
+  font-family: monospace;
+  font-style: normal;
+}
+#view a{
+  color: rgb(59, 167, 209);
+  font-style: normal;
+}
+#empty{
+  display: flex;
+}
+#empty .col-sm-12{
+  align-self: flex-end;
+}
+#empty .col-sm-12 a{
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 12px;
+  object-fit: wrap;
+  margin-top: auto;
+  margin-bottom: auto;
+  color:rgb(158, 4, 4);
+}
+.cart-card{
+  background-color: rgba(246, 246, 255, 0.719) !important;
+}
+label{
+  font-weight: 800 !important;
+}
+#about-text{
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+   Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  line-height: auto;
+  text-align: center;
+  text-orientation: upright;
+  font-weight: 700;
+}
+#about-header{
+  font-size: 30px;
+  font-weight: 900;
+  font-style: normal;
+}
+#product-tab a{
+  color: black;
+  font-family: cursive;
+  font-weight: 600;
+}
+#nav-tabcontent #product-desc{
+  font-family: cursive;
+  font-weight: 500;
+}
+/* Login & sign up */

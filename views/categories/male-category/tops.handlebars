@@ -1,0 +1,22 @@
+<div class="container-fluid">
+    
+    <div class="row">
+        {{#each tops}}
+        <div class="col-xs-6 col-sm-6 col-md-4">
+            
+            <div id="genericCard">  
+                <div class="featuredImageHolder">
+                    <a href="/viewProduct?id={{id}}"><img src="/images/IMG_4811.JPG" id="featuredImage"></a>
+                    <span class="badge badge-sm badge-secondary" id="discount">
+                        {{discount}}% off
+                    </span>
+                </div>
+                <p class="product-text">{{name}}</p>
+                <p class="price-text">{{price}}.OO USD</p>    
+            </div>
+        </div>
+        {{/each}}
+        
+    </div>
+    
+</div>

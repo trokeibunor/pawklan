@@ -1,4 +1,5 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-lg shop-nav">
+<nav class="navbar navbar-expand-lg navbar-light">
+    <span><img src="/images/logoimagepawklan-removebg-preview.png" id="navlogo" alt=""></span>
     <a class="navbar-brand" href="#">PawKlan</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -50,9 +51,9 @@
         <div class="row">
             {{#each photos}}
             <div class="col-sm-10 col-md-4 mx-auto" id="gallery">
-                <img src="{{path}}" class="galleryImg shadow-lg" alt="....Image">
+                <img src="{{path}}" class="galleryImg" alt="....Image">
                 {{!-- Model Name --}}
-                <p class="gallImageName text-center">{{title}}</p>
+                <p class="gallImageName">{{title}}</p>
                 <p class="gallImageDesc">{{description}}</p>
             </div>
             {{/each}}

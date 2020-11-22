@@ -86,7 +86,9 @@ module.exports = function (app){
                 console.log(err);
                 throw err
             }
-            if(staff.position == 'attendant'){
+            console.log(staff.position);
+            if(staff.position === 'admin'|| staff.position === 'supervisor'){
+                req.session.admin = staff.position;
                 req.session.username = staff.name;
                 console.log(req.session.username);
                 req.session.flash = {
@@ -94,8 +96,9 @@ module.exports = function (app){
                     intro: 'Login Successful',
                     message: ':  ' + req.session.username,
                 }
-                res.redirect('/staff-home')
-            }else if(staff.position == 'admin' || 'supervisor'){
+                res.redirect('/')
+            }else{
+                console.log('from else statement')
                 req.session.username = staff.name;
                 console.log(req.session.username);
                 req.session.flash = {
@@ -108,6 +111,8 @@ module.exports = function (app){
         })
     });
     admin.get('/logout',(req,res)=>{
+        req.session.admin = null;
+        req.session.username = null;
         console.log(req.user)
         req.logout();
         res.redirect('/login')

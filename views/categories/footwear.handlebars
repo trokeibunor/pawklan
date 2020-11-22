@@ -1,46 +1,68 @@
 <div class="container-fluid">
-    <h3>Shoe's & Boots</h3>
-    <h4>Men's Section</h4>
-    <div class="owl-carousel owl-theme" style="height: 65%;">
-        {{#each male}}
-            <div class="item correct">
-                <a href="/viewProduct?id={{id}}">
-                    <img src="{{image}}" alt=""
-                    class="shadow-lg" id="carousel-image shadow-lg">
-                    <span id="discount" class="badge badge-success">{{discount}}% off</span>
+        <div class="section-desc">
+            <h2>Shoes & Boots</h2>
+        </div>
+    <div class="row mx-auto">
+        <div class="col-sm-6 col-md-4 col-lg-4">
+            <div class="card">
+                <div class="image-holder">
+                    <img src="/images/pk logo  1.jpg" alt=".....picture">
+                </div>
+                <div class="category-description">
+                    <h4 class="product-text">
+                        Gents
+                    </h4>
+                    <hr class="shadow-lg">
+                    <h5 class="price-text">
+                        Check out our Nice collection of sneakers and shoes for you
+                        in pawklan's collection
+                    </h5>
+                </div>
+                <a href="/footwear/male" class="btn btn-block btn-dark">
+                    View Collection
                 </a>
-                <p class="product-text">{{name}}</p>
-                <p class="price-text">${{price}}.00</p>
             </div>
-        {{/each}}
-    </div>
-    <h4>Ladies</h4>
-    <div class="owl-carousel owl-theme" style="height: 65%;">
-        {{#each female}}
-            <div class="item correct">
-                <a href="/viewProduct?id={{id}}">
-                    <img src="{{image}}" alt=""
-                    class="shadow-lg" id="carousel-image shadow-lg">
-                    <span id="discount" class="badge badge-success">{{discount}}% off</span>
+        </div>
+        <div class="col-sm-6 col-md-4 col-lg-4">
+            <div class="card">
+                <div class="image-holder">
+                    <img src="/images/pk logo  1.jpg" alt=".....picture">
+                </div>
+                <div class="category-description">
+                    <h4 class="product-text">
+                        Ladies
+                    </h4>
+                    <hr>
+                    <h5 class="price-text">
+                        Check out our Nice collection of sneakers and shoes for you
+                        in pawklan's collection
+                    </h5>
+                </div>
+                <a href="/footwear/female" class="btn btn-block btn-dark">
+                    View Collection
                 </a>
-                <p class="product-text">{{name}}</p>
-                <p class="price-text">${{price}}.00</p>
             </div>
-        {{/each}}
-    </div>
-    <h4>Children</h4>
-    <div class="owl-carousel owl-theme" style="height: 65%;">
-        {{#each child}}
-            <div class="item correct">
-                <a href="/viewProduct?id={{id}}">
-                    <img src="{{image}}" alt=""
-                    class="shadow-lg" id="carousel-image shadow-lg">
-                    <span id="discount" class="badge badge-success">{{discount}}% off</span>
+        </div>
+        <div class="col-sm-6 col-md-4 col-lg-4">
+            <div class="card">
+                <div class="image-holder">
+                    <img src="/images/pk logo  1.jpg" alt=".....picture">
+                </div>
+                <div class="category-description">
+                    <h4 class="product-text">
+                        Kids
+                    </h4>
+                    <hr>
+                    <h5 class="price-text">
+                        Check out our Nice collection of sneakers and shoes for
+                        your kids in our collection.
+                    </h5>
+                </div>
+                <a href="/footwear/children" class="btn btn-block btn-dark">
+                    View Collection
                 </a>
-                <p class="product-text">{{name}}</p>
-                <p class="price-text">${{price}}.00</p>
             </div>
-        {{/each}}
+        </div>
     </div>
 </div>
 <script>
@@ -52,3 +74,27 @@
     men.classList.remove('active');
     shoe.classList.add('active');
 </script>
+{{#section 'javascript'}}
+    <script>
+        $('document').ready(function(){
+            $('.owl-carousel').owlCarousel({
+                loop: true,
+                margin:10,
+                nav:true,
+                autoWidth: true,
+                responsiveClass: true,
+                responsive:{
+                    0:{
+                        items:2
+                    },
+                    600:{
+                        items:3
+                    },
+                    1000:{
+                        items:5
+                    }
+                }
+            });
+        })
+    </script>
+{{/section}}

@@ -1,27 +1,13 @@
 {{#section 'head'}}
-<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-<script src="/assets/jquery-3.5.1.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" integrity="sha512-3n19xznO0ubPpSwYCRRBgHh63DrV+bdZfHK52b1esvId4GsfwStQNPJFjeQos2h3JwCmZl0/LgLxSKMAI55hgw==" crossorigin="anonymous"></script>
-<script src="/assets/bootstrap-4.5.2-dist/js/bootstrap.min.js"></script>
-<script type="text/javascript">
-    //coutry modal
-    $(window).on('load',function(){
-        $('.modal').modal('show');
-        console.log('please work')
-    })
-    //$(window).on('load',function(){
-       //$('.loader').fadeOut("slow");
-       //console.log('help')
-    //});
-</script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script src="/assets/jquery-3.5.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" integrity="sha512-3n19xznO0ubPpSwYCRRBgHh63DrV+bdZfHK52b1esvId4GsfwStQNPJFjeQos2h3JwCmZl0/LgLxSKMAI55hgw==" crossorigin="anonymous"></script>
+    <script src="/assets/bootstrap-4.5.2-dist/js/bootstrap.min.js"></script>
 {{/section}}
 {{!-- Use nice loader Image --}}
-{{!-- <div class="loader"></div> --}}
+<div class="loader"></div>
 <!--lauch modal-->
-{{#if currency}}
-    {{else}}
-    {{>currencyModal}}
-{{/if}}
+{{>currencyModal}}
 <header>
     <!--navbar start-->
     <!--landing page header-->
@@ -35,30 +21,30 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="/">Home<span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/shop">Shop</a>
-            </li>
-            <li class="nav-item">
-                <a href="/categories" class="nav-link">Categories</a>
-            </li>
-            <li class="nav-item">
-                <a href="/gallery" class="nav-link">Gallery</a>
-            </li>
-            <li class="nav-item">
-                <a href="/about" class="nav-link">Our brand</a>
-            </li>
-            <li class="nav-item">
-                <a href="/cart" class="nav-link">Cart</a>
-            </li>
-            <li class="nav-item">
-                <a href="/wishlist" class="nav-link">WishList</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" id="currencyLink">{{currency}}</a>
-            </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Home<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/shop">Shop</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/categories" class="nav-link">Categories</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/gallery" class="nav-link">Gallery</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/about" class="nav-link">Our brand</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/cart" class="nav-link">Cart</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/wishlist" class="nav-link">WishList</a>
+                </li>
+                <li class="nav-item" id="currencyLink">
+                    <a class="nav-link">{{currency}}</a>
+                </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
                 <div class="dropdown">
@@ -106,34 +92,12 @@
 <section>
 <!--CAROUSEL USING OWLCAROUSEL-->
 <div class="owl-carousel owl-theme">
+    {{#each photos}}
     <div class="item">
-        <img src="/images/IMG_5007.JPG" alt=""
+        <img src="{{path}}" alt=""
         class="img-fluid" id="carousel-image shadow-lg">
     </div>
-    <div class="item">
-        <img src="/images/IMG_4814.JPG" alt=""
-        class="img-fluid" id="carousel-image shadow-lg">
-    </div>
-    <div class="item">
-        <img src="/images/DSC_6439.jpg" alt=""
-        class="img-fluid" id="carousel-image shadow-lg">
-    </div>
-    <div class="item">
-        <img src="/images/IMG_5008.JPG" alt=""
-        class="img-fluid" id="carousel-image shadow-lg">
-    </div>
-    <div class="item">
-        <img src="/images/IMG_5008.JPG" alt=""
-        class="img-fluid" id="carousel-image shadow-lg">
-    </div>
-    <div class="item">
-        <img src="/images/IMG_5008.JPG" alt=""
-        class="img-fluid" id="carousel-image shadow-lg">
-    </div>
-    <div class="item">
-        <img src="/images/IMG_5008.JPG" alt=""
-        class="img-fluid" id="carousel-image shadow-lg">
-    </div>
+    {{/each}}
 </div>
 </section>
 <section class="mb-4">
@@ -162,7 +126,6 @@
 {{>footer}}
 <script>
     document.querySelector('#currencyLink').addEventListener('click',function(){
-        document.querySelector('.modal').modal('show');
-        console.log('please work')
+        $('.modal').modal('show');
     })
 </script>

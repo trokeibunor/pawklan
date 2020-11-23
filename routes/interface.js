@@ -1,16 +1,18 @@
 var express = require('express');
 const gallery = require('../public/models/gallery');
 const product =  require('../public/models/product');
-var convertCurrency = require('nodejs-currency-converter');
-convertCurrency(1,'USD','NGN').then((response)=>{
-  console.log(response);
-})
 module.exports = function(app){
 //Get user and parse to all routes
 app.get('*',function(req,res,next){
   res.locals.user = req.session.user;
   res.locals.username = req.session.username;
-  res.locals.currency = req.session.currency;
+  res.locals.currency = req.session.currency || 'USD';
+  var reqCurrency = req.session.currency;
+  var convertCurrency = require('nodejs-currency-converter');
+      convertCurrency(1,'USD',reqCurrency).then((response,err)=>{
+      console.log(response);
+      console.log(err);
+  })
   next();
 }) 
 // Get currency
@@ -21,10 +23,41 @@ app.post('/getCurrency',(req,res,)=>{
 });
 /* GET home page. */
 app.get('/',function(req, res, next) {
-  res.render('index');
+  gallery.find({available: true},function(err, photos){
+    var content = {
+      photos: photos.map(function(image){
+        return {
+          id: image.id,
+          path: image.path,
+        }
+      }),
+    }
+    res.render('index',content)
+  })
 });
 app.get('/shop', function(req,res,next){
-  res.render('shop');
+  product.find({available: true}, function(err,products){
+    
+    var content= {
+      male: newMale,
+      featured: products.map(function(item){
+        if(item.featured == "true"){
+          return {
+            id: item.id,
+            name:item.name,
+            sku: item.sku,
+            description:item.description,
+            discount: item.discount || 'Zero',
+            price: item.price,
+            color: item.color,
+            image: item.path[0],
+            tags: products.tags,
+          }
+        }
+      })
+    }
+    res.render('shop',content)
+  })
 });
 app.get('/about',(req,res,next)=>{
   res.render('aboutus', {email: req.session.email});
@@ -48,6 +81,9 @@ app.get('/gallery',(req,res,next)=>{
 app.get('/login',(req,res,next)=>{
   res.render('login')
 });
+app.get('/checkout',(req,res,next)=>{
+  res.render('checkout')
+})
 app.get('/signup',(req,res,next)=>{
   res.render('signup')
 });

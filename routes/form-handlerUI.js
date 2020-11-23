@@ -185,10 +185,13 @@ module.exports = function(app){
     })
     // contact form Form Handling
     app.post('/contact',(req,res)=>{
+        console.log(req.body.contactMail);
+        console.log(req.body.contactText);
         var pawCustomer = new Object({
-            email: req.body.email,
-            message: req.body.contact-text,
-        })
+            email: req.body.contactMail,
+            message: req.body.contactText,
+        });
+        console.log(pawCustomer);
         new customerCareMail(pawCustomer).save();
         // send mail
         mailTransport.sendMail({
@@ -242,10 +245,7 @@ module.exports = function(app){
                     })
                     
                 }
-                console.log('from bottom');
-                console.log(itemID);
                 cart[itemID] = required.product[0]; 
-                console.log(cart)
             }
             res.redirect('/cart'); 
         })

@@ -121,9 +121,9 @@ module.exports = function (app){
     admin.post('/process-product',upload.array('productImages', 5),function(req,res,next){
         // console.log(req.file.path);
         var file = req.files
-        var path = [reqPath(file[0].path),reqPath(file[1].path),reqPath(file[2].path),
+        var paths = [reqPath(file[0].path),reqPath(file[1].path),reqPath(file[2].path),
         reqPath(file[3].path),reqPath(file[4].path)];
-        console.log(path);
+        
         var color_array = req.body.productColour;
         var subCategories_array = [req.body.SC_hoodies,req.body.SC_tops,req.body.SC_outwear,
             req.body.SC_shorts,req.body.SC_jackets,req.body.SC_sweatshirts,
@@ -147,8 +147,9 @@ module.exports = function (app){
             description: req.body.productDescription,
             addedBy: req.session.username, 
             featured: req.body.productFeatured,
-            path: path,
+            path: paths,
             date: now,
+            available: true
         });
         try {
             new product(pawProduct).save();
@@ -222,6 +223,7 @@ module.exports = function (app){
             phone: req.body.staffPhone,
             salary: req.body.staffSalary,
             position: req.body.staffPosition,
+            available: true,
         })
         try {
             new staff(pawStaff).save();

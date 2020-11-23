@@ -57,56 +57,40 @@
 </div>
 <section>
     <div class="container">
-        <p class="best-sellers">
-            Best Offers 
-        </p>
+        <div class="section-holder">
+            <p class="best-sellers">
+                Featured Products
+            </p>
+            
+        </div>
         {{!-- Featured product --}}
         <div class="owl-carousel owl-theme" id="owl-one">
+            {{#each featured}}
             <div class="item">
                 <div class="card">
                     <div class="featuredImageHolder">
-                        <a><img src="/images/IMG_4811.JPG" id="featuredImage"></a>
+                        <a href="/viewProduct?id={{id}}"><img src="{{image}}" id="featuredImage"></a>
                         <span class="badge badge-sm badge-secondary" id="discount">
-                            20% off
+                            {{discount}}% off
                         </span>
                     </div>
-                    <p class="product-text">Nice tops</p>
-                    <p class="price-text">$100.00</p>
+                    <p class="product-text">{{name}}</p>
+                    <p class="price-text">{{price}}USD</p>
                 </div>
             </div>
-            <div class="item">
-                <div class="card">
-                    <div class="featuredImageHolder">
-                        <a><img src="/images/IMG_4811.JPG" id="featuredImage"></a>
-                        <span class="badge badge-sm badge-secondary" id="discount">
-                            20% off
-                        </span>
-                    </div>
-                    <p class="product-text">Nice tops</p>
-                    <p class="price-text">$100.00</p>
-                </div>
-            </div>
-            <div class="item">
-                <div class="card">
-                    <div class="featuredImageHolder">
-                        <a><img src="/images/IMG_4811.JPG" id="featuredImage"></a>
-                        <span class="badge badge-sm badge-secondary" id="discount">
-                            20% off
-                        </span>
-                    </div>
-                    <p class="product-text">Nice tops</p>
-                    <p class="price-text">$100.00</p>
-                </div>
-            </div>
+            {{/each}}
         </div>
     </div>
 </section>
 <section>
     {{!-- Most orders --}}
     <div class="container">
-        <p class="most-orders">
+        <div class="section-holder">
+            <p class="most-orders">
             Most Orders
-        </p>
+            </p>
+        </div>
+        
         <div class="owl-carousel owl-theme" id="owl-two">
             <div class="item">
                 <div class="card">
@@ -149,7 +133,204 @@
 </section>
 <section>
     {{!-- New Arrivals --}}
-    
+    <div class="container-fluid new-arrivals">
+        <h5>New Arrivals</h5>
+        <div class="row">
+            <div class="col-sm-12 col-md-3">
+                <p class="column-desc">Men's Fashion</p>
+                <ul class="list-unstyled">
+                    {{#each male}}
+                       
+                            <li class="media">
+                                <img src="{{image}}">
+                                <div class="media-body">
+                                    <a href="/viewProduct?id={{id}}">
+                                        <span class="badge badge-secondary" id="discount">{{discount}}% off</span>
+                                        <p class="product-text">{{name}}</p>
+                                        <p class="price-text">{{price}} USD</p>
+                                    </a>
+                                </div>
+                            </li>
+                    {{/each}}
+                </ul>
+            </div>
+            <div class="col-sm-12 col-md-3">
+                <p class="column-desc">Ladies Wears</p>
+                <ul class="list-unstyled">
+                    <li class="media">
+                        <img src="/images/IMG_5003.JPG">
+                        <div class="media-body">
+                            <span class="badge badge-secondary" id="discount">20% off</span>
+                            <p class="product-text">Paw Top</p>
+                            <p class="price-text">1200.00 USD</p>
+                        </div>
+                    </li>
+                    <li class="media">
+                        <img src="/images/IMG_5003.JPG">
+                        <div class="media-body">
+                            <span class="badge badge-secondary" id="discount">20% off</span>
+                            <p class="product-text">Paw Top</p>
+                            <p class="price-text">1200.00 USD</p>
+                        </div>
+                    </li>
+                    <li class="media">
+                        <img src="/images/IMG_5003.JPG">
+                        <div class="media-body">
+                            <span class="badge badge-secondary" id="discount">20% off</span>
+                            <p class="product-text">Paw Top</p>
+                            <p class="price-text">1200.00 USD</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-sm-12 col-md-3">
+                <p class="column-desc">Shoes &amp; Boots</p>
+                <ul class="list-unstyled">
+                    <li class="media">
+                        <img src="/images/IMG_5003.JPG">
+                        <div class="media-body">
+                            <span class="badge badge-secondary" id="discount">20% off</span>
+                            <p class="product-text">Paw Top</p>
+                            <p class="price-text">1200.00 USD</p>
+                        </div>
+                    </li>
+                    <li class="media">
+                        <img src="/images/IMG_5003.JPG">
+                        <div class="media-body">
+                            <span class="badge badge-secondary" id="discount">20% off</span>
+                            <p class="product-text">Paw Top</p>
+                            <p class="price-text">1200.00 USD</p>
+                        </div>
+                    </li>
+                    <li class="media">
+                        <img src="/images/IMG_5003.JPG">
+                        <div class="media-body">
+                            <span class="badge badge-secondary" id="discount">20% off</span>
+                            <p class="product-text">Paw Top</p>
+                            <p class="price-text">1200.00 USD</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-sm-12 col-md-3">
+                <p class="column-desc">Accessories</p>
+                <ul class="list-unstyled">
+                    <li class="media">
+                        <img src="/images/IMG_5003.JPG">
+                        <div class="media-body">
+                            <span class="badge badge-secondary" id="discount">20% off</span>
+                            <p class="product-text">Paw Top</p>
+                            <p class="price-text">1200.00 USD</p>
+                        </div>
+                    </li>
+                    <li class="media">
+                        <img src="/images/IMG_5003.JPG">
+                        <div class="media-body">
+                            <span class="badge badge-secondary" id="discount">20% off</span>
+                            <p class="product-text">Paw Top</p>
+                            <p class="price-text">1200.00 USD</p>
+                        </div>
+                    </li>
+                    <li class="media">
+                        <img src="/images/IMG_5003.JPG">
+                        <div class="media-body">
+                            <span class="badge badge-secondary" id="discount">20% off</span>
+                            <p class="product-text">Paw Top</p>
+                            <p class="price-text">1200.00 USD</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="container-fluid" id="info-container">
+        <div class="row">
+            <div class="col-sm-4">
+                <p class="info-header">Free Delivery</p>
+                <p class="info-message">Free Delivery for orders over 150.00 USD</p>
+            </div>
+            <div class="col-sm-4">
+                <p class="info-header">Money Guarantee</p>
+                <p class="info-message">30 days money back Gurantee on bought Items</p>
+            </div>
+            <div class="col-sm-4">
+                <p class="info-header">Customer Service</p>
+                <div class="info-message">24/7 Customer service </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section>
+    <p class="categories-intro">
+        Pawklan Collections
+    </p>
+    <div class="container-fluid">
+        {{!-- Categories carousel --}}
+        <div class="owl-carousel owl-theme">
+            <div class="item">
+                <div class="card">
+                    <div class="featuredImageHolder">
+                        <a href="/categories">
+                            <img src="/images/pk logo  1.jpg" alt=".....male" id="featuredImage">
+                        </a>
+                        <p id="category-name" >Men's Fashion</p>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="card">
+                    <div class="featuredImageHolder">
+                        <a href="/female">
+                            <img src="/images/pk logo  1.jpg" alt=".....male" id="featuredImage">
+                        </a>
+                        <p id="category-name" >Ladies Fashion</p>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="card">
+                    <div class="featuredImageHolder">
+                        <a href="/children">
+                            <img src="/images/pk logo  1.jpg" alt=".....male" id="featuredImage">
+                        </a>
+                        <p id="category-name" >Children's Wears</p>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="card">
+                    <div class="featuredImageHolder">
+                        <a href="/headwear">
+                            <img src="/images/pk logo  1.jpg" alt=".....male" id="featuredImage">
+                        </a>
+                        <p id="category-name" >Caps &amp; Hats</p>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="card">
+                    <div class="featuredImageHolder">
+                        <a href="/footwear">
+                            <img src="/images/pk logo  1.jpg" alt=".....male" id="featuredImage">
+                        </a>
+                        <p id="category-name" >Shoes &amp; Boots</p>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="card">
+                    <div class="featuredImageHolder">
+                        <a href="/accessories">
+                            <img src="/images/pk logo  1.jpg" alt=".....male" id="featuredImage">
+                        </a>
+                        <p id="category-name" >Accessories</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 {{>footer}}
 {{#section 'javascript'}}
@@ -160,7 +341,7 @@
                 margin:10,
                 nav:true,
                 autoplay: true,
-                autoplayTimeout: 1000,
+                autoplayTimeout: 2000,
                 autoplayHoverPause:true,
                 autoWidth: true,
                 responsiveClass: true,

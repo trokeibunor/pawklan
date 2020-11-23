@@ -24,6 +24,7 @@ module.exports = function(app){
       });
       admin.get('/product',ensureStaffAuthenticated,(req,res,next)=>{
         product.find({available: true},function(err,products){
+          console.log(products);
           var content = {
               products : products.map(function(product){
                   return{
@@ -31,7 +32,7 @@ module.exports = function(app){
                       name: product.name,
                       category: product.category,
                       price: product.price,
-                      addedby: product.addedby,
+                      addedby: product.addedBy,
                       editedby: product.editedby,
                       sku: product.sku,
                       date:product.date,
@@ -82,11 +83,38 @@ module.exports = function(app){
             }),
             layout: 'admin',
             page: 'Gallery',
-            user: req.session.username
+            user: req.session.username,
           }
           res.render('admin/gallery',content)
         })
       })
+      // Message Routes
+      // Compose Mail
+      admin.get('/compose',(req,res,next)=>{
+        res.render('admin/compose',{layout:'admin'})
+      })
+      // Message Inbox
+      admin.get('/inbox',(req,res,next)=>{
+        res.render('admin/inbox',{layout: 'admin'})
+      })
+      // Read mail
+      admin.get('/readMail',(req,res,next)=>{
+        res.render('admin/read',{layout: 'admin'})
+      })
+      // Get Drafts
+      admin.get('/drafts',(req,res,next)=>{
+        res.render('admin/drafts',{layout: 'admin'})
+      })
+      // Sent Mails
+      admin.get('/sent',(req,res,next)=>{
+        res.render('admin/sent',{layout: 'admin'})
+      })
+
+
+
+
+
+
       // forgotpassword
       admin.get('/forgotPassword',(req,res,next)=>{
         res.render('admin/forgotPasswordAdmin')

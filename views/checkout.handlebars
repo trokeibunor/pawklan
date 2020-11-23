@@ -1,0 +1,75 @@
+<nav class="navbar navbar-expand-lg navbar-light">
+    <span><img src="/images/logoimagepawklan-removebg-preview.png" id="navlogo" alt=""></span>
+    <a class="navbar-brand" href="#">PawKlan</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+        <li class="nav-item ">
+            <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/shop">Shop</a>
+        </li>
+        <li class="nav-item">
+            <a href="/categories" class="nav-link">Categories</a>
+        </li>
+        <li class="nav-item">
+            <a href="/gallery" class="nav-link">Gallery</a>
+        </li>
+        <li class="nav-item">
+            <a href="/about" class="nav-link">Our brand</a>
+        </li>
+        <li class="nav-item">
+            <a href="/cart" class="nav-link">Cart</a>
+        </li>
+        <li class="nav-item">
+            <a href="/wishlist" class="nav-link">WishList</a>
+        </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" name="searchForm" type="search" placeholder="Search" aria-label="Search">
+                {{#if user}}
+                <a href="/logout" class="btn ml-2 my-2 my-sm-0 footer-btn" id="loginbtn">
+                    Log Out
+                    <span class="fas fa-sign-out-alt" style="color: white;" ></span>
+                </a>
+                {{else}}
+                <a href="/login" class="btn ml-2 my-2 my-sm-0 footer-btn" id="loginbtn">
+                    Login
+                    <span class="fas fa-sign-in-alt" style="color: white;"></span>
+                </a>
+            {{/if}}
+            </form>
+    </div>
+</nav>
+<section>
+    <div class="container">
+        <div class="row mx-auto">
+            <div class="col-sm-10">
+
+            </div>
+            <div class="col-sm-12 col-md-6 mx-auto">
+                <form action="#" method="post">
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" name="checkEmail" id="email" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="country">Country:</label>
+                        <input type="text" name="checkCountry" id="country" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="state">State:</label>
+                        <input type="text" name="checkState" id="state" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="zipCode">Zip Code:</label>
+                        <input type="number" name="CheckZip" id="zipCode">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

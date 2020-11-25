@@ -45,14 +45,14 @@
     </div>
 </nav>
 {{!-- Start cart --}}
-<div class="col-sm-10 col-md-4 mx-auto">
+<div class="col-sm-10 col-md-8 col-lg-4 mx-auto">
     <div class="card shadow cart-card">
         <div class="card-body">
                 <div class="row">
                     <h2>Cart</h2>
                 </div>
                 {{#if cart}}
-                    <table class="table-responsive table">
+                    <table class="table table-responsive">
                         <thead class="shadow">
                             <tr>
                                 <th>Item</th>
@@ -98,10 +98,7 @@
                             <a href="/emptyCart">Empty</a>
                         </div>
                     </div>
-                    {{else}}
-                        <div class="row">
-                            <p class="lead m-3 small">There are no items in your cart</p>
-                        </div>
+                    <a href="/checkout" class="btn btn-block btn-sm btn-dark">Proceed to checkout</a>
                 {{/if}}
         </div>
     </div>

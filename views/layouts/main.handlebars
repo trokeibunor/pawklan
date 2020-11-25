@@ -6,10 +6,15 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="/assets/bootstrap-4.5.2-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/slick/slick-theme.css">
     <link rel="stylesheet" href="/assets/owl-carousel-dis/assets/owl.carousel.min.css">
     <link rel="stylesheet" href="/assets/owl-carousel-dis/assets/owl.theme.default.min.css">
     <link rel="stylesheet" href="/stylesheets/style.css">
     <link rel="stylesheet" href="/stylesheets/footer.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css">
+    <link rel="stylesheet" href="/assets/swiper/swiper-bundle.css">
+    <link rel="stylesheet" href="/assets/swiper/swiper-bundle.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
     <title>PawKlan wears</title>
     {{{_sections.head}}}
 </head>
@@ -26,14 +31,36 @@
     {{!-- back up jquery --}}
     
     <script src="/assets/jquery-3.5.1.js"></script>
-    {{{_sections.javascripts}}}
     <script src="/assets/owl-carousel-dis/owl.carousel.min.js"></script>
+    <script src="/assets/owl-carousel-dis/owl.carousel.js"></script>
+    
+    <script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="/assets/swiper/swiper-bundle.js"></script>
+    <script src="/assets/swiper/swiper-bundle.min.js"></script>
     <script src="/javascripts/pawklan.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" 
         crossorigin="anonymous"></script>
     <script src="/assets/bootstrap-4.5.2-dist/js/bootstrap.min.js"></script>
-    
+    <script>
+        var mySwiper = new Swiper('.swiper-container', {
+            // Optional parameters
+            direction: 'horizontal',
+            loop: true,
+
+            // If we need pagination
+            pagination: {
+                el: '.swiper-pagination',
+            },
+            // And if we need scrollbar
+            scrollbar: {
+                el: '.swiper-scrollbar',
+            },
+        })
+        $(document).on('ready', mySwiper());
+    </script>
+    {{{_sections.javascripts}}}
 </body>
 </html>

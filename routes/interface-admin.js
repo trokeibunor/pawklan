@@ -2,9 +2,12 @@ var express = require('express');
 var admin = express.Router();
 var vhost = require('vhost');
 const gallery = require('../public/models/gallery');
+const message = require('../public/models/message');
 var product = require('../public/models/product');
 var staff = require('../public/models/staff');
-
+var moment = require('moment');
+var credentials = require('../public/lib/credentials')
+const Crptyr = require('cryptr');
 module.exports = function(app){
       app.use(vhost('admin.*',admin));
       admin.get('*',function(req,res,next){
@@ -24,7 +27,6 @@ module.exports = function(app){
       });
       admin.get('/product',ensureStaffAuthenticated,(req,res,next)=>{
         product.find({available: true},function(err,products){
-          console.log(products);
           var content = {
               products : products.map(function(product){
                   return{
@@ -91,23 +93,98 @@ module.exports = function(app){
       // Message Routes
       // Compose Mail
       admin.get('/compose',(req,res,next)=>{
-        res.render('admin/compose',{layout:'admin'})
+        staff.find({available: true},function(err,staffs){
+          var content = {
+              staffs : staffs.map(function(staff){
+                  return{
+                      id:staff.id,
+                      name: staff.name,
+                      email: staff.email
+                  }
+              }),
+              layout: 'admin',
+              page: 'Compose',
+              user: req.session.username,
+          }   
+          res.render('admin/compose',content)
+        })
       })
       // Message Inbox
       admin.get('/inbox',(req,res,next)=>{
-        res.render('admin/inbox',{layout: 'admin'})
+        message.find({type: "sentmail", receiver: req.session.username},function(err,messages){
+          var content = {
+            messages : messages.map(function(message){
+              return{
+                id: message.id,
+                sender: message.sender,
+                subject: message.subject,
+                time: moment(message.time).fromNow()
+              }
+            }),
+            layout: 'admin',
+            page: 'Inbox',
+            user: req.session.username,
+          }
+          res.render('admin/inbox',content)
+        })
       })
       // Read mail
       admin.get('/readMail',(req,res,next)=>{
-        res.render('admin/read',{layout: 'admin'})
+        message.find({_id: req.query.id},function(err,messages){
+          var cryptr = new Crptyr(credentials.secretCrypt);
+          var content = {
+            messages : messages.map(function(message){
+              return{
+                id: message.id,
+                sender: message.sender,
+                subject: message.subject,
+                time: moment(message.time).fromNow(),
+                content: cryptr.decrypt(message.content)
+              }
+            }),
+            layout: 'admin',
+            page: 'Read Message',
+            user: req.session.username,
+          }
+          res.render('admin/read',content)
+        })
       })
       // Get Drafts
       admin.get('/drafts',(req,res,next)=>{
-        res.render('admin/drafts',{layout: 'admin'})
+        message.find({type: "savedDraft", sender: req.session.username},function(err,drafts){
+          var content = {
+            drafts : drafts.map(function(message){
+              return{
+                id: message.id,
+                subject: message.subject,
+                time: moment(message.time).fromNow()
+              }
+            }),
+            layout: 'admin',
+            page: 'Draft',
+            user: req.session.username,
+          }
+          res.render('admin/drafts',content)
+        })
       })
       // Sent Mails
       admin.get('/sent',(req,res,next)=>{
-        res.render('admin/sent',{layout: 'admin'})
+        message.find({type: "sentmail", sender: req.session.username},function(err,outbox){
+          var content = {
+            outbox : outbox.map(function(message){
+              return{
+                id: message.id,
+                receiver: message.receiver,
+                subject: message.subject,
+                time: moment(message.time).fromNow()
+              }
+            }),
+            layout: 'admin',
+            page: 'Outbox',
+            user: req.session.username,
+          }
+          res.render('admin/sent',content)
+        })
       })
 
 

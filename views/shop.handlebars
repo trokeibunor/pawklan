@@ -55,30 +55,104 @@
         <h6>Let's make your fashion desires come true</h6>
     </div>
 </div>
+{{!-- collection Section --}}
 <section>
-    <div class="container">
-        <div class="section-holder">
-            <p class="best-sellers">
-                Featured Products
-            </p>
-            
-        </div>
-        {{!-- Featured product --}}
-        <div class="owl-carousel owl-theme" id="owl-one">
-            {{#each featured}}
+    <p class="categories-intro">
+        Pawklan Collections
+    </p>
+    <div class="container-fluid">
+        {{!-- Categories carousel --}}
+        <div class="owl-carousel owl-theme">
             <div class="item">
                 <div class="card">
                     <div class="featuredImageHolder">
-                        <a href="/viewProduct?id={{id}}"><img src="{{image}}" id="featuredImage"></a>
-                        <span class="badge badge-sm badge-secondary" id="discount">
-                            {{discount}}% off
-                        </span>
+                        <a href="/categories">
+                            <img src="/images/pk logo  1.jpg" alt=".....male" id="featuredImage">
+                        </a>
+                        <p id="category-name" >Men's Fashion</p>
                     </div>
-                    <p class="product-text">{{name}}</p>
-                    <p class="price-text">{{price}}USD</p>
                 </div>
             </div>
-            {{/each}}
+            <div class="item">
+                <div class="card">
+                    <div class="featuredImageHolder">
+                        <a href="/female">
+                            <img src="/images/pk logo  1.jpg" alt=".....male" id="featuredImage">
+                        </a>
+                        <p id="category-name" >Ladies Fashion</p>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="card">
+                    <div class="featuredImageHolder">
+                        <a href="/children">
+                            <img src="/images/pk logo  1.jpg" alt=".....male" id="featuredImage">
+                        </a>
+                        <p id="category-name" >Children's Wears</p>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="card">
+                    <div class="featuredImageHolder">
+                        <a href="/headwear">
+                            <img src="/images/pk logo  1.jpg" alt=".....male" id="featuredImage">
+                        </a>
+                        <p id="category-name" >Caps &amp; Hats</p>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="card">
+                    <div class="featuredImageHolder">
+                        <a href="/footwear">
+                            <img src="/images/pk logo  1.jpg" alt=".....male" id="featuredImage">
+                        </a>
+                        <p id="category-name" >Shoes &amp; Boots</p>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="card">
+                    <div class="featuredImageHolder">
+                        <a href="/accessories">
+                            <img src="/images/pk logo  1.jpg" alt=".....male" id="featuredImage">
+                        </a>
+                        <p id="category-name" >Accessories</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{{!-- featured Section --}}
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-8 mx-auto">
+                <div class="swiper-container">
+                    <div class="swiper-wrapper">
+                        {{#each featured}}
+                        <div class="swiper-slide">
+                            <img src="{{image}}" id="featured">
+                            <div>
+                                <a href="/viewProduct?id={{id}}" class="bottom-left">
+                                    <p class="product-text">
+                                        {{name}}  </p>
+                                    <p class="price-text">{{price}} USD</p>
+                                    
+                                </a>
+                                <p class="top-left">
+                                   <span class="badge badge-info" id="discount">{{discount}}% off</span> 
+                                </p>
+                            </div>
+                        </div>
+                        {{/each}}
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
@@ -262,81 +336,13 @@
         </div>
     </div>
 </section>
-<section>
-    <p class="categories-intro">
-        Pawklan Collections
-    </p>
-    <div class="container-fluid">
-        {{!-- Categories carousel --}}
-        <div class="owl-carousel owl-theme">
-            <div class="item">
-                <div class="card">
-                    <div class="featuredImageHolder">
-                        <a href="/categories">
-                            <img src="/images/pk logo  1.jpg" alt=".....male" id="featuredImage">
-                        </a>
-                        <p id="category-name" >Men's Fashion</p>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <div class="card">
-                    <div class="featuredImageHolder">
-                        <a href="/female">
-                            <img src="/images/pk logo  1.jpg" alt=".....male" id="featuredImage">
-                        </a>
-                        <p id="category-name" >Ladies Fashion</p>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <div class="card">
-                    <div class="featuredImageHolder">
-                        <a href="/children">
-                            <img src="/images/pk logo  1.jpg" alt=".....male" id="featuredImage">
-                        </a>
-                        <p id="category-name" >Children's Wears</p>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <div class="card">
-                    <div class="featuredImageHolder">
-                        <a href="/headwear">
-                            <img src="/images/pk logo  1.jpg" alt=".....male" id="featuredImage">
-                        </a>
-                        <p id="category-name" >Caps &amp; Hats</p>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <div class="card">
-                    <div class="featuredImageHolder">
-                        <a href="/footwear">
-                            <img src="/images/pk logo  1.jpg" alt=".....male" id="featuredImage">
-                        </a>
-                        <p id="category-name" >Shoes &amp; Boots</p>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <div class="card">
-                    <div class="featuredImageHolder">
-                        <a href="/accessories">
-                            <img src="/images/pk logo  1.jpg" alt=".....male" id="featuredImage">
-                        </a>
-                        <p id="category-name" >Accessories</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+
 {{>footer}}
-{{#section 'javascript'}}
+{{#section 'javascripts'}}
+    <script type="text/javascript" src="/assets/slick/slick.min.js"></script>
     <script>
-        //$('document').ready(function(){
-            $('#owl-one').owlCarousel({
+        $('document').on('ready',function(){
+            $('.owl-carousel').owlCarousel({
                 loop: true,
                 margin:10,
                 nav:true,
@@ -357,27 +363,6 @@
                     }
                 }
             });
-            $('#owl-two').owlCarousel({
-                loop: true,
-                margin:10,
-                nav:true,
-                autoplay: true,
-                autoplayTimeout: 1000,
-                autoplayHoverPause:true,
-                autoWidth: true,
-                responsiveClass: true,
-                responsive:{
-                    0:{
-                        items:2
-                    },
-                    600:{
-                        items:4
-                    },
-                    1000:{
-                        items:4
-                    }
-                }
-            });
-       // })
+        })
     </script>
 {{/section}}

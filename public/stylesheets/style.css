@@ -99,7 +99,12 @@ select option{
   height: 50px;
 }
 #currencyLink a{
-  color: rgb(212, 212, 212) !important;
+  width: 50px;
+  border-radius: 10px;
+  text-align: center;
+  padding: auto;
+  height: auto;
+  background-color: rgb(212, 212, 212) !important;
 }
 .sitename{
   font-family: -apple-system, BlinkMacSystemFont, 
@@ -220,6 +225,11 @@ section{
   width: 100%;
   height: 20vh;
 }
+#payment-image{
+  width: 100%;
+  height: 150px;
+  object-fit: contain;
+}
 /* ---------------- */
 /* About Page */
 /* ---------------- */
@@ -273,6 +283,7 @@ section{
   display: block;
   max-width: 100%;
   background-image: url('/images/shop-loadingImg.jpg');
+  max-height: 100%;
   object-fit: contain;
   background-origin: content-box;
   background-size: 100% 100%;
@@ -280,7 +291,7 @@ section{
   background-repeat: no-repeat;
   background-position-y: inherit;
   background-attachment: scroll;
-  height: 85vh;
+  height: 90vh;
   filter: opacity(90%);
   -webkit-filter: opacity(90%);
   box-shadow: rgb(112, 111, 111) 0px 0px 5px 5px;
@@ -397,12 +408,64 @@ section{
   font-size: 8px;
 }
 .featuredImageHolder{
-  max-width: 100%;
+  width: 100%;
   height: 80%;
   cursor: pointer;
 
 }
-
+.swiper-container{
+  width: 100%;
+  height: 65vh;
+  border-radius: 10px;
+}
+@media(max-width: 850px){
+  .swiper-container{
+    width: 100%;
+    height: 55vh;
+  }
+}
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+  position: relative;
+  /* Center slide text vertically */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+.bottom-left {
+  position: absolute;
+  bottom: 8px;
+  left: 16px;
+}
+.bottom-left .product-text{
+  margin: 2px;
+}
+.top-left {
+  position: absolute;
+  top: 8px;
+  left: 16px;
+}
+.top-left #discount{
+  background-color: #00B7FF;
+}
+.bottom-left:hover{
+  border-radius: 10px;
+  padding: 3px;
+  background-color: #67d0fa;
+  text-decoration: none;
+  transform: scale(0.8);
+}
 .item .card{
   border-color: rgb(228, 228, 228) !important;
   border: transparent !important;
@@ -412,11 +475,17 @@ section{
   background-color: lightgray;
 }
 .featuredImageHolder #featuredImage{
-  object-fit: contain;
+  object-fit: cover;
   max-width: 100%;
   height: 100%;
   border-radius: 10px;
   border:transparent;
+}
+#featured{
+  object-fit: fill;
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 #featured-text{
   font-family: cursive;
@@ -616,6 +685,10 @@ section .container-fluid{
 /* =================== */
 /* Cart and wishList */
 /* =================== */
+.cart-card .card-body table{
+  width: 100%;
+  max-width: 100% !important;
+}
 table thead tr th{
   font-size: 16px;
   font-weight: 700;
@@ -692,11 +765,15 @@ h4 strong{
   margin-bottom: auto;
   color:rgb(158, 4, 4);
 }
-.cart-card{
-  background-color: rgba(246, 246, 255, 0.719) !important;
-}
+
 label{
   font-weight: 800 !important;
+}
+.cart-card .card-body a{
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: .85rem;
+  margin-top: 5px;
+  font-weight: bold;
 }
 #about-text{
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
@@ -711,6 +788,9 @@ label{
   font-weight: 900;
   font-style: normal;
 }
+/* ------------------- */
+  /* VIEW PRODDUCT PAGE */
+/* -------------------- */
 #product-tab a{
   color: black;
   font-family: cursive;
@@ -719,4 +799,56 @@ label{
 #nav-tabcontent #product-desc{
   font-family: cursive;
   font-weight: 500;
+}
+/* ------------------------- */
+  /* CHECKOUT PAGE */
+/* -------------------------- */
+#checkRow .topCheck{
+  border-radius: 15px;
+  background-color: whitesmoke !important;
+}
+#checkRow .topCheck a{
+  font-size: 0.75rem;
+  font-weight: bold;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-style: normal;
+  padding: 3px;
+  margin: 5px 0px;
+
+}
+#shippingForm{
+  margin:5px;
+  position: relative;
+  z-index: 9999;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 1rem;
+}
+#shippingForm .form-group{
+  padding: 0px 5px;
+}
+#shippingForm .form-group input{
+  border-radius: 10px;
+  border-color: rgb(56, 56, 56) !important;
+  height: 30px !important;
+}
+#shippingForm .form-group input:focus{
+  background-color: #00B7FF !important;
+}
+#shippingForm h3{
+  font-family: cursive;
+  font-weight: bold;
+}
+#shippingForm h4{
+  font-family: cursive;
+  font-weight: 400;
+}
+#totPur{
+  padding: 10px;
+  margin: 5px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+#totPur span{
+  color: #00709c;
 }

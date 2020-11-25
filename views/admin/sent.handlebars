@@ -61,14 +61,17 @@
                     <div class="table-responsive mailbox-messages">
                     <table class="table table-hover table-striped">
                         <tbody>
-                        <tr>
-                            <td class="mailbox-star"><a href="#"><i class="fas fa-star text-warning"></i></a></td>
-                            <td class="mailbox-name"><a href="read-mail.html">Alexander Pierce</a></td>
-                            <td class="mailbox-subject"><b>AdminLTE 3.0 Issue</b> - Trying to find a solution to this problem...
-                            </td>
-                            <td class="mailbox-attachment"></td>
-                            <td class="mailbox-date">5 mins ago</td>
-                        </tr>
+                            {{#each outbox}}
+                            <tr>
+                                <td class="mailbox-star"><a><i class="fas fa-star text-warning"></i></a></td>
+                                <td class="mailbox-name">{{receiver}}</td>
+                                <td class="mailbox-subject"><b>{{subject}}</b> - <a href="/readMail?id={{id}}"><span class="small text-muted">Click here to view mail</span></a>
+                                </td>
+                                <td class="mailbox-attachment"></td>
+                                <td class="mailbox-date">{{time}}</td>
+                            </tr>
+                            {{/each}}
+                        </tbody>
                     </table>
                     <!-- /.table -->
                     </div>

@@ -1,18 +1,19 @@
 var express = require('express');
 const gallery = require('../public/models/gallery');
 const product =  require('../public/models/product');
+var async = require('async');
+const products = require('../public/models/product');
+
+  
 module.exports = function(app){
+  
 //Get user and parse to all routes
 app.get('*',function(req,res,next){
   res.locals.user = req.session.user;
   res.locals.username = req.session.username;
   res.locals.currency = req.session.currency || 'USD';
+  res.locals.email = req.session.email;
   var reqCurrency = req.session.currency;
-  var convertCurrency = require('nodejs-currency-converter');
-      convertCurrency(1,'USD',reqCurrency).then((response,err)=>{
-      console.log(response);
-      console.log(err);
-  })
   next();
 }) 
 // Get currency
@@ -35,13 +36,32 @@ app.get('/',function(req, res, next) {
     res.render('index',content)
   })
 });
+// Shop Page
 app.get('/shop', function(req,res,next){
-  product.find({available: true}, function(err,products){
-    
-    var content= {
-      male: newMale,
-      featured: products.map(function(item){
-        if(item.featured == "true"){
+  var local = {};
+  async.parallel([
+    function(callback){
+      product.find({featured: true},function(err,features){
+        local.features = features.map(function(item){
+          return {
+              id: item.id,
+              name:item.name,
+              sku: item.sku,
+              description:item.description,
+              discount: item.discount || 'Zero',
+              price: item.price,
+              color: item.color,
+              image: item.path[0],
+              tags: products.tags,
+          }
+        });
+        callback()
+      })
+    },
+    function(callback){
+      product.find({category: "male"},function(err,newMale){
+        if(err) callback(err);
+        local.newMale = newMale.map(function(item){
           return {
             id: item.id,
             name:item.name,
@@ -52,11 +72,13 @@ app.get('/shop', function(req,res,next){
             color: item.color,
             image: item.path[0],
             tags: products.tags,
-          }
         }
-      })
+        });
+        callback()
+      }).sort({date:1}).limit(3);
     }
-    res.render('shop',content)
+  ],function(err){
+    res.render('shop',{featured: local.features, male : local.newMale})
   })
 });
 app.get('/about',(req,res,next)=>{
@@ -82,7 +104,19 @@ app.get('/login',(req,res,next)=>{
   res.render('login')
 });
 app.get('/checkout',(req,res,next)=>{
-  res.render('checkout')
+  // get cart from sessions
+  var cart = req.session.cart;
+  var displayCart = {items:[],total:0};
+  var total = 0;
+  // Get total
+  for(var item in cart){
+    displayCart.items.push(cart[item]);
+    total += cart[item].qty * cart[item].price;
+  }
+  displayCart.total = total;
+  res.render('checkout',{
+   cart: displayCart,
+  });
 })
 app.get('/signup',(req,res,next)=>{
   res.render('signup')

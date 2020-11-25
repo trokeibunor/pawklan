@@ -13,8 +13,7 @@ var staffSchema = mongoose.Schema({
     position: String,
     salary: Number,
     phone: Number,
-    messages: [String],
-    availble: Boolean
+    available: Boolean,
 
 });
 

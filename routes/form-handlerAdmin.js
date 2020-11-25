@@ -10,6 +10,7 @@ var storage = multer.diskStorage({
     },
      
 });
+var credentials = require('../public/lib/credentials')
 var upload = multer({ storage: storage });
 var vhost = require('vhost');
 var product = require('../public/models/product');
@@ -20,7 +21,9 @@ var now = moment();
 var passport = require('passport') 
     ,LocalStrategy = require('passport-local').Strategy;
 var bcrypt = require('bcryptjs');
+var message = require('../public/models/message')
 const customer = require('../public/models/user');
+const Crptyr = require('cryptr');
 function sort(val){
     if (val != undefined)
     return val;
@@ -98,9 +101,7 @@ module.exports = function (app){
                 }
                 res.redirect('/')
             }else{
-                console.log('from else statement')
                 req.session.username = staff.name;
-                console.log(req.session.username);
                 req.session.flash = {
                     type: 'success',
                     intro: 'Login Successful',
@@ -113,17 +114,13 @@ module.exports = function (app){
     admin.get('/logout',(req,res)=>{
         req.session.admin = null;
         req.session.username = null;
-        console.log(req.user)
         req.logout();
         res.redirect('/login')
     })
     // handle add Product form
-    admin.post('/process-product',upload.array('productImages', 5),function(req,res,next){
-        // console.log(req.file.path);
+    admin.post('/process-product',upload.array('productImages', 3),function(req,res,next){
         var file = req.files
-        var paths = [reqPath(file[0].path),reqPath(file[1].path),reqPath(file[2].path),
-        reqPath(file[3].path),reqPath(file[4].path)];
-        
+        var paths = [reqPath(file[0].path),reqPath(file[1].path),reqPath(file[2].path)];
         var color_array = req.body.productColour;
         var subCategories_array = [req.body.SC_hoodies,req.body.SC_tops,req.body.SC_outwear,
             req.body.SC_shorts,req.body.SC_jackets,req.body.SC_sweatshirts,
@@ -153,7 +150,6 @@ module.exports = function (app){
         });
         try {
             new product(pawProduct).save();
-            console.log(pawProduct);
             req.session.flash = {
                 type:'success',
                 intro: 'Request success',
@@ -227,8 +223,6 @@ module.exports = function (app){
         })
         try {
             new staff(pawStaff).save();
-            console.log(pawStaff);
-            console.log(staff)
             req.session.flash = {
                 type:'success',
                 intro: 'Request success',
@@ -247,7 +241,6 @@ module.exports = function (app){
     }) 
     // gallery upload
     admin.post('/galleryUpload',upload.single('galleryImage'),(req,res,next)=>{
-        console.log(req.file)
         var pawGallery = new Object({
             title : req.body.galleryTitle,
             description: req.body.galleryDesc,
@@ -258,7 +251,6 @@ module.exports = function (app){
         
         try {
             new gallery(pawGallery).save();
-            console.log(pawGallery);
             req.session.flash = {
                 type:'success',
                 intro: 'Request success',
@@ -275,5 +267,65 @@ module.exports = function (app){
             res.redirect(303,'/gallery');
         }
 
+    })
+    // compose mail
+    admin.post('/postMessage',(req,res,next)=>{
+        var crptyr = new Crptyr(credentials.secretCrypt);
+        var mail = crptyr.encrypt(req.body.message)
+        var pawMessage = new Object({
+            subject : req.body.subject,
+            receiver: req.body.receiver,
+            content: mail,
+            sender: req.session.username,
+            time: now,
+            type: 'sentmail'
+        })
+        try {
+            new message(pawMessage).save();
+            req.session.flash = {
+                type:'success',
+                intro: 'Request success',
+                message: 'Message Sent',
+            };
+        } catch (error) {
+            req.session.flash = {
+                type:'danger',
+                intro: 'Request Failure',
+                message: 'Please Check variables and try again',
+            };
+            console.log(error);
+        } finally{
+            res.redirect(303,'/compose');
+        }
+    })
+        // Save Draft
+    admin.post('/postDraft',(req,res,next)=>{
+        var crptyr = new Crptyr(credentials.secretCrypt);
+        var mail = crptyr.encrypt(req.body.message)
+        var pawMessage = new Object({
+            subject : req.body.subject,
+            receiver: req.body.receiver,
+            content: mail,
+            sender: req.session.username,
+            time: now,
+            type: 'savedDraft'
+        })
+        try {
+            new message(pawMessage).save();
+            req.session.flash = {
+                type:'success',
+                intro: 'Request success',
+                message: 'Draft Saved',
+            };
+        } catch (error) {
+            req.session.flash = {
+                type:'danger',
+                intro: 'Request Failure',
+                message: 'Please Check variables and try again',
+            };
+            console.log(error);
+        } finally{
+            res.redirect(303,'/compose');
+        }
     })
 };

@@ -46,16 +46,50 @@
 </nav>
 <section>
     <div class="container">
-        <div class="row mx-auto">
-            <div class="col-sm-10">
-
+        <div class="row" id="checkRow">
+            <div class="col-sm-10 col-md-10 mx-auto topCheck">
+                    <table class="table checkout-table">
+                        <thead>
+                            <tr>
+                                <th>Products</th>
+                                <th>Quantity</th>
+                                <th>Colour</th>
+                                <th>Size</th>
+                            </tr>
+                        </thead>
+                        {{#each this}}
+                        <tbody>
+                            {{#each items}}   
+                                <tr>
+                                    <td><a href="/viewProduct?id={{item}}">{{name}}</a></td>
+                                    <td>{{qty}}</td>
+                                    <td>{{colour}}</td>
+                                    <td>{{size}}</td>
+                                </tr>
+                            {{/each}} 
+                        </tbody>
+                        {{/each}}
+                    </table>
+                    <h5 id="totPur">Total Purchase : <span>{{#each this}}
+                                            {{total}}
+                                        {{/each}}{{currency}}</span></h5>
+                    <a href="/cart" class="btn btn-sm btn-dark">Go To Cart</a>
             </div>
             <div class="col-sm-12 col-md-6 mx-auto">
-                <form action="#" method="post">
+                <form action="#" method="post" id="shippingForm">
+                    <h3>Complete Purchase</h3>
+                    <hr>
+                    <h4>Personal Details</h4>
                     <div class="form-group">
                         <label for="email">Email:</label>
-                        <input type="email" name="checkEmail" id="email" class="form-control">
+                        <input type="email" name="checkEmail" id="email" class="form-control" value="{{email}}">
                     </div>
+                    <div class="form-group">
+                        <label for="name">Full Name:</label>
+                        <input type="text" name="checkName" id="name" class="form-control" value="{{username}}">
+                    </div>
+                    <h4>Shipping Details</h4>
+                    <hr>
                     <div class="form-group">
                         <label for="country">Country:</label>
                         <input type="text" name="checkCountry" id="country" class="form-control">
@@ -65,11 +99,17 @@
                         <input type="text" name="checkState" id="state" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label for="zipCode">Zip Code:</label>
-                        <input type="number" name="CheckZip" id="zipCode">
+                        <label for="city">City:</label>
+                        <input type="text" name="checkCity" id="city" class="form-control">
                     </div>
+                    <div class="form-group">
+                        <label for="zipCode">Zip Code:</label>
+                        <input type="text" name="checkZip" id="zipCode" class="form-control">
+                    </div>
+                    <input type="submit" value="Make Payment" class="btn btn-small btn-outline-info text-center">
                 </form>
             </div>
         </div>
     </div>
 </section>
+{{>footer}}

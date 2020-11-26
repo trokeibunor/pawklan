@@ -34,10 +34,14 @@ text-align: center;
 color: white;
 font-size: 8px;
 }
+.featuredImageHolder{
+    width: 100%;
+    height: 18rem;
+}
 .featuredImageHolder #featuredImage{
-object-fit: contain;
-max-width: 100%;
-height: 100%;
+object-fit: cover;
+width: 100%;
+height: 92%;
 border-radius: 10px;
 border:transparent;
 }
@@ -129,4 +133,15 @@ h4{
     line-height: auto;
     text-align: center;
     text-rendering: optimizeLegibility;
+}
+.footer{
+    margin-top: 0px;
+    width: 100%;
+    height: 20vh;
+}
+#payment-image{
+    border-radius: 10px;
+    width: 100%;
+    height: 125px;
+    object-fit: contain;
 }

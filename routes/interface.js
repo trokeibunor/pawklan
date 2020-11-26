@@ -3,21 +3,23 @@ const gallery = require('../public/models/gallery');
 const product =  require('../public/models/product');
 var async = require('async');
 const products = require('../public/models/product');
+var credentials  = require('../public/lib/credentials')
+// currency conversion
+var oxr = require('open-exchange-rates');
+var fx = require('money');
+oxr.set({ app_id: credentials.oxr_auth })
 
-  
 module.exports = function(app){
-  
-//Get user and parse to all routes
+  //Get user and parse to all routes
 app.get('*',function(req,res,next){
   res.locals.user = req.session.user;
   res.locals.username = req.session.username;
   res.locals.currency = req.session.currency || 'USD';
   res.locals.email = req.session.email;
-  var reqCurrency = req.session.currency;
   next();
-}) 
+})
 // Get currency
-app.post('/getCurrency',(req,res,)=>{
+app.post('/getCurrency',(req,res, next)=>{
   req.body.countryCode = req.session.currency;
   console.log(req.body.countryCode);
   res.redirect('/')
@@ -38,6 +40,17 @@ app.get('/',function(req, res, next) {
 });
 // Shop Page
 app.get('/shop', function(req,res,next){
+  var currency = req.session.currency;
+  oxr.latest(function(err) {
+    // Apply exchange rates and base rate to `fx` library object:
+    fx.rates = oxr.rates;
+    fx.base = oxr.base;
+    if(err){
+      console.log(err)
+    }
+    // money.js is ready to use:
+    console.log(Math.ceil(fx(1).from('USD').to(currency)));
+  });
   var local = {};
   async.parallel([
     function(callback){
@@ -49,7 +62,7 @@ app.get('/shop', function(req,res,next){
               sku: item.sku,
               description:item.description,
               discount: item.discount || 'Zero',
-              price: item.price,
+              price: item.getDisplayPrice(),
               color: item.color,
               image: item.path[0],
               tags: products.tags,
@@ -58,6 +71,7 @@ app.get('/shop', function(req,res,next){
         callback()
       })
     },
+    // new arraivals far male
     function(callback){
       product.find({category: "male"},function(err,newMale){
         if(err) callback(err);
@@ -68,17 +82,37 @@ app.get('/shop', function(req,res,next){
             sku: item.sku,
             description:item.description,
             discount: item.discount || 'Zero',
-            price: item.price,
+            price: item.getDisplayPrice(),
             color: item.color,
             image: item.path[0],
             tags: products.tags,
         }
         });
         callback()
-      }).sort({date:1}).limit(3);
+      }).sort({date:-1}).limit(3);
+    },
+    // new arriavals for female category
+    function(callback){
+      product.find({category: "female"},function(err,newFemale){
+        if(err) callback(err);
+        local.newFemale = newFemale.map(function(item){
+          return {
+            id: item.id,
+            name:item.name,
+            sku: item.sku,
+            description:item.description,
+            discount: item.discount || 'Zero',
+            price: item.getDisplayPrice(),
+            color: item.color,
+            image: item.path[0],
+            tags: products.tags,
+        }
+        });
+        callback()
+      }).sort({date:-1}).limit(3);
     }
   ],function(err){
-    res.render('shop',{featured: local.features, male : local.newMale})
+    res.render('shop',{featured: local.features, male : local.newMale, female : local.newFemale})
   })
 });
 app.get('/about',(req,res,next)=>{
@@ -172,10 +206,11 @@ app.get('/viewProduct',(req,res,next)=>{
           name: product.name,
           slug: product.slug,
           description: product.description,
-          price: product.price,
+          price: product.getDisplayPrice(),
           color: product.color,
           path: product.path,
-          indexPath : product.path[0]
+          indexPath : product.path[0],
+          currency : req.session.currency
         }
       })
     }

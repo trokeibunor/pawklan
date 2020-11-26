@@ -231,30 +231,19 @@
             <div class="col-sm-12 col-md-3">
                 <p class="column-desc">Ladies Wears</p>
                 <ul class="list-unstyled">
-                    <li class="media">
-                        <img src="/images/IMG_5003.JPG">
-                        <div class="media-body">
-                            <span class="badge badge-secondary" id="discount">20% off</span>
-                            <p class="product-text">Paw Top</p>
-                            <p class="price-text">1200.00 USD</p>
-                        </div>
-                    </li>
-                    <li class="media">
-                        <img src="/images/IMG_5003.JPG">
-                        <div class="media-body">
-                            <span class="badge badge-secondary" id="discount">20% off</span>
-                            <p class="product-text">Paw Top</p>
-                            <p class="price-text">1200.00 USD</p>
-                        </div>
-                    </li>
-                    <li class="media">
-                        <img src="/images/IMG_5003.JPG">
-                        <div class="media-body">
-                            <span class="badge badge-secondary" id="discount">20% off</span>
-                            <p class="product-text">Paw Top</p>
-                            <p class="price-text">1200.00 USD</p>
-                        </div>
-                    </li>
+                    {{#each female}}
+                       
+                            <li class="media">
+                                <img src="{{image}}">
+                                <div class="media-body">
+                                    <a href="/viewProduct?id={{id}}">
+                                        <span class="badge badge-secondary" id="discount">{{discount}}% off</span>
+                                        <p class="product-text">{{name}}</p>
+                                        <p class="price-text">{{price}} USD</p>
+                                    </a>
+                                </div>
+                            </li>
+                    {{/each}}
                 </ul>
             </div>
             <div class="col-sm-12 col-md-3">
@@ -320,18 +309,43 @@
 </section>
 <section>
     <div class="container-fluid" id="info-container">
+        <hr>
         <div class="row">
             <div class="col-sm-4">
-                <p class="info-header">Free Delivery</p>
-                <p class="info-message">Free Delivery for orders over 150.00 USD</p>
+                <div class="row" id="info-col">
+                    <div class="col-4">
+                        <img src="/images/Generic-Van-Passenger-Side.svg" alt="" id="svgImg">
+                    </div>
+                    <div class="col-8">
+                        <p class="info-header">Free Delivery</p>
+                        <hr>
+                        <p class="info-message">Free Delivery for orders over 150.00 USD</p>
+                    </div>
+                </div>
             </div>
             <div class="col-sm-4">
-                <p class="info-header">Money Guarantee</p>
-                <p class="info-message">30 days money back Gurantee on bought Items</p>
+                <div class="row" id="info-col">
+                    <div class="col-4">
+                        <img src="/images/money-back-sticker.svg" alt="" id="svgImgmon">
+                    </div>
+                    <div class="col-8">
+                        <p class="info-header">Money Back Guarantee</p>
+                        <hr>
+                        <p class="info-message">30 days money back Gurantee on bought Items</p>
+                    </div>
+                </div>
             </div>
             <div class="col-sm-4">
-                <p class="info-header">Customer Service</p>
-                <div class="info-message">24/7 Customer service </div>
+                <div class="row" id="info-col">
+                    <div class="col-4">
+                        <img src="/images/user_helpdesk_contact.svg" alt="" id="svgImgmon">
+                    </div>
+                    <div class="col-8">
+                        <p class="info-header">Customer Service</p>
+                        <hr>
+                        <p class="info-message"> Excellent 24/7 Customer service just contact us. </p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

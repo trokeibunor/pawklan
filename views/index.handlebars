@@ -1,14 +1,24 @@
 {{#section 'head'}}
-    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-    <script src="/assets/jquery-3.5.1.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" integrity="sha512-3n19xznO0ubPpSwYCRRBgHh63DrV+bdZfHK52b1esvId4GsfwStQNPJFjeQos2h3JwCmZl0/LgLxSKMAI55hgw==" crossorigin="anonymous"></script>
-    <script src="/assets/bootstrap-4.5.2-dist/js/bootstrap.min.js"></script>
+    <script>
+        document.onreadystatechange = function () {
+            var state = document.readyState
+            if (state == 'interactive') {
+                document.getElementById('contents').style.visibility="visible";
+            } else if (state == 'complete') {
+                setTimeout(function(){
+                    document.getElementById('interactive');
+                    document.getElementById('load').style.visibility="hidden";
+                    document.getElementById('contents').style.visibility="visible";
+                },1000);
+            }
+            }
+    </script>
 {{/section}}
 {{!-- Use nice loader Image --}}
-<div class="loader"></div>
+<div class="loader" id="load"></div>
 <!--lauch modal-->
 {{>currencyModal}}
-<header>
+<header id="contents">
     <!--navbar start-->
     <!--landing page header-->
     <div class="jumbotron-fluid index-jumbotron shadow-lg">

@@ -236,7 +236,7 @@ module.exports = function(app){
                             item: item.id,
                             hidden: itemID,
                             name: item.name,
-                            price: item.price,
+                            price: item.getDisplayPrice(),
                             colour: req.body.color_option,
                             size: req.body.size_option,
                             qty: 1,
@@ -274,7 +274,7 @@ module.exports = function(app){
                         return{
                             item: item.id,
                             name: item.name,
-                            price: item.price,
+                            price: item.getDisplayPrice(),
                             delete: "X"
                         }
                     })

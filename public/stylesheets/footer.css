@@ -3,18 +3,18 @@
 ====================== */
 
 /* Main Footer */
-footer .main-footer{	padding: 20px 0;	background: #ffffff; border-color: #efefef;}
+footer .main-footer{	padding: 20px 0;	background: #000000; border-color: #efefef;}
 footer ul{	padding-left: 0;	list-style: none;}
 footer {color: black !important;}
 /* Copy Right Footer */
-.footer-copyright {	background: lightgray;	padding: 5px 0; font-family: cursive;}
+.footer-copyright {	background: white;	padding: 5px 0; font-family: cursive;}
 .footer-copyright .logo {    display: inherit;}
 .footer-copyright nav {    float: right;    margin-top: 5px;}
 .footer-copyright nav ul {	list-style: none;	margin: 0;	padding: 0;}
 .footer-copyright nav ul li {	border-left: 1px solid #505050;	display: inline-block;	line-height: 12px;	margin: 0;	padding: 0 8px;}
 .footer-copyright nav ul li a{	color: #969696;}
 .footer-copyright nav ul li:first-child {	border: medium none;	padding-left: 0;}
-.footer-copyright p {	color: #6e6e6e;	margin: 2px 0 0;}
+.footer-copyright p {	color: #6e6e6e;	margin: 2px 0 0; font-style: normal;}
 
 /* Footer Top */
 .footer-top{	background: #252525;	padding-bottom: 30px;	margin-bottom: 30px;	border-bottom: 3px solid #222;}
@@ -59,7 +59,7 @@ footer.light .footer-copyright{	background: none repeat scroll 0 0 rgba(255, 255
 .typo-light p,
 .typo-light div,
 .typo-light span,
-.typo-light small{	color: black;font-family: cursive;}
+.typo-light small{	color: rgb(250, 250, 250);font-family: cursive;}
 
 ul.social-footer2 {	margin: 0;padding: 0;	width: auto;}
 ul.social-footer2 li {display: inline-block;padding: 0;}

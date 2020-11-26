@@ -26,15 +26,15 @@ var handlebars = require('express-handlebars')
 .create({defaultLayout: 'main',
 helpers: {
   section: function(name, options){
-  if(!this._sections) this._sections = {};
-  this._sections[name] = options.fn(this);
-  return null;
-  }},
-  multiply: function(x,y){
-    return y * x;
-  }
+    if(!this._sections) this._sections = {};
+    this._sections[name] = options.fn(this);
+    return null;
+  }}
+  // static: function(name) {
+  //   return require('./lib/static.js').map(name);
+  // }
 });
-// Set upp mongo
+// Set up mongo
 //link in mongo
 var opts = {
   useNewUrlParser: true,
@@ -97,6 +97,7 @@ app.use(function(req, res, next){
 require('./routes/form-handlerAdmin')(app);
 require('./routes/interface-admin')(app);
 //  User interface routes
+
 require('./routes/form-handlerUI')(app);
 require('./routes/interface')(app);
 require('./routes/categories')(app)

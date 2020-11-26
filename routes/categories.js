@@ -2,7 +2,7 @@ var express = require('express');
 var product = require('../public/models/product');
 module.exports = function(app){
     // male route
-    app.get('/categories', function(req,res,next){
+    app. get('/categories', function(req,res,next){
         var content = {
             layout: 'categories', 
         };
@@ -17,17 +17,17 @@ module.exports = function(app){
                     ||item.subcategories.includes('Hoodies')
                     ||item.subcategories.includes('Jackets')
                     ||item.subcategories.includes('Sweatshirts')){
-                        console.log(item.path[0]);
                         return {
                             id: item.id,
                             name:item.name,
                             sku: item.sku,
                             description:item.description,
                             discount: item.discount || 'Zero',
-                            price: item.price,
+                            price: item.getDisplayPrice(),
                             color: item.color,
-                            image: item.path[0],
+                            image: item.path[1],
                             tags: products.tags,
+                            currency: req.session.currency
                         }
                     }
                 }),
@@ -48,10 +48,11 @@ module.exports = function(app){
                             sku: item.sku,
                             description:item.description,
                             discount: item.discount || 'Zero',
-                            price: item.price,
+                            price: item.getDisplayPrice(),
                             color: item.color,
                             image: item.path[0],
                             tags: item.tags,
+                            currency: req.session.currency
                         }
                     }
                 }),
@@ -73,10 +74,11 @@ module.exports = function(app){
                             sku: item.sku,
                             description:item.description,
                             discount: item.discount || 'Zero',
-                            price: item.price,
+                            price: item.getDisplayPrice(),
                             color: item.color,
                             image: item.path[0],
                             tags: item.tags,
+                            currency: req.session.currency
                         }
                     }
                 }),
@@ -98,10 +100,11 @@ module.exports = function(app){
                             sku: item.sku,
                             description: item.description,
                             discount: item.discount || 'Zero',
-                            price: item.price,
+                            price: item.getDisplayPrice(),
                             color: item.color,
                             image: item.path[0],
                             tags: item.tags,
+                            currency: req.session.currency
                         };
                     }
                 }),
@@ -135,10 +138,11 @@ module.exports = function(app){
                             sku: item.sku,
                             description:item.description,
                             discount: item.discount || 'Zero',
-                            price: item.price,
+                            price: item.getDisplayPrice(),
                             color: item.color,
                             image: item.path[0],
                             tags: products.tags,
+                            currency: req.session.currency
                         }
                     }
                 }),
@@ -152,7 +156,6 @@ module.exports = function(app){
         product.find( {category: 'female'},function(err,products){
             var content = {
                 shorts: products.map(function(item){
-                    console.log(item.subcategories)
                     if(item.subcategories.includes('Shorts')||
                     item.subcategories.includes('Skirts')){
                         return {
@@ -161,10 +164,11 @@ module.exports = function(app){
                             sku: item.sku,
                             description:item.description,
                             discount: item.discount || 'Zero',
-                            price: item.price,
+                            price: item.getDisplayPrice(),
                             color: item.color,
                             image: item.path[0],
                             tags: item.tags,
+                            currency: req.session.currency
                         }
                     }
                 }),
@@ -186,10 +190,11 @@ module.exports = function(app){
                             sku: item.sku,
                             description: item.description,
                             discount: item.discount || 'Zero',
-                            price: item.price,
+                            price: item.getDisplayPrice(),
                             color: item.color,
                             image: item.path[0],
                             tags: item.tags,
+                            currency: req.session.currency
                         };
                     }
                 }),
@@ -212,10 +217,11 @@ module.exports = function(app){
                             sku: item.sku,
                             description:item.description,
                             discount: item.discount || 'Zero',
-                            price: item.price,
+                            price: item.getDisplayPrice(),
                             color: item.color,
                             image: item.path[0],
                             tags: item.tags,
+                            currency: req.session.currency
                         }
                     }
                 }),
@@ -238,10 +244,11 @@ module.exports = function(app){
                             sku: item.sku,
                             description: item.description,
                             discount: item.discount || 'Zero',
-                            price: item.price,
+                            price: item.getDisplayPrice(),
                             color: item.color,
                             image: item.path[0],
                             tags: item.tags,
+                            currency: req.session.currency
                         };
                     }
                 }),
@@ -275,10 +282,11 @@ module.exports = function(app){
                             sku: item.sku,
                             description:item.description,
                             discount: item.discount || 'Zero',
-                            price: item.price,
+                            price: item.getDisplayPrice(),
                             color: item.color,
                             image: item.path[0],
                             tags: products.tags,
+                            currency: req.session.currency
                         }
                     }
                 }),
@@ -292,7 +300,6 @@ module.exports = function(app){
         product.find( {category: 'children'},function(err,products){
             var content = {
                 shorts: products.map(function(item){
-                    console.log(item.subcategories)
                     if(item.subcategories.includes('Shorts')||
                     item.subcategories.includes('Skirts')){
                         return {
@@ -301,10 +308,11 @@ module.exports = function(app){
                             sku: item.sku,
                             description:item.description,
                             discount: item.discount || 'Zero',
-                            price: item.price,
+                            price: item.getDisplayPrice(),
                             color: item.color,
                             image: item.path[0],
                             tags: item.tags,
+                            currency: req.session.currency
                         }
                     }
                 }),
@@ -326,10 +334,11 @@ module.exports = function(app){
                             sku: item.sku,
                             description:item.description,
                             discount: item.discount || 'Zero',
-                            price: item.price,
+                            price: item.getDisplayPrice(),
                             color: item.color,
                             image: item.path[0],
                             tags: item.tags,
+                            currency: req.session.currency
                         }
                     }
                 }),
@@ -351,10 +360,11 @@ module.exports = function(app){
                             sku: item.sku,
                             description: item.description,
                             discount: item.discount || 'Zero',
-                            price: item.price,
+                            price: item.getDisplayPrice(),
                             color: item.color,
                             image: item.path[0],
                             tags: item.tags,
+                            currency: req.session.currency
                         };
                     }
                 }),
@@ -375,10 +385,11 @@ module.exports = function(app){
                             sku: item.sku,
                             description: item.description,
                             discount: item.discount || 'Zero',
-                            price: item.price,
+                            price: item.getDisplayPrice(),
                             color: item.color,
                             image: item.path[0],
                             tags: item.tags,
+                            currency: req.session.currency
                         };
                     }
                 }),
@@ -409,10 +420,11 @@ module.exports = function(app){
                             sku: item.sku,
                             description:item.description,
                             discount: item.discount || 'Zero',
-                            price: item.price,
+                            price: item.getDisplayPrice(),
                             color: item.color,
                             image: item.path[0],
                             tags: products.tags,
+                            currency: req.session.currency
                         }
                     }
                 }),
@@ -433,10 +445,11 @@ module.exports = function(app){
                         sku: item.sku,
                         description:item.description,
                         discount: item.discount || 'Zero',
-                        price: item.price,
+                        price: item.getDisplayPrice(),
                         color: item.color,
                         image: item.path[0],
                         tags: products.tags,
+                        currency: req.session.currency
                     }
                 }
             }),
@@ -457,10 +470,11 @@ module.exports = function(app){
                             sku: item.sku,
                             description:item.description,
                             discount: item.discount || 'Zero',
-                            price: item.price,
+                            price: item.getDisplayPrice(),
                             color: item.color,
                             image: item.path[0],
                             tags: products.tags,
+                            currency: req.session.currency
                         }
                     }
                 }),
@@ -491,10 +505,11 @@ module.exports = function(app){
                             sku: item.sku,
                             description:item.description,
                             discount: item.discount || 'Zero',
-                            price: item.price,
+                            price: item.getDisplayPrice(),
                             color: item.color,
                             image: item.path[0],
                             tags: products.tags,
+                            currency: req.session.currency
                         }
                     }
                 }),
@@ -515,10 +530,11 @@ module.exports = function(app){
                         sku: item.sku,
                         description:item.description,
                         discount: item.discount || 'Zero',
-                        price: item.price,
+                        price: item.getDisplayPrice(),
                         color: item.color,
                         image: item.path[0],
                         tags: products.tags,
+                        currency: req.session.currency
                     }
                 }
             }),
@@ -539,10 +555,11 @@ module.exports = function(app){
                             sku: item.sku,
                             description:item.description,
                             discount: item.discount || 'Zero',
-                            price: item.price,
+                            price: item.getDisplayPrice(),
                             color: item.color,
                             image: item.path[0],
                             tags: products.tags,
+                            currency: req.session.currency
                         }
                     }
                 }),
@@ -573,10 +590,11 @@ module.exports = function(app){
                             sku: item.sku,
                             description:item.description,
                             discount: item.discount || 'Zero',
-                            price: item.price,
+                            price: item.getDisplayPrice(),
                             color: item.color,
                             image: item.path[0],
                             tags: products.tags,
+                            currency: req.session.currency
                         }
                     }
                 }),
@@ -597,10 +615,11 @@ module.exports = function(app){
                         sku: item.sku,
                         description:item.description,
                         discount: item.discount || 'Zero',
-                        price: item.price,
+                        price: item.getDisplayPrice(),
                         color: item.color,
                         image: item.path[0],
                         tags: products.tags,
+                        currency: req.session.currency
                     }
                 }
             }),
@@ -621,10 +640,11 @@ module.exports = function(app){
                             sku: item.sku,
                             description:item.description,
                             discount: item.discount || 'Zero',
-                            price: item.price,
+                            price: item.getDisplayPrice(),
                             color: item.color,
                             image: item.path[0],
                             tags: products.tags,
+                            currency: req.session.currency
                         }
                     }
                 }),

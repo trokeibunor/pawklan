@@ -2,17 +2,16 @@
     
     <div class="row">
         {{#each tops}}
-        <div class="col-xs-6 col-sm-6 col-md-4">
-            
+        <div class="col-xs-6 col-sm-6 col-md-3 mx-auto">
             <div id="genericCard">  
                 <div class="featuredImageHolder">
-                    <a href="/viewProduct?id={{id}}"><img src="/images/IMG_4811.JPG" id="featuredImage"></a>
+                    <a href="/viewProduct?id={{id}}"><img src="/{{image}}" id="featuredImage"></a>
                     <span class="badge badge-sm badge-secondary" id="discount">
                         {{discount}}% off
                     </span>
                 </div>
                 <p class="product-text">{{name}}</p>
-                <p class="price-text">{{price}}.OO USD</p>    
+                <p class="price-text">{{price}} {{currency}}</p>    
             </div>
         </div>
         {{/each}}

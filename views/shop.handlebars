@@ -140,7 +140,7 @@
                                 <a href="/viewProduct?id={{id}}" class="bottom-left">
                                     <p class="product-text">
                                         {{name}}  </p>
-                                    <p class="price-text">{{price}} USD</p>
+                                    <p class="price-text">{{price}} {{currency}}</p>
                                     
                                 </a>
                                 <p class="top-left">
@@ -221,7 +221,7 @@
                                     <a href="/viewProduct?id={{id}}">
                                         <span class="badge badge-secondary" id="discount">{{discount}}% off</span>
                                         <p class="product-text">{{name}}</p>
-                                        <p class="price-text">{{price}} USD</p>
+                                        <p class="price-text">{{price}} {{currency}}</p>
                                     </a>
                                 </div>
                             </li>
@@ -232,14 +232,13 @@
                 <p class="column-desc">Ladies Wears</p>
                 <ul class="list-unstyled">
                     {{#each female}}
-                       
                             <li class="media">
                                 <img src="{{image}}">
                                 <div class="media-body">
                                     <a href="/viewProduct?id={{id}}">
                                         <span class="badge badge-secondary" id="discount">{{discount}}% off</span>
                                         <p class="product-text">{{name}}</p>
-                                        <p class="price-text">{{price}} USD</p>
+                                        <p class="price-text">{{price}} {{currency}}</p>
                                     </a>
                                 </div>
                             </li>

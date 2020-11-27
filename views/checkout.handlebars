@@ -1,3 +1,23 @@
+{{#section 'head'}}
+    <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- Ensures optimal rendering on mobile devices. -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" /> <!-- Optimal Internet Explorer compatibility -->
+  <script>
+        document.onreadystatechange = function () {
+            var state = document.readyState
+            if (state == 'interactive') {
+                document.getElementById('contents').style.visibility="visible";
+            } else if (state == 'complete') {
+                setTimeout(function(){
+                    document.getElementById('interactive');
+                    document.getElementById('load').style.visibility="hidden";
+                    document.getElementById('contents').style.visibility="visible";
+                },1000);
+            }
+            }
+    </script>
+{{/section}}
+{{!-- Use nice loader Image --}}
+<div class="loader" id="load"></div>
 <nav class="navbar navbar-expand-lg navbar-light">
     <span><img src="/images/logoimagepawklan-removebg-preview.png" id="navlogo" alt=""></span>
     <a class="navbar-brand" href="#">PawKlan</a>
@@ -47,69 +67,59 @@
 <section>
     <div class="container">
         <div class="row" id="checkRow">
-            <div class="col-sm-10 col-md-10 mx-auto topCheck">
-                    <table class="table checkout-table">
-                        <thead>
-                            <tr>
-                                <th>Products</th>
-                                <th>Quantity</th>
-                                <th>Colour</th>
-                                <th>Size</th>
-                            </tr>
-                        </thead>
+            <div class="col-sm-8 col-md-6 mx-auto topCheck">
+                <div class="card bg-light">
+                    <h3><i class="fab fa-opencart"></i>Cart Summary</h3>
+                    <hr>
+                    <ul class="list-unstyled">
                         {{#each this}}
-                        <tbody>
-                            {{#each items}}   
-                                <tr>
-                                    <td><a href="/viewProduct?id={{item}}">{{name}}</a></td>
-                                    <td>{{qty}}</td>
-                                    <td>{{colour}}</td>
-                                    <td>{{size}}</td>
-                                </tr>
-                            {{/each}} 
-                        </tbody>
+                        {{#each items}}
+                        <li class="list-item">
+                            <div class="row">
+                                <div class="col-8">
+                                    <div id="holder">
+                                        <h5>{{qty}}&times;{{name}}</h5>
+                                        <p class="small">{{slug}}</p>
+                                        <p class="small">{{colour}}</p>
+                                        <p class="small">{{size}}</p>
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-4">
+                                    <h5>{{price}} <img src="{{picture}}" alt=""></h5>
+                                </div>
+                            </div>
+                            <hr>
+                        </li>
                         {{/each}}
-                    </table>
-                    <h5 id="totPur">Total Purchase : <span>{{#each this}}
-                                            {{total}}
-                                        {{/each}}{{currency}}</span></h5>
-                    <a href="/cart" class="btn btn-sm btn-dark">Go To Cart</a>
-            </div>
-            <div class="col-sm-12 col-md-6 mx-auto">
-                <form action="#" method="post" id="shippingForm">
-                    <h3>Complete Purchase</h3>
-                    <hr>
-                    <h4>Personal Details</h4>
+                        {{/each}}
+                    </ul>
+                    <h5 class="text-right">sub-total:{{#each this}} {{total}} {{/each}} {{currency}}</h5>
+                </div>
+            </div> 
+            <div class="col-sm-10 col-md-6 mx-auto bottomCheck">
+                <h3>Billing Details</h3>
+                <a href="/login" class="btn btn-block btn-lg btn-secondary">
+                <img src="/images/logoimgdark-removebg-preview (1).png" class="img-responsive" alt=""> Login</a>
+                <h2 class="text-center">Or</h2>
+                <form action="#" method="post" class="bg-light">
                     <div class="form-group">
-                        <label for="email">Email:</label>
-                        <input type="email" name="checkEmail" id="email" class="form-control" value="{{email}}">
+                        <label for="email">Email</label>
+                        <input type="email" name="cartEmail" class="form-control" id="email" value="{{email}}">
                     </div>
                     <div class="form-group">
-                        <label for="name">Full Name:</label>
-                        <input type="text" name="checkName" id="name" class="form-control" value="{{username}}">
+                        <label for="name">Name</label>
+                        <input type="text" name="cartName" class="form-control" id="name" value="{{username}}">
                     </div>
-                    <h4>Shipping Details</h4>
-                    <hr>
-                    <div class="form-group">
-                        <label for="country">Country:</label>
-                        <input type="text" name="checkCountry" id="country" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="state">State:</label>
-                        <input type="text" name="checkState" id="state" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="city">City:</label>
-                        <input type="text" name="checkCity" id="city" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="zipCode">Zip Code:</label>
-                        <input type="text" name="checkZip" id="zipCode" class="form-control">
-                    </div>
-                    <input type="submit" value="Make Payment" class="btn btn-small btn-outline-info text-center">
+                    <div id="paypal-button-container"></div>
                 </form>
             </div>
         </div>
     </div>
 </section>
+<script src="https://www.paypal.com/sdk/js?client-id=AQYV819n-ccOeVDLNqFUAIBCq6tJYSQGZbt7c02N-f3z4GljAsm-Z1HIX02gZWw7N6xs6ys0YQRZa9og"></script>
+<script>
+paypal.Buttons().render('#paypal-button-container');
+// This function displays Smart Payment Buttons on your web page.
+</script>
 {{>footer}}

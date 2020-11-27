@@ -210,7 +210,7 @@ module.exports = function(app){
     app.post('/getCurrency',upload.none(),(req,res)=>{
         // req.body.countryCode = req.session.currency;
         var countryCode = req.body.countryCode;
-        req.session.currency= countryCode;
+        req.session.currency = countryCode;
         console.log(req.session.currency);
         res.redirect('/')
       })
@@ -218,6 +218,7 @@ module.exports = function(app){
     app.post('/cart',(req,res)=>{
         req.session.cart = req.session.cart || {};
         var cart = req.session.cart;
+        var currency = req.session.currency || 'USD';
         var itemID = "."+req.query.id+req.body.color_option+ 
                         req.body.size_option+".";
         products.find({_id: req.query.id},(err,product)=>{
@@ -225,8 +226,6 @@ module.exports = function(app){
                 console.log(err)
             }
             if(cart[itemID]){
-                    console.log('from top');
-                    console.log(itemID)
                     cart[itemID].qty++;
             }else{
                 var required  = {
@@ -236,15 +235,18 @@ module.exports = function(app){
                             item: item.id,
                             hidden: itemID,
                             name: item.name,
+                            slug: item.slug,
                             price: item.getDisplayPrice(),
                             colour: req.body.color_option,
                             size: req.body.size_option,
                             qty: 1,
+                            currency: currency,
                             delete: "X"
                         }
                     })
                     
                 }
+                console.log(required.product[0])
                 cart[itemID] = required.product[0]; 
             }
             res.redirect('/cart'); 
@@ -261,6 +263,7 @@ module.exports = function(app){
     // Add Product to wishlist
     app.post('/wishlist',(req,res)=>{
         req.session.wishlist = req.session.wishlist || {};
+        var currency = req.session.currency || 'USD';
         var wishlist = req.session.wishlist;
         products.find({_id: req.query.id},(err,product)=>{
             if(err){
@@ -272,17 +275,20 @@ module.exports = function(app){
                 var required  = {
                     product: product.map(function(item){
                         return{
+                            picture: item.path[0],
+                            slug: item.slug,
                             item: item.id,
                             name: item.name,
                             price: item.getDisplayPrice(),
+                            currency : currency,
                             delete: "X"
                         }
                     })
                 }
                 wishlist[req.query.id] = required.product[0];
-                console.log(wishlist); 
+                
             }
-            res.redirect('/wishlist'); 
+            res.redirect(303,'/wishlist'); 
         })
 
     })

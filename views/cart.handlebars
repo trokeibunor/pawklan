@@ -1,108 +1,140 @@
+{{#section 'head'}}
+    <link rel="stylesheet" href="/stylesheets/cart.css">
+{{/section}}
 <nav class="navbar navbar-expand-lg navbar-light">
     <span><img src="/images/logoimagepawklan-removebg-preview.png" id="navlogo" alt=""></span>
-    <a class="navbar-brand" href="#">PawKlan</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-        <li class="nav-item ">
-            <a class="nav-link" href="/">Home</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/shop">Shop</a>
-        </li>
-        <li class="nav-item">
-            <a href="/categories" class="nav-link">Categories</a>
-        </li>
-        <li class="nav-item">
-            <a href="/gallery" class="nav-link">Gallery</a>
-        </li>
-        <li class="nav-item">
-            <a href="/about" class="nav-link">Our brand</a>
-        </li>
-        <li class="nav-item active">
-            <a href="/cart" class="nav-link">Cart <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-            <a href="/wishlist" class="nav-link">WishList</a>
-        </li>
-        </ul>
-        <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" name="searchForm" type="search" placeholder="Search" aria-label="Search">
-                {{#if user}}
-                <a href="/logout" class="btn ml-2 my-2 my-sm-0 footer-btn" id="loginbtn">
-                    Log Out
-                    <span class="fas fa-sign-out-alt" style="color: white;" ></span>
-                </a>
-                {{else}}
-                <a href="/login" class="btn ml-2 my-2 my-sm-0 footer-btn" id="loginbtn">
-                    Login
-                    <span class="fas fa-sign-in-alt" style="color: white;"></span>
-                </a>
-            {{/if}}
-            </form>
-    </div>
+<a class="navbar-brand" href="#">PawKlan</a>
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+    <li class="nav-item ">
+        <a class="nav-link" href="/">Home</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/shop">Shop</a>
+    </li>
+    <li class="nav-item">
+        <a href="/categories" class="nav-link">Categories</a>
+    </li>
+    <li class="nav-item">
+        <a href="/gallery" class="nav-link">Gallery</a>
+    </li>
+    <li class="nav-item">
+        <a href="/about" class="nav-link">Our brand</a>
+    </li>
+    <li class="nav-item active">
+        <a href="/cart" class="nav-link">Cart <span class="sr-only">(current)</span></a>
+    </li>
+    <li class="nav-item">
+        <a href="/wishlist" class="nav-link">WishList</a>
+    </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" name="searchForm" type="search" placeholder="Search" aria-label="Search">
+        {{#if user}}
+            <a href="/logout" class="btn ml-2 my-2 my-sm-0 footer-btn" id="loginbtn">
+                Log Out
+                <span class="fas fa-sign-out-alt" style="color: white;" ></span>
+            </a>
+            {{else}}
+            <a href="/login" class="btn ml-2 my-2 my-sm-0 footer-btn" id="loginbtn">
+                Login
+                <span class="fas fa-sign-in-alt" style="color: white;"></span>
+            </a>
+        {{/if}}
+    </form>
+</div>
 </nav>
-{{!-- Start cart --}}
-<div class="col-sm-10 col-md-8 col-lg-4 mx-auto">
-    <div class="card shadow cart-card">
-        <div class="card-body">
-                <div class="row">
-                    <h2>Cart</h2>
-                </div>
-                {{#if cart}}
-                    <table class="table table-responsive">
-                        <thead class="shadow">
-                            <tr>
-                                <th>Item</th>
-                                <th>Quantity</th>
-                                <th>Unit Price</th>
-                                <th>Colour</th>
-                                <th>Size</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        
-                        {{#each this}}
-                        <tbody>
-                            {{#each items}}   
-                                <tr>
-                                    <td><a href="/viewProduct?id={{item}}">{{name}}</a></td>
-                                    <td>{{qty}}</td>
-                                    <td>{{price}}</td>
-                                    <td>{{colour}}</td>
-                                    <td>{{size}}</td>
-                                    <td id="delete">
-                                        <a href="/removeItem?id={{hidden}}" class="text-center">{{delete}}</a>
-                                    </td>
-                                </tr>
-                            {{/each}} 
-                        </tbody>
-                        {{/each}}
-                        
-                    </table>
-                    <div class="row">
-                            <div class="col-sm-6 col-md-6">
-                                <h4 id="total">Total: <strong>$
-                                    {{#each this}}
-                                    {{total}}
-                                    {{/each}}
-                                    </strong> 
-                                </h4>
-                            </div>
-                            <div class="col-sm-6 col-md-6"></div>
-                    </div>
-                    <div class="row" id="empty">
-                        <div class="col-sm-12">
-                            <a href="/emptyCart">Empty</a>
-                        </div>
-                    </div>
-                    <a href="/checkout" class="btn btn-block btn-sm btn-dark">Proceed to checkout</a>
-                {{/if}}
+<div class="wrap">
+  <header class="cart-header cf">
+    <strong>Shopping Cart</strong>
+  </header>
+  <div class="bonus-products">
+    <strong>Please confirm Product Quantity </strong>
+  </div>
+  <div class="cart-table">
+    <ul>
+<!-- begin variation product w/ option -->
+    {{#each this}}
+    {{#each items}}
+    <li class="item">
+    <div class="item-main cf">
+        <div class="item-block ib-info cf">
+        <img class="product-img" src="{{picture}}" />
+        <div class="ib-info-meta">
+            <span class="title">{{name}}</span>
+            <span class="itemno">{{slug}}</span>
+            <span class="itemno">#{{item}}</span>
+            <span class="styles">
+            <span><strong>Color</strong>: {{colour}}</span>
+            <span><strong>Size</strong>: {{size}}</span>
+            <a href="/viewProduct?id={{item}}" class="blue-link">Edit Details</a>
+            </span>
         </div>
+        </div>
+        <div class="item-block ib-qty">
+        <input type="text" value="{{qty}}" class="qty" disabled />
+        {{!-- <span class="price"><span>x</span> $25.00</span> --}}
+        </div>
+        <div class="item-block ib-total-price">
+        <span class="tp-price">{{price}} <span class="small">{{currency}}</span></span>
+        <span class="tp-remove"><i class="i-cancel-circle"></i></span>
+        </div>         
     </div>
+    <div class="item-foot cf">
+        <div class="if-message"><p> Item/promo related messaging shows up here</p></div>
+        <div class="if-left"><span class="if-status">In Stock</span></div>
+        <div class="if-right"><span class="blue-link"><a href="/removeItem?id={{hidden}}" class="blue-link">Remove From Cart</a></div>
+    </div>
+    </li>
+    {{/each}}
+    {{/each}}
+<!-- end variation product w/ option -->
+<!-- end bundle product -->
+    </ul>
+  </div>
+  <div class="sub-table cf">
+    <div class="summary-block">
+      <div class="sb-promo">
+        <input type="text" placeholder="Enter Promo Code" />
+        <span class="btn">APPLY</span>
+      </div>        
+      <ul>
+        <li class="subtotal"><span class="sb-label">Subtotal</span><span class="sb-value">{{#each this}}{{total}}{{/each}} <span class="small">{{currency}}</span> </span></li>
+        <li class="shipping"><span class="sb-label">Shipping</span><span class="sb-value">n/a</span></li>
+        <li class="grand-total"><span class="sb-label">Total</span><span class="sb-value">{{#each this}}{{total}}{{/each}} <span class="small">{{currency}}</span></span></li>
+      </ul>
+    </div>
+    <div class="copy-block">    
+      <p>Items will be saved in your cart for a day. To save items longer, add them to your <a href="/wishlist">Wish List</a>.</p>
+      <p class="customer-care">
+        Call us M-F 8:00 am to 6:00 pm EST<br />
+        (877)-555-5555 or <a href="/about#contact">contact us</a>. <br />     
+      </p>
+    </div>    
+  </div>
+  
+  <div class="cart-footer cf">
+      <a href="/checkout" class="btn">CHECK OUT</a>
+      <a href="/shop" class="cont-shopping"><i class="i-angle-left"></i>Continue Shopping</a>    
+  </div>
 </div>
-<div class="mt-5">
-    {{>footer}}
-</div>
+{{>footer}}
+{{#section 'javascripts'}}
+    <script>
+        $( ".tax-edit" ).click(function() {
+    $(this).toggleClass('te-open').parent;
+    $('.tax-calculate').slideToggle(200);
+    });
+
+    $( ".if-left" ).click(function() {
+    $(this).prev('.if-message').slideToggle(200);
+    });
+
+    $( ".bp-toggle" ).click(function() {
+    $('.bonus-products').slideToggle(200);
+    });
+    </script>
+{{/section}}

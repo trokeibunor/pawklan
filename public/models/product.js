@@ -23,8 +23,8 @@ var productsSchema = mongoose.Schema({
     comments: [String]
 })
 // write function for get display price
-productsSchema.methods.getDisplayPrice = function(x){
-    return ((this.price * x) / 1.00).toFixed(2);
+productsSchema.methods.getDisplayPrice = function(){
+    return ((this.price) / 1.00).toFixed(2);
 };
 var products = mongoose.model('products', productsSchema);
 // write functions for stock left

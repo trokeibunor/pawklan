@@ -40,17 +40,17 @@ app.get('/',function(req, res, next) {
 });
 // Shop Page
 app.get('/shop', function(req,res,next){
-  var currency = req.session.currency;
-  oxr.latest(function(err) {
-    // Apply exchange rates and base rate to `fx` library object:
-    fx.rates = oxr.rates;
-    fx.base = oxr.base;
-    if(err){
-      console.log(err)
-    }
-    // money.js is ready to use:
-    console.log(Math.ceil(fx(1).from('USD').to(currency)));
-  });
+  // var currency = req.session.currency;
+  // oxr.latest(function(err) {
+  //   // Apply exchange rates and base rate to `fx` library object:
+  //   fx.rates = oxr.rates;
+  //   fx.base = oxr.base;
+  //   if(err){
+  //     console.log(err)
+  //   }
+  //   // money.js is ready to use:
+  //   console.log(Math.ceil(fx(1).from('USD').to(currency)));
+  // });
   var local = {};
   async.parallel([
     function(callback){
@@ -66,6 +66,7 @@ app.get('/shop', function(req,res,next){
               color: item.color,
               image: item.path[0],
               tags: products.tags,
+              currency: req.session.currency || 'USD'
           }
         });
         callback()
@@ -86,6 +87,7 @@ app.get('/shop', function(req,res,next){
             color: item.color,
             image: item.path[0],
             tags: products.tags,
+            currency: req.session.currency || 'USD'
         }
         });
         callback()
@@ -106,6 +108,7 @@ app.get('/shop', function(req,res,next){
             color: item.color,
             image: item.path[0],
             tags: products.tags,
+            currency: req.session.currency || 'USD'
         }
         });
         callback()
@@ -137,6 +140,12 @@ app.get('/gallery',(req,res,next)=>{
 app.get('/login',(req,res,next)=>{
   res.render('login')
 });
+app.get('/terms',(req,res,next)=>{
+  res.render('terms')
+});
+app.get('/thanks',(req,res,next)=>{
+  res.render('thanks')
+});
 app.get('/checkout',(req,res,next)=>{
   // get cart from sessions
   var cart = req.session.cart;
@@ -155,10 +164,10 @@ app.get('/checkout',(req,res,next)=>{
 app.get('/signup',(req,res,next)=>{
   res.render('signup')
 });
-app.get('/cart',ensureUserAuthenticated,(req,res,next)=>{
+app.get('/cart',(req,res,next)=>{
   // get cart from sessions
   var cart = req.session.cart;
-  var displayCart = {items:[],total:0};
+  var displayCart = {items:[],total:0,currency: req.session.currency || 'USD'};
   var total = 0;
   // Get total
   for(var item in cart){
@@ -177,10 +186,9 @@ app.get('/emptyCart',(req,res)=>{
 })
 
 // Wishlist
-app.get('/wishlist',ensureUserAuthenticated,(req,res,next)=>{
+app.get('/wishlist',(req,res,next)=>{
   var wishlist = req.session.wishlist;
   var displayWishlist = {items:[]};
-  console.log(wishlist);
   // Get total
   for(var item in wishlist){
     displayWishlist.items.push(wishlist[item]);
@@ -205,7 +213,7 @@ app.get('/viewProduct',(req,res,next)=>{
           id: req.query.id,
           name: product.name,
           slug: product.slug,
-          description: product.description,
+          description: product.description ,
           price: product.getDisplayPrice(),
           color: product.color,
           path: product.path,

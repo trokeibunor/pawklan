@@ -19,6 +19,7 @@
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">  
 {{/section}}
+{{>currencyModal}}
 <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-lg shop-nav">
     <span><img src="/images/logoimagepawklan-removebg-preview.png" id="navlogo" alt=""></span>
     <a class="navbar-brand" href="#">PawKlan</a>
@@ -28,49 +29,69 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-            <a class="nav-link" href="/">Home</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/shop">Shop</a>
-        </li>
-        <li class="nav-item">
-            <a href="/categories" class="nav-link">Categories</a>
-        </li>
-        <li class="nav-item">
-            <a href="/gallery" class="nav-link">Gallery</a>
-        </li>
-        <li class="nav-item">
-            <a href="/about" class="nav-link">Our brand</a>
-        </li>
-        <li class="nav-item">
-            <a href="/cart" class="nav-link">Cart</a>
-        </li>
-        <li class="nav-item">
-            <a href="/wishlist" class="nav-link">Wishlist</a>
-        </li>
-        </ul>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Home<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/shop">Shop</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/categories" class="nav-link">Categories</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/gallery" class="nav-link">Gallery</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/about" class="nav-link">Our brand</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/cart" class="nav-link">Cart</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/wishlist" class="nav-link">WishList</a>
+                </li>
+                <li class="nav-item" id="currencyLink">
+                    <a class="nav-link">{{currency}}</a>
+                </li>
+            </ul>
         <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" name="searchForm" type="search" placeholder="Search" aria-label="Search">
+                <div class="dropdown">
+                    <input class="form-control mr-sm-2 dropdown-toggle" name="searchForm" id="dropdown" onkeyup="showResults(this.value)" type="search"
+                    placeholder="Search" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" autocomplete="off"
+                    aria-label="Search" style="width: 100%;">
+                    </input>
+                    <div style="position: relative ;width:100% ;top:-1px;background-color:white;">
+                        <div class="border search-drop dropdown-menu" id="search-results" aria-labelledby="dropdown">
+                        </div>
+                    </div>
+                </div>
                 {{#if user}}
-                <a href="/logout" class="btn ml-2 my-2 my-sm-0 footer-btn" id="loginbtn">
-                    Log Out
-                    <span class="fas fa-sign-out-alt" style="color: white;" ></span>
-                </a>
-                {{else}}
-                <a href="/login" class="btn ml-2 my-2 my-sm-0 footer-btn" id="loginbtn">
-                    Login
-                    <span class="fas fa-sign-in-alt" style="color: white;"></span>
-                </a>
-            {{/if}}
-        </form>
+                    <a href="/logout" class="btn ml-2 my-2 my-sm-0 footer-btn" id="loginbtn">
+                        Log Out
+                        <span class="fas fa-sign-out-alt" style="color: white;" ></span>
+                    </a>
+                    {{else}}
+                    <a href="/login" class="btn ml-2 my-2 my-sm-0 footer-btn" id="loginbtn">
+                        Login
+                        <span class="fas fa-sign-in-alt" style="color: white;"></span>
+                    </a>
+                {{/if}}
+            </form>
     </div>
 </nav>
 <div class="content-wrapper-ui" style="min-height: 1416.81px; width:100vw;">
 <!-- Main content -->
 <section class="content-ui" style="width:100vw;">
+    
     <!-- Default box -->
     <div class="container">
+    {{#if flash}}
+        <p class="alert alert-{{flash.type}} mx-auto" style="border-radius: 10px;height: 50px;opacity: 0.7;">
+        <span style="font-weight:600;color:#000">{{flash.intro}}__{{{flash.message}}}
+            <a class="btn float-right" data-dismiss="alert" style="font-size: large;font-weight:bold"><sup>X</sup></a>
+        </span>
+        </p>
+    {{/if}}
     {{#each products}}
     <div class="card card-solid card-product">
     <div class="card-body">

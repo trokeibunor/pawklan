@@ -32,18 +32,27 @@
     </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" name="searchForm" type="search" placeholder="Search" aria-label="Search">
-        {{#if user}}
-            <a href="/logout" class="btn ml-2 my-2 my-sm-0 footer-btn" id="loginbtn">
-                Log Out
-                <span class="fas fa-sign-out-alt" style="color: white;" ></span>
-            </a>
-            {{else}}
-            <a href="/login" class="btn ml-2 my-2 my-sm-0 footer-btn" id="loginbtn">
-                Login
-                <span class="fas fa-sign-in-alt" style="color: white;"></span>
-            </a>
-        {{/if}}
+                <div class="dropdown">
+                    <input class="form-control mr-sm-2 dropdown-toggle" name="searchForm" id="dropdown" onkeyup="showResults(this.value)" type="search"
+                    placeholder="Search" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" autocomplete="off"
+                    aria-label="Search" style="width: 100%;">
+                    </input>
+                    <div style="position: relative ;width:100% ;top:-1px;background-color:white;">
+                        <div class="border search-drop dropdown-menu" id="search-results" aria-labelledby="dropdown">
+                        </div>
+                    </div>
+                </div>
+                {{#if user}}
+                    <a href="/logout" class="btn ml-2 my-2 my-sm-0 footer-btn" id="loginbtn">
+                        Log Out
+                        <span class="fas fa-sign-out-alt" style="color: white;" ></span>
+                    </a>
+                    {{else}}
+                    <a href="/login" class="btn ml-2 my-2 my-sm-0 footer-btn" id="loginbtn">
+                        Login
+                        <span class="fas fa-sign-in-alt" style="color: white;"></span>
+                    </a>
+                {{/if}}
     </form>
 </div>
 </nav>
@@ -108,7 +117,7 @@
       </ul>
     </div>
     <div class="copy-block">    
-      <p>Items will be saved in your cart for a day. To save items longer, add them to your <a href="/wishlist">Wish List</a>.</p>
+      <p>Items will be saved in your cart for a session. To save items longer, add them to your <a href="/wishlist">Wish List</a>.</p>
       <p class="customer-care">
         Call us M-F 8:00 am to 6:00 pm EST<br />
         (877)-555-5555 or <a href="/about#contact">contact us</a>. <br />     

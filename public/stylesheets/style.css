@@ -12,6 +12,27 @@ a {
 a .active{
   font-weight: 900px;
 }
+.search-drop{
+  opacity: 0.7;
+}
+#search-st{
+  font-weight: 800;
+}
+#search-cn{
+  font-size: 12px;
+  margin-left: 10px;
+  font-style: normal;
+  font-family: cursive;
+  font-weight: lighter;
+
+}
+.search-result{
+  margin-left: 5px;
+  font-size: 18px;
+  color: black;
+  text-align: left;
+  font-family: cursive;
+}
 /* -------------------- */
 /* LANDING PAGE */
 /* -------------- */
@@ -191,10 +212,10 @@ select option{
 }
 .dropdown-menu{
   width: 100% !important;
-  background-color: rgb(207, 200, 190);
+  background-color: whitesmoke;
 }
 .dropdown-item:hover{
-  background-color: rgb(184, 183, 183);
+  background-color: rgb(160, 155, 155);
 }
 .dropdown-menu a{
   font-family: Cambria, Cochin, Georgia,
@@ -202,6 +223,7 @@ select option{
   font-style: normal;
   font-size: 12px;
   font-weight: 400;
+  text-decoration: none;
   margin: 0px 0px 0px 0px;
   line-height: normal;
 }
@@ -413,35 +435,17 @@ section{
   cursor: pointer;
 
 }
-.swiper-container{
-  width: 100%;
-  height: 65vh;
-  border-radius: 10px;
+.swiper-container {
+  width: 85%;
+  height: 450px;
+  position: absolute;
+  margin-left: -50px;
+  margin-top: -50px;
 }
-@media(max-width: 850px){
-  .swiper-container{
-    width: 100%;
-    height: 55vh;
-  }
-}
+
 .swiper-slide {
-  text-align: center;
-  font-size: 18px;
-  background: #fff;
-  position: relative;
-  /* Center slide text vertically */
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  -webkit-align-items: center;
-  align-items: center;
+  background-position: center;
+  background-size: cover;
 }
 .bottom-left {
   position: absolute;
@@ -545,6 +549,11 @@ section{
 section .container-fluid{
   margin-top: 10px;
 }
+section li a{
+  text-emphasis: none;
+  text-decoration-line: none;
+  text-decoration: none;
+}
 .col-8 a{
   margin-top: 10px;
   font-family: cursive;
@@ -612,6 +621,9 @@ section .container-fluid{
 }
 .media-body #discount{
   margin-left: 5px;
+}
+.media a{
+  text-decoration: none;
 }
 #info-container{
   width: 100%;
@@ -769,7 +781,7 @@ section .container-fluid{
 }
 .topCheck .card li #holder{
   margin-top: 0px;
-  line-height: 5px;
+  line-height: 0.7rem;
 }
 .bottomCheck{
   padding: 10px;

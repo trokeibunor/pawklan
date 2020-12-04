@@ -1,14 +1,31 @@
-var express = require('express');
 const gallery = require('../public/models/gallery');
 const product =  require('../public/models/product');
 var async = require('async');
 const products = require('../public/models/product');
 var credentials  = require('../public/lib/credentials')
 // currency conversion
-var oxr = require('open-exchange-rates');
-var fx = require('money');
-oxr.set({ app_id: credentials.oxr_auth })
-
+var oxr = require('oxr')
+var service = oxr.factory({
+  appId: credentials.oxr_auth
+ });
+//  Support for caching
+// service = oxr.cache({
+// method: 'latest',
+// ttl: 7 * 24 * 1000 * 3600,
+// store: {
+//   get: function () {
+//     return Promise.resolve(this.value)
+//   },
+//   put: function (value) {
+//     this.value = value
+//     return Promise.resolve(this.value)
+//   }
+// }
+// }, service)
+//  service.latest().then(function(result){
+//   var rates = result.rates
+//   // console.log(JSON.stringify(rates))
+// })
 module.exports = function(app){
   //Get user and parse to all routes
 app.get('*',function(req,res,next){
@@ -16,14 +33,9 @@ app.get('*',function(req,res,next){
   res.locals.username = req.session.username;
   res.locals.currency = req.session.currency || 'USD';
   res.locals.email = req.session.email;
+  // res.locals.conFactor = req.session.conFactor;
   next();
 })
-// Get currency
-app.post('/getCurrency',(req,res, next)=>{
-  req.body.countryCode = req.session.currency;
-  console.log(req.body.countryCode);
-  res.redirect('/')
-});
 /* GET home page. */
 app.get('/',function(req, res, next) {
   gallery.find({available: true},function(err, photos){
@@ -40,82 +52,188 @@ app.get('/',function(req, res, next) {
 });
 // Shop Page
 app.get('/shop', function(req,res,next){
-  // var currency = req.session.currency;
-  // oxr.latest(function(err) {
-  //   // Apply exchange rates and base rate to `fx` library object:
-  //   fx.rates = oxr.rates;
-  //   fx.base = oxr.base;
-  //   if(err){
-  //     console.log(err)
-  //   }
-  //   // money.js is ready to use:
-  //   console.log(Math.ceil(fx(1).from('USD').to(currency)));
-  // });
+  var factor;
+  service = oxr.cache({
+    method: 'latest',
+    ttl: 7 * 24 * 1000 * 3600,
+    store: {
+      get: function () {
+        return Promise.resolve(this.value)
+      },
+      put: function (value) {
+        this.value = value
+        return Promise.resolve(this.value)
+      }
+    }
+    }, service)
+    
   var local = {};
-  async.parallel([
+  async.series([
+    // Function for getting featured products
     function(callback){
-      product.find({featured: true},function(err,features){
-        local.features = features.map(function(item){
-          return {
+      service.latest().then(
+        async function(result){
+        var currency = req.session.currency|| 'USD';
+        var rates = result.rates;
+        if(currency in rates){
+          factor = await rates[currency];
+          console.log(factor)
+          product.find({featured: true},function(err,features){
+            local.features = features.map(
+              function(item){
+              return {
+                  id: item.id,
+                  name:item.name,
+                  sku: item.sku,
+                  description:item.description,
+                  discount: item.discount || 'Zero',
+                  price: item.getDisplayPrice(factor),
+                  color: item.color,
+                  image: item.path[0],
+                  tags: products.tags,
+                  currency: req.session.currency || 'USD'
+              }
+            });
+            callback()
+          })
+        }else{
+          product.find({featured: true},function(err,features){
+            local.features = features.map(
+              function(item){
+              console.log(factor)
+              return {
+                  id: item.id,
+                  name:item.name,
+                  sku: item.sku,
+                  description:item.description,
+                  discount: item.discount || 'Zero',
+                  price: item.getDisplayPrice(1),
+                  color: item.color,
+                  image: item.path[0],
+                  tags: products.tags,
+                  currency: req.session.currency || 'USD'
+              }
+            });
+            callback()
+          })
+        }
+        local.rate = rates;
+      }).catch(function(err){
+        console.log(err)
+        return null
+    });
+    },
+    // new arraivals far male
+    function(callback){
+      service.latest().then(
+        async function(result){
+        var currency = req.session.currency|| 'USD';
+        var rates = result.rates;
+        if(currency in rates){
+          factor = await rates[currency];
+          console.log(factor)
+          product.find({category: "male"},function(err,newMale){
+          if(err) callback(err);
+          local.newMale = newMale.map(function(item){
+            return {
               id: item.id,
               name:item.name,
               sku: item.sku,
               description:item.description,
               discount: item.discount || 'Zero',
-              price: item.getDisplayPrice(),
+              price: item.getDisplayPrice( factor),
               color: item.color,
               image: item.path[0],
               tags: products.tags,
               currency: req.session.currency || 'USD'
-          }
-        });
-        callback()
+            }
+          });
+          callback()
+        }).sort({date:-1}).limit(3);
+        
+      }else{
+        product.find({category: "male"},function(err,newMale){
+          if(err) callback(err);
+          local.newMale = newMale.map(function(item){
+            return {
+              id: item.id,
+              name:item.name,
+              sku: item.sku,
+              description:item.description,
+              discount: item.discount || 'Zero',
+              price: item.getDisplayPrice(1),
+              color: item.color,
+              image: item.path[0],
+              tags: products.tags,
+              currency: req.session.currency || 'USD'
+            }
+          });
+          callback()
+        }).sort({date:-1}).limit(3);
+      }
+      }).catch(function(err){
+        console.log(err)
       })
-    },
-    // new arraivals far male
-    function(callback){
-      product.find({category: "male"},function(err,newMale){
-        if(err) callback(err);
-        local.newMale = newMale.map(function(item){
-          return {
-            id: item.id,
-            name:item.name,
-            sku: item.sku,
-            description:item.description,
-            discount: item.discount || 'Zero',
-            price: item.getDisplayPrice(),
-            color: item.color,
-            image: item.path[0],
-            tags: products.tags,
-            currency: req.session.currency || 'USD'
-        }
-        });
-        callback()
-      }).sort({date:-1}).limit(3);
     },
     // new arriavals for female category
     function(callback){
-      product.find({category: "female"},function(err,newFemale){
-        if(err) callback(err);
-        local.newFemale = newFemale.map(function(item){
-          return {
-            id: item.id,
-            name:item.name,
-            sku: item.sku,
-            description:item.description,
-            discount: item.discount || 'Zero',
-            price: item.getDisplayPrice(),
-            color: item.color,
-            image: item.path[0],
-            tags: products.tags,
-            currency: req.session.currency || 'USD'
-        }
-        });
-        callback()
-      }).sort({date:-1}).limit(3);
+      service.latest().then(
+        async function(result){
+        var currency = req.session.currency|| 'USD';
+        var rates = result.rates;
+        if(currency in rates){
+          factor = await rates[currency];
+          console.log(factor)
+          product.find({category: "female"},function(err,newFemale){
+          if(err) callback(err);
+          local.newFemale = newFemale.map(function(item){
+            return {
+              id: item.id,
+              name:item.name,
+              sku: item.sku,
+              description:item.description,
+              discount: item.discount || 'Zero',
+              price: item.getDisplayPrice( factor),
+              color: item.color,
+              image: item.path[0],
+              tags: products.tags,
+              currency: req.session.currency || 'USD'
+            }
+          });
+          callback()
+        }).sort({date:-1}).limit(3);
+        
+      }else{
+        product.find({category: "female"},function(err,newFemale){
+          if(err) callback(err);
+          local.newFemale = newFemale.map(function(item){
+            return {
+              id: item.id,
+              name:item.name,
+              sku: item.sku,
+              description:item.description,
+              discount: item.discount || 'Zero',
+              price: item.getDisplayPrice(1),
+              color: item.color,
+              image: item.path[0],
+              tags: products.tags,
+              currency: req.session.currency || 'USD'
+            }
+          });
+          callback()
+        }).sort({date:-1}).limit(3);
+        
+      }
+      }).catch(function(err){
+        console.log(err)
+      })
     }
   ],function(err){
-    res.render('shop',{featured: local.features, male : local.newMale, female : local.newFemale})
+    res.render('shop',{featured: local.features,
+    male : local.newMale, 
+    female : local.newFemale,
+    money: req.session.currency || 'USD',
+    })
   })
 });
 app.get('/about',(req,res,next)=>{
@@ -143,6 +261,21 @@ app.get('/login',(req,res,next)=>{
 app.get('/terms',(req,res,next)=>{
   res.render('terms')
 });
+// search
+app.get('/xhr/search',function(req,res,next){
+  // regex search
+  var q = req.query.q;
+  product.find({
+    name: {
+      $regex: new RegExp(q)
+    }
+  },{
+    __v:0
+  },function(err,data){
+    console.log(data)
+    res.json(data)
+  }).limit(5)
+})
 app.get('/thanks',(req,res,next)=>{
   res.render('thanks')
 });
@@ -186,7 +319,7 @@ app.get('/emptyCart',(req,res)=>{
 })
 
 // Wishlist
-app.get('/wishlist',(req,res,next)=>{
+app.get('/wishlist',ensureUserAuthenticated,(req,res,next)=>{
   var wishlist = req.session.wishlist;
   var displayWishlist = {items:[]};
   // Get total

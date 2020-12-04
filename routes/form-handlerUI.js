@@ -208,14 +208,13 @@ module.exports = function(app){
     });
     // Get Currency
     app.post('/getCurrency',upload.none(),(req,res)=>{
-        // req.body.countryCode = req.session.currency;
         var countryCode = req.body.countryCode;
         req.session.currency = countryCode;
         console.log(req.session.currency);
-        res.redirect('/')
+        res.redirect('back')
       })
     // Add product to cart
-    app.post('/cart',(req,res)=>{
+    app.post('/cart',(req,res,next)=>{
         req.session.cart = req.session.cart || {};
         var cart = req.session.cart;
         var currency = req.session.currency || 'USD';
@@ -244,12 +243,16 @@ module.exports = function(app){
                             delete: "X"
                         }
                     })
-                    
                 }
                 console.log(required.product[0])
                 cart[itemID] = required.product[0]; 
             }
-            res.redirect('/cart'); 
+            req.session.flash = {
+                type: 'secondary',
+                intro: 'Product added to cart',
+                message: '<a href="/cart" style="font-weight: bold;">View cart</a>',
+            };
+            res.redirect("back")             
         })
     });
     // Remove Item from cart
@@ -288,7 +291,12 @@ module.exports = function(app){
                 wishlist[req.query.id] = required.product[0];
                 
             }
-            res.redirect(303,'/wishlist'); 
+            req.session.flash = {
+                type: 'info',
+                intro: 'Product added to ',
+                message: '<a href="/wishlist" style="font-weight: bold;">Wishlist</a>',
+            };
+            res.redirect("back") 
         })
 
     })

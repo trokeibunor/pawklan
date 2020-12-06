@@ -5,6 +5,7 @@ const gallery = require('../public/models/gallery');
 const message = require('../public/models/message');
 var product = require('../public/models/product');
 var staff = require('../public/models/staff');
+var user = require('../public/models/user');
 var moment = require('moment');
 var credentials = require('../public/lib/credentials')
 const Crptyr = require('cryptr');
@@ -25,6 +26,25 @@ module.exports = function(app){
           page: 'Home',
         })
       });
+      // Show recent customer sign ins
+      admin.get('/customers',ensureStaffAuthenticated,function(req,res,next){
+        user.find({},function(err,users){
+          var content = {
+            users : users.map(function(user){
+              return{
+                id: user.id,
+                name: user.name,
+                email: user.email
+              }
+            }),
+            user :req.session.username,
+            page : 'customers (recent)',
+            layout: 'admin'
+          }
+          res.render('admin/customers', content)
+        })
+      });
+      // product page logic
       admin.get('/product',ensureStaffAuthenticated,(req,res,next)=>{
         product.find({available: true},function(err,products){
           var content = {

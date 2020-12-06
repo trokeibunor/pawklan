@@ -162,6 +162,7 @@ module.exports = function(app){
                             id: item.id,
                             name:item.name,
                             sku: item.sku,
+                            slug: item.slug,
                             description:item.description,
                             discount: item.discount || 'Zero',
                             price: item.getDisplayPrice(),

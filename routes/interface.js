@@ -65,7 +65,7 @@ app.get('/shop', function(req,res,next){
         return Promise.resolve(this.value)
       }
     }
-    }, service)
+  }, service)
     
   var local = {};
   async.series([
@@ -77,7 +77,6 @@ app.get('/shop', function(req,res,next){
         var rates = result.rates;
         if(currency in rates){
           factor = await rates[currency];
-          console.log(factor)
           product.find({featured: true},function(err,features){
             local.features = features.map(
               function(item){

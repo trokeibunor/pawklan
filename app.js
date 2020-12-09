@@ -62,7 +62,7 @@ app.use(session({
     saveUninitialized: true, 
     resave: false, //don't save session if unmodified
     store: new MongoStore({ 
-      url: 'mongodb://127.0.0.1:27017/pawklan',
+      url: credentials.mongo.production.connectionString,
       ttl: 14 * 24 * 60 * 60 }),
 }));
 app.engine('handlebars',handlebars.engine);

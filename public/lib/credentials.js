@@ -9,7 +9,7 @@ module.exports = {
             connectionString:"mongodb://127.0.0.1:27017/pawklan"
         },
         production: {
-            connectionString:"mongodb://127.0.0.1:27017/pawklan"
+            connectionString:"mongodb+srv://okeibunor:ilove2000@pawklan.u6zgi.mongodb.net/test"
         },
     },
     oauth: {

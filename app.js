@@ -45,7 +45,7 @@ var opts = {
   };
 switch(app.get('env')){
   case 'development':
-  mongoose.connect(credentials.mongo.development.connectionString, opts);
+  mongoose.connect(credentials.mongo.production.connectionString, opts);
   console.log('mongo connected')
   break;
   case 'production':

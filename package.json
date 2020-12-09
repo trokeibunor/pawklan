@@ -23,6 +23,7 @@
     "express-session": "^1.17.1",
     "fixer-api": "^2.2.0",
     "fixer-io-node": "^1.0.2",
+    "heroku": "^7.47.4",
     "http-errors": "~1.6.3",
     "locale-currency": "0.0.2",
     "moment": "^2.29.1",

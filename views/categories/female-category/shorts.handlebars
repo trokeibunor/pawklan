@@ -1,9 +1,10 @@
+<h2 id="cat-header">
+    Female / <span class="text-muted small">Skirts &amp; Shorts</span>
+</h2>
 <div class="container-fluid">
-    
     <div class="row">
-        
-        <div class="col-xs-6 col-sm-6 col-md-3 mx-auto">
         {{#each shorts}}
+        <div class="col-xs-6 col-sm-6 col-md-3 mx-auto">
             <div id="genericCard">  
                 <div class="featuredImageHolder">
                     <a href="/viewProduct?id={{id}}"><img src="/{{image}}" id="featuredImage"></a>
@@ -13,12 +14,9 @@
                 </div>
                 <p class="product-text">{{name}}</p>
                 <p class="price-text">{{price}} {{currency}}</p> 
-                <p class="lead small mt-2">"{{slug}}"</p>   
+                <p class="lead small mt-1">"{{slug}}"</p>   
             </div>
-        {{/each}}
         </div>
-        
-        
+        {{/each}}
     </div>
-    
 </div>

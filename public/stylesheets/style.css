@@ -9,7 +9,7 @@ a {
   color: #00B7FF;
   font-weight: normal;
 }
-a .active{
+a .active{ 
   font-weight: 900px;
 }
 .search-drop{
@@ -86,7 +86,7 @@ select option{
   background-image: url('/images/_MG_9794black\ andwhite.jpg') !important;
   background-size: cover;
   background-repeat: repeat;
-  background-origin: border-box;
+  background-origin: content-box;
   background-attachment: scroll;
   background-position: center;
   background-blend-mode: lighten;

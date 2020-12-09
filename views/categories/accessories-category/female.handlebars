@@ -1,3 +1,6 @@
+<h2 id="cat-header">
+    Accessories / <span class="text-muted small">Ladies</span>
+</h2>
 <div class="container-fluid">
     <div class="row">
         {{#each female}}
@@ -10,9 +13,10 @@
                     </span>
                 </div>
                 <p class="product-text">{{name}}</p>
-                <p class="price-text">{{price}} {{currency}}</p>    
+                <p class="price-text">{{price}} {{currency}}</p> 
+                <p class="lead small mt-1">"{{slug}}"</p>   
             </div>
         </div>
-        {{/each}}    
-    </div>    
+        {{/each}}
+    </div>
 </div>

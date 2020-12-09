@@ -57,8 +57,6 @@ switch(app.get('env')){
 // Set up sessions storage in mongodb
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
-mongoose.connect(credentials.mongo.development.connectionString, opts);
- 
 app.use(session({
     secret: 'pawklan_secret',
     saveUninitialized: true, 

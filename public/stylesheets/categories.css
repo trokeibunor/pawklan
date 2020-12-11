@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
 body{
     font-family: -apple-system, BlinkMacSystemFont, 
         'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 
@@ -66,7 +67,7 @@ border:transparent;
     bleed: 2px;
     box-shadow: rgb(146, 143, 143) -1px 1px 1px 1px;
     font-weight: 700;
-    font-family: cursive;
+    font-family: 'Itim', cursive;
 }
 .section-desc{
     background-image: linear-gradient(gray white);
@@ -109,7 +110,7 @@ h1{
     color: black;
 }
 h2{ 
-    font-family: cursive;
+    font-family: 'Itim', cursive;
     text-decoration: darkgray;
     text-rendering: optimizeLegibility;
     font-weight: 900px;
@@ -128,7 +129,7 @@ h4{
 #acknowledge{
     font-size: 14px;
     font-weight: bold;
-    font-family: cursive;
+    font-family: 'Itim', cursive;
     color: rgb(124, 122, 122) !important;
     line-height: auto;
     text-align: center;

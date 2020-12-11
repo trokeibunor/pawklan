@@ -1,8 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
 body{
-    font-family: -apple-system, BlinkMacSystemFont, 
-        'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 
-        'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: 'Itim', cursive;
     background-color: white;
     background-repeat: no-repeat;
     background-size: cover;
@@ -85,7 +84,7 @@ border:transparent;
     font-weight: bolder;
 }
 .price-text{
-    font-family: 'Courier New', Courier, monospace;
+    font-family: 'Lato', sans-serif;
     overflow: hidden;
     text-shadow: 1px 1px gray;
     line-height: 13px;
@@ -104,6 +103,7 @@ border:transparent;
 }
 
 h1{
+    font-family: 'Itim', cursive;
     font-weight: 900px;
     text-shadow: 3px 2px gray;
     text-align: left;

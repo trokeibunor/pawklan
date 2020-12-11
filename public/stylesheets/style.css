@@ -85,7 +85,7 @@ select option{
   color: rgb(0, 0, 0);
   background-image: url('/images/_MG_9794black\ andwhite.jpg') !important;
   background-size: cover;
-  background-repeat: repeat;
+  background-repeat: no-repeat;
   background-origin: content-box;
   background-attachment: scroll;
   background-position: center;

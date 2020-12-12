@@ -6,6 +6,7 @@ var logger = require("morgan");
 var mongoose = require("mongoose");
 var passport = require("passport");
 var connect = require("connect");
+var favicon = require("serve-favicon")
 var flash = require("connect-flash");
 
 // Mongo models
@@ -77,6 +78,7 @@ app.use(function (req, res, next) {
 });
 
 // app.use(logger('dev'));
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser(credentials.cookiesecret));

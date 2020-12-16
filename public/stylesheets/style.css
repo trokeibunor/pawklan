@@ -316,7 +316,7 @@ section{
 .shop-jumbo{
   display: block;
   max-width: 100%;
-  background-image: url('/images/shop-loadingImg.jpg');
+  background-image: url('/images/shopImage.jpg');
   max-height: 100%;
   object-fit: contain;
   background-origin: content-box;
@@ -757,11 +757,11 @@ section li a{
 /* -------------------- */
 #product-tab a{
   color: black;
-  font-family: 'Itim', cursive;;
+  font-family: 'Itim', cursive;
   font-weight: 600;
 }
 #nav-tabcontent #product-desc{
-  font-family: 'Itim', cursive;;
+  font-family: 'Itim', cursive;
   font-weight: 500;
 }
 /* ------------------------- */
@@ -771,7 +771,7 @@ section li a{
   padding: 10px;
 }
 .topCheck .card h3{
-  font-family: 'Itim', cursive;;
+  font-family: 'Itim', cursive;
   font-weight: 500;
   padding: 10px;
 }

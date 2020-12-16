@@ -11,6 +11,9 @@ var credentials = require('../public/lib/credentials')
 const Crptyr = require('cryptr');
 module.exports = function(app){
       app.use(vhost('admin.*',admin));
+      app.get('/admin',function(req,res,next){
+        res.render('admin/login')
+      })
       admin.get('*',function(req,res,next){
         res.locals.admin = req.session.admin;
         res.locals.user = req.session.username;

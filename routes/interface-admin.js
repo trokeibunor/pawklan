@@ -10,7 +10,7 @@ var moment = require('moment');
 var credentials = require('../public/lib/credentials')
 const Crptyr = require('cryptr');
 module.exports = function(app){
-      app.use(vhost('admin.pawlan.com',admin));
+      
       admin.get('*',function(req,res,next){
         res.locals.admin = req.session.admin;
         res.locals.user = req.session.username;
@@ -225,5 +225,5 @@ module.exports = function(app){
         }else{
           res.redirect('/login')
         }
-      }
+  }
 }

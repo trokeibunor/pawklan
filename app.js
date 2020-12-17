@@ -7,7 +7,8 @@ var mongoose = require("mongoose");
 var passport = require("passport");
 var connect = require("connect");
 var vhost = require("vhost");
-var favicon = require("serve-favicon")
+var favicon = require("serve-favicon");
+var admin = express.Router();
 var flash = require("connect-flash");
 
 // Mongo models
@@ -101,7 +102,8 @@ app.use(function (req, res, next) {
 // app.use(vhost('admin.pawklan.com', require('./routes/interface-admin')));
 require("./routes/form-handlerAdmin")(app);
 // app.use(vhost('admin.pawklan.com', require('./routes/interface-admin')));
-require("./routes/interface-admin")(app);
+// require("./routes/interface-admin")(app);
+app.use(vhost('admin.pawlan.com',admin));
 //  User interface routes
 
 require("./routes/form-handlerUI")(app);

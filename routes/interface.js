@@ -8,24 +8,6 @@ var oxr = require('oxr')
 var service = oxr.factory({
   appId: credentials.oxr_auth
  });
-//  Support for caching
-// service = oxr.cache({
-// method: 'latest',
-// ttl: 7 * 24 * 1000 * 3600,
-// store: {
-//   get: function () {
-//     return Promise.resolve(this.value)
-//   },
-//   put: function (value) {
-//     this.value = value
-//     return Promise.resolve(this.value)
-//   }
-// }
-// }, service)
-//  service.latest().then(function(result){
-//   var rates = result.rates
-//   // console.log(JSON.stringify(rates))
-// })
 module.exports = function(app){
   //Get user and parse to all routes
 app.get('*',function(req,res,next){
@@ -335,7 +317,7 @@ app.get('/emptyWishList',(req,res)=>{
   res.redirect('/wishlist');
 })
 app.get('/forgotPassword',(req,res,next)=>{
-  res.render('forgotPasswordUI')
+  res.render('forgotpasswordUI')
 })
 app.get('/viewProduct',(req,res,next)=>{
   product.find({_id: req.query.id},(err,products)=>{

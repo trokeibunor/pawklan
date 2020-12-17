@@ -2,15 +2,18 @@
   "name": "pawklan",
   "version": "0.0.0",
   "private": true,
+  "engines": {
+    "node": "15.3.0",
+    "npm": "7.0.14"
+  },
   "scripts": {
     "start": "nodemon app.js"
   },
   "dependencies": {
     "async": "^3.2.0",
-    "bcrypt": "^5.0.0",
     "bcrypt-nodejs": "0.0.3",
     "bcryptjs": "^2.4.3",
-    "connect": "2.0",
+    "connect": "^3.7.0",
     "connect-flash": "^0.1.1",
     "connect-mongo": "^3.2.0",
     "cookie-parser": "~1.4.4",
@@ -21,9 +24,10 @@
     "express": "~4.16.1",
     "express-handlebars": "5.1.0",
     "express-session": "^1.17.1",
+    "express-subdomain": "^1.0.5",
     "fixer-api": "^2.2.0",
     "fixer-io-node": "^1.0.2",
-    "heroku": "^7.47.4",
+    "heroku": "^7.47.5",
     "http-errors": "~1.6.3",
     "locale-currency": "0.0.2",
     "moment": "^2.29.1",
@@ -41,6 +45,7 @@
     "passport-google-oauth": "^2.0.0",
     "passport-local": "^1.0.0",
     "save": "^2.4.0",
+    "serve-favicon": "^2.5.0",
     "session-mongoose": "^0.5.2",
     "vhost": "^3.0.2"
   },

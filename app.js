@@ -98,9 +98,9 @@ app.use(function (req, res, next) {
 });
 //routes
 //  Dashboard routes
-app.use(vhost('admin.pawklan.com', require('./routes/interface-admin')(app)))
+app.use(vhost('admin.pawklan.com', require('./routes/interface-admin')));
 require("./routes/form-handlerAdmin")(app);
-require("./routes/interface-admin")(app);
+// require("./routes/interface-admin")(app);
 //  User interface routes
 
 require("./routes/form-handlerUI")(app);

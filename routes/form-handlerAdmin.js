@@ -31,7 +31,7 @@ function sort(val){
 
 module.exports = function (app){
     var admin  = express.Router();
-    app.use(vhost('admin.*',admin));
+    app.use(vhost('admin.pawklan.com',admin));
     passport.serializeUser(function(user,done){
         if (staff.isStaff(user.email)){
             done(null,user.id)

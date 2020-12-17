@@ -6,6 +6,7 @@ var logger = require("morgan");
 var mongoose = require("mongoose");
 var passport = require("passport");
 var connect = require("connect");
+var vhost = require("vhost");
 var favicon = require("serve-favicon")
 var flash = require("connect-flash");
 
@@ -78,6 +79,7 @@ app.use(function (req, res, next) {
 });
 
 // app.use(logger('dev'));
+app.use(vhost('admin.pawklan.com', require('./routes/interface-admin')))
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

@@ -79,7 +79,7 @@ app.use(function (req, res, next) {
 });
 
 // app.use(logger('dev'));
-app.use(vhost('admin.pawklan.com', require('./routes/interface-admin')))
+
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -98,6 +98,7 @@ app.use(function (req, res, next) {
 });
 //routes
 //  Dashboard routes
+app.use(vhost('admin.pawklan.com', require('./routes/interface-admin')(app)))
 require("./routes/form-handlerAdmin")(app);
 require("./routes/interface-admin")(app);
 //  User interface routes

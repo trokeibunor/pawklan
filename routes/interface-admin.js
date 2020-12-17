@@ -14,7 +14,7 @@ module.exports = function(app){
       app.use(vhost('admin.pawklan.com',admin));
       admin.get('*',function(req,res,next){
         res.locals.admin = req.session.admin;
-        res.locals.user = req.session.username;
+        res.locals.user = req.session.staffUsername;
         next();
       })
       admin.get('/login',(req,res,next)=>{
@@ -23,7 +23,7 @@ module.exports = function(app){
       admin.get('/',ensureStaffAuthenticated,function(req,res,next){
         res.render('admin/home', {
           layout:'admin',
-          user: req.session.username,
+          user: req.session.staffusername,
           page: 'Home',
         })
       });
@@ -38,7 +38,7 @@ module.exports = function(app){
                 email: user.email
               }
             }),
-            user :req.session.username,
+            user :req.session.staffusername,
             page : 'customers (recent)',
             layout: 'admin'
           }
@@ -65,7 +65,7 @@ module.exports = function(app){
               }),
               layout: 'admin',
               page: 'Product',
-              user: req.session.username,
+              user: req.session.staffusername,
           }   
           res.render('admin/product',content)
       })
@@ -87,7 +87,7 @@ module.exports = function(app){
               }),
               layout: 'admin',
               page: 'Staff',
-              user: req.session.username,
+              user: req.session.staffusername,
           }   
           res.render('admin/staff',content)
         })
@@ -106,7 +106,7 @@ module.exports = function(app){
             }),
             layout: 'admin',
             page: 'Gallery',
-            user: req.session.username,
+            user: req.session.staffusername,
           }
           res.render('admin/gallery',content)
         })
@@ -125,14 +125,14 @@ module.exports = function(app){
               }),
               layout: 'admin',
               page: 'Compose',
-              user: req.session.username,
+              user: req.session.staffusername,
           }   
           res.render('admin/compose',content)
         })
       })
       // Message Inbox
       admin.get('/inbox',(req,res,next)=>{
-        message.find({type: "sentmail", receiver: req.session.username},function(err,messages){
+        message.find({type: "sentmail", receiver: req.session.staffusername},function(err,messages){
           var content = {
             messages : messages.map(function(message){
               return{
@@ -144,7 +144,7 @@ module.exports = function(app){
             }),
             layout: 'admin',
             page: 'Inbox',
-            user: req.session.username,
+            user: req.session.staffusername,
           }
           res.render('admin/inbox',content)
         })
@@ -165,14 +165,14 @@ module.exports = function(app){
             }),
             layout: 'admin',
             page: 'Read Message',
-            user: req.session.username,
+            user: req.session.staffusername,
           }
           res.render('admin/read',content)
         })
       })
       // Get Drafts
       admin.get('/drafts',(req,res,next)=>{
-        message.find({type: "savedDraft", sender: req.session.username},function(err,drafts){
+        message.find({type: "savedDraft", sender: req.session.staffusername},function(err,drafts){
           var content = {
             drafts : drafts.map(function(message){
               return{
@@ -183,14 +183,14 @@ module.exports = function(app){
             }),
             layout: 'admin',
             page: 'Draft',
-            user: req.session.username,
+            user: req.session.staffusername,
           }
           res.render('admin/drafts',content)
         })
       })
       // Sent Mails
       admin.get('/sent',(req,res,next)=>{
-        message.find({type: "sentmail", sender: req.session.username},function(err,outbox){
+        message.find({type: "sentmail", sender: req.session.staffusername},function(err,outbox){
           var content = {
             outbox : outbox.map(function(message){
               return{
@@ -202,7 +202,7 @@ module.exports = function(app){
             }),
             layout: 'admin',
             page: 'Outbox',
-            user: req.session.username,
+            user: req.session.staffusername,
           }
           res.render('admin/sent',content)
         })
@@ -221,7 +221,7 @@ module.exports = function(app){
       // edit staff
       // edit product
       function ensureStaffAuthenticated(req,res,next){
-        if(req.isAuthenticated()){
+        if(req.session.staffusername != undefined){
           return next();
         }else{
           res.redirect('/login')

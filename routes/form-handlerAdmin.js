@@ -143,6 +143,7 @@ module.exports = function (app){
     })
     // handle add Product form
     admin.post('/process-product',upload.array('productImages', 3),function(req,res,next){
+        console.log(location)
         var file = req.files
         var paths = [reqPath(file[0].path),reqPath(file[1].path),reqPath(file[2].path)];
         var color_array = req.body.productColour;

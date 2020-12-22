@@ -50,7 +50,8 @@ module.exports = function (app) {
       {
         clientID: credentials.oauth.clientID,
         clientSecret: credentials.oauth.clientSecret,
-        callbackURL: "http://localhost:3000",
+        callbackURL: "https://pawklan.herokuapp.com",
+        passReqToCallback: true,
       },
       function (accessToken, refreshToken, profile, done) {
         customer.findOrCreate({ googleId: profile.id }, function (err, user) {
@@ -100,7 +101,7 @@ module.exports = function (app) {
   app.get(
     "/auth/google",
     passportUI.authenticate("google", {
-      scope: ["https://www.googleapis.com/auth/plus.login"],
+      scope: ["email","profile"],
     })
   );
   app.get(

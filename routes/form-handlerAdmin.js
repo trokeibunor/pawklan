@@ -1,22 +1,46 @@
+var credentials = require('../public/lib/credentials');
 var express = require('express');
 var multer = require('multer');
+var multerS3 = require('multer-s3')
 var moment = require('moment');
-var storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, 'public/uploads/images/')   
-    },
-    filename: function (req, file, cb) {
-        cb(null, Date.now() + '-' + file.originalname)      
-    },
+var AWS = require('aws-sdk');
+AWS.config.update({
+    accessKeyId: credentials.AWS_KEY.keyId,
+    secretAccessKey: credentials.AWS_KEY.secretKey,
+})
+var s3 = new AWS.S3()
+// var storage = multer.diskStorage({
+//     destination: function (req, file, cb) {
+//         cb(null, 'public/uploads/images/')   
+//     },
+//     filename: function (req, file, cb) {
+//         cb(null, Date.now() + '-' + file.originalname)      
+//     },
      
-});
+// });
+const my_bucket = 'pawklan';
+// s3 storage
+var upload = multer({
+    storage: multerS3({
+      s3: s3,
+      bucket: my_bucket,
+      acl : 'public-read',
+      contentType: multerS3.AUTO_CONTENT_TYPE,
+      metadata: function (req, file, cb) {
+        cb(null, {fieldName: file.fieldname});
+      },
+      key: function (req, file, cb) {
+        cb(null, Date.now().toString())
+      }
+    })
+})
 var credentials = require('../public/lib/credentials')
 var upload = multer({ storage: storage });
 var vhost = require('vhost');
 var product = require('../public/models/product');
 var staff = require('../public/models/staff');
 var gallery = require('../public/models/gallery');
-var now = moment();
+var now = moment(); 
 // User authentication
 var passport = require('passport') 
     ,LocalStrategy = require('passport-local').Strategy;

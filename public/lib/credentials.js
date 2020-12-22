@@ -17,5 +17,9 @@ module.exports = {
         clientSecret:"ZsdC55S9B2n2DLArqxNxd3ys"
     },
     secretCrypt: 'pawklan_secretKey',
-    oxr_auth: "7465092a8bcb445e95d2b647396a8be0"
+    oxr_auth: "7465092a8bcb445e95d2b647396a8be0",
+    AWS_KEY: {
+        keyId: "AKIAIPXNYXP2EHOFLNCQ",
+        secretKey: "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"
+    }
 }

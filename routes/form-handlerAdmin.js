@@ -35,7 +35,7 @@ var upload = multer({
     })
 })
 var credentials = require('../public/lib/credentials')
-var upload = multer({ storage: storage });
+// var upload = multer({ storage: storage });
 var vhost = require('vhost');
 var product = require('../public/models/product');
 var staff = require('../public/models/staff');
